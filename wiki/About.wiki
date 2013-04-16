@@ -11,7 +11,7 @@ Java Web application for generating Curriculum vitae (CV). User will have to reg
  * Mgr. Luděk Bártek, Ph.D.(teacher)
  * RNDr. Adam Rambousek (teacher)
 
- * Martin Proks (team leader)
- * Matus Kralik
- * Martin Otahal
- * Jozef Durisin
+ * Martin Proks (team leader, developer)
+ * Matus Kralik (developer)
+ * Martin Otahal (developer)
+ * Jozef Durisin (developer)
