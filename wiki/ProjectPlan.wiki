@@ -1,0 +1,12 @@
+= Project plan =
+
+ * UML Model
+ * Base system 
+ * GUI Interface
+ * Latech PDF
+ * Unit tests
+ * Documentation
+
+== Schedule ==
+
+ Comming soon ...
