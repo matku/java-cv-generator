@@ -1,4 +1,5 @@
 package cz.muni.web;
+import cz.muni.web.WebContent;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Handles requests for the application home page.
+ * 
  */
 @Controller
 public class HomeController {
@@ -24,16 +26,31 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("Method: Home", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+                WebContent content = new WebContent("");
+                
+		model.addAttribute("title", content.getTitle());
 		
 		return "home";
 	}
-	
+        	
+        
+        @RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(Locale locale, Model model) {
+		logger.info("Method: About ", locale);
+				
+		//model.addAttribute("title", content.getTitle());
+		
+		return "about";
+	}
+        
+        @RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public String contact(Locale locale, Model model) {
+		logger.info("Method: Contact", locale);
+			
+		//model.addAttribute("title", content.getTitle());
+		
+		return "contact";
+	}
 }
