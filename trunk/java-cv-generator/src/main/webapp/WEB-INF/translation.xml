@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<translation>
+    <language lang="en">
+        <home>Home</home>
+        <about>About</about>
+        <contact>Contact</contact>
+
+        <login>LOG IN</login>
+        <username>Username:</username>
+        <password>Password:</password>
+
+        <content><h1>Wellcome,</h1> <br />
+                 <p>to the web app for CV creation.</p>
+        </content>
+    </language>
+    
+    
+    <langueage lang="sk">
+        <home>Hlavna stanka</home>
+        <about>O nas</about>
+        <contact>Kontakt</contact>
+        
+        <login>Prihlasit sa</login>
+        <username>Prihlasovacie meno</username>
+        <password>Heslo</password>
+        
+        <conntent><h1>Vitajte,</h1> <br />
+                  <p>vo vebovej aplikacii na tvorbu zivotopisu.</p>
+        </conntent>    
+        
+    </langueage>   
+    
+     
+    <language lang="de">
+        <home></home>
+        <about></about>
+        <contact></contact>
+        
+        <login></login>
+        <username></username>
+        <password></password>
+        
+        <content></content>
+        
+        
+    </language> 
+</translation>
