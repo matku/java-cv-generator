@@ -33,7 +33,7 @@ public class WebContent {
      */
     private boolean isSupported(String lang)
     {
-        return (lang.equals("sk") || lang.equals("en") || lang.equals("de"));
+        return (lang.equals("sk") || lang.equals("en") || lang.equals("de") || lang.equals(" "));
     }
     
     public String getTitle()
