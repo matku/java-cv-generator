@@ -70,6 +70,7 @@
       <div class="row-fluid">
         <div class="span3">
           
+          <form method="post" action="#">  
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">LOG IN</li>
@@ -80,6 +81,7 @@
               <li><input type="submit" value="Login" class="btn btn-success"></li>
             </ul>
           </div><!--/.well -->
+          </form>
           
         </div><!--/span-->
         <div class="span9">
