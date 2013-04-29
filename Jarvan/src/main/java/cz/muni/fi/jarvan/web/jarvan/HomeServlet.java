@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet
         {
             String language = lang.getLanguage(URL);
             log.info("Lang = " + language);
-            req.setAttribute("webPath", lang.getBaseUrl());
+            req.setAttribute("webPath", lang.getBaseUrl(URL));
             req.getRequestDispatcher(HOME_JSP).forward(req, resp);
         } catch (LanguageException e)
         {
@@ -46,6 +46,7 @@ public class HomeServlet extends HttpServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         //req.getRequestURL();
+        resp.sendRedirect(req.getContextPath() + "/" + lang.getLang() + URL_MAPPING);
     }
     
     

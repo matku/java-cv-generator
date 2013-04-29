@@ -13,6 +13,16 @@ public class Language
 
     
     /**
+     * Getter for attribute lang (language)
+     * 
+     * @return  language
+     */
+    public String getLang() {
+        return this.lang;
+    }
+
+    
+    /**
      * Method parseURL parses given URL and searches it for translation language
      * and sets it
      * - if no language is given, default english is set
@@ -69,13 +79,20 @@ public class Language
      * method getBaseUrl returns base web page url for css to function properly
      * Default: http://localhost:8080/JarvanUpdate
      * 
-     * edit code if you feel like Yoda himself!
+     * I felt like Yoda ...
      * 
      * @return      base web page url
      */
-    public String getBaseUrl()
+    public String getBaseUrl(StringBuffer URL)
     {
-        // in case edit else dont do it
-        return "http://localhost:8080/JarvanUpdate";
+        String url = URL.toString();
+        String baseURL = "";
+        String[] parsedURL = url.split("/", 5);
+        for (int i = 0; i < 4; i++)
+        {
+            baseURL += parsedURL[i] + "/";
+        }
+        
+        return baseURL;
     }
 }
