@@ -3,12 +3,16 @@ package cz.muni.fi.jarvan.auth;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author martin
  */
 public class User {
+    
+    private final static Logger log = LoggerFactory.getLogger(User.class);
     
     private String username;
     private String password;
@@ -69,7 +73,7 @@ public class User {
  
         } catch (NoSuchAlgorithmException e) {
  
-            System.out.println("MD5 method failed, no idea why\n Error: " + e );
+            log.error("MD5 method failed, no idea why\n Error: " + e );
         }
         return md5;
     }

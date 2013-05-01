@@ -41,6 +41,7 @@ public class HomeServlet extends HttpServlet
                 //resp.sendRedirect(req.getContextPath() + DashboardServlet.URL_MAPPING);
                 if (!allowUser(username, password)) 
                 {
+                    log.warn("Could not login. Username or Password invalid.");
                     req.setAttribute("error", "Username or Password invalid.");
                     req.getRequestDispatcher(HOME_JSP).forward(req, resp);
                     return;

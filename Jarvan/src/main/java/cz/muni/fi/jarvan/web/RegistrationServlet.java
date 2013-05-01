@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -15,6 +17,8 @@ public class RegistrationServlet extends HttpServlet
 {
     private static final String REGISTRATION_JSP = "/WEB-INF/view/registration.jsp";
     public static final String URL_MAPPING = "/registration";
+    
+    private final static Logger log = LoggerFactory.getLogger(RegistrationServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,6 +39,7 @@ public class RegistrationServlet extends HttpServlet
                 
                 if(!password.equals(password2))
                 {
+                    log.error("Could not register. Given passwords don't match.");
                     req.setAttribute("error", "Passwords don't match !!!");
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
@@ -44,11 +49,13 @@ public class RegistrationServlet extends HttpServlet
                 
                 if(!registration.tryRegister())
                 {
+                    log.error("Could not register. Given username or email already used.");
                     req.setAttribute("error", "User or email already exists !!!");
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
                 
+                log.info("User " + username + " has been succesfully registered.");
                 req.setAttribute("success", "Congratulation ! You have been successfully registered :) ");
                 req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
         }

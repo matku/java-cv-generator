@@ -4,11 +4,16 @@
  */
 package cz.muni.fi.jarvan.auth;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *
  * @author martin
  */
 public class Registration {
+    
+    private final static Logger log = LoggerFactory.getLogger(Registration.class);
     
     User user;
 
@@ -23,6 +28,7 @@ public class Registration {
     {
         if (user.userAlreadyExists() || user.emailAlreadyExists())
         {
+            log.error("Could not register. User or email already in use.");
             return false;
         }
         

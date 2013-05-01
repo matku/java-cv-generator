@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -20,6 +22,8 @@ public class ContactServlet extends HttpServlet
 {
     private static final String CONTACT_JSP = "/WEB-INF/view/contact.jsp";
     public static final String URL_MAPPING = "/contact";
+    
+    private final static Logger log = LoggerFactory.getLogger(ContactServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
