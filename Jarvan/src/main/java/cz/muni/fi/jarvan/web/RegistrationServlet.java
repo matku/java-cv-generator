@@ -1,6 +1,6 @@
 package cz.muni.fi.jarvan.web;
 
-import cz.muni.fi.jarvan.auth.User;
+import cz.muni.fi.jarvan.auth.Registration;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,23 +40,18 @@ public class RegistrationServlet extends HttpServlet
                     return;
                 }
                 
-                User user = new User();
+                Registration registration = new Registration(username, email, password);
                 
-                if(user.alreadyExists(username))
+                if(!registration.tryRegister())
                 {
-                    req.setAttribute("error", "User already exists !!!");
+                    req.setAttribute("error", "User or email already exists !!!");
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
                 
-                user.setUsername(username);
-                user.setPassword(password);
-                user.setEmail(email);
-                
                 req.setAttribute("success", "Congratulation ! You have been successfully registered :) ");
                 req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
         }
-        //resp.sendRedirect(req.getContextPath() + URL_MAPPING);
     }
     
     

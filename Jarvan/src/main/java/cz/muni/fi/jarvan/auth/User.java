@@ -21,7 +21,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = md5(password);
     }
 
     public void setEmail(String email) {
@@ -40,14 +40,14 @@ public class User {
         return email;
     }
     
-    public boolean alreadyExists(String username)
+    public boolean userAlreadyExists()
     {
         return false;
     }
-
-    public String hashPassword(String password)
+    
+    public boolean emailAlreadyExists()
     {
-        return md5(password);
+        return false;
     }
     
     public static String md5(String input) {
