@@ -71,13 +71,49 @@
         
         <div class="span5 offset3">
           <!--<div class="hero-unit">-->
-                       
-            <form method="post" action="${pageContext.request.contextPath}/registration/process">
-                <input type="text" name="username" />
-                <input type="submit" value="register" class="btn btn-success" />
+              
+            <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/registration/process">
+            <fieldset>
+                <legend>Registracia</legend>
+
+                <div class="control-group">
+                  <label class="control-label">Prihlasovacie meno:</label>
+                  <div class="controls">
+                    <input name="username" type="text" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">E-mail:</label>
+                  <div class="controls">
+                    <input name="email" type="text" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Prihlasovacie heslo</label>
+                  <div class="controls">
+                    <input name="username" type="text" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Prihlasovacie heslo</label>
+                  <div class="controls">
+                    <input name="password" type="password" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Zopakujte heslo:</label>
+                  <div class="controls">
+                    <input name="password2" type="password" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                   <div class="controls">
+                    <input name="Register" type="submit" value="Registuj!" class="btn btn-success" />
+                  </div>
+                </div>
+            </fieldset>
             </form>
-            
-          <!--</div>-->
+          
         </div><!--/span-->
       </div><!--/row-->
 
