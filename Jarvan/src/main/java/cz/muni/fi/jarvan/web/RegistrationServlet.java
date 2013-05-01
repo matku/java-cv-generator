@@ -1,5 +1,6 @@
 package cz.muni.fi.jarvan.web;
 
+import cz.muni.fi.jarvan.auth.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,40 @@ public class RegistrationServlet extends HttpServlet
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() + URL_MAPPING);
+        req.setCharacterEncoding("utf-8");
+        String action = req.getPathInfo();
+        switch(action)
+        {
+            case "/process":
+                String username = req.getParameter("username");
+                String email = req.getParameter("email");
+                String password = req.getParameter("password");
+                String password2 = req.getParameter("password2");
+                
+                if(!password.equals(password2))
+                {
+                    req.setAttribute("error", "Passwords don't match !!!");
+                    req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
+                    return;
+                }
+                
+                User user = new User();
+                
+                if(user.alreadyExists(username))
+                {
+                    req.setAttribute("error", "User already exists !!!");
+                    req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
+                    return;
+                }
+                
+                user.setUsername(username);
+                user.setPassword(password);
+                user.setEmail(email);
+                
+                req.setAttribute("success", "Congratulation ! You have been successfully registered :) ");
+                req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
+        }
+        //resp.sendRedirect(req.getContextPath() + URL_MAPPING);
     }
     
     

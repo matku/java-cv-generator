@@ -12,11 +12,9 @@ public class User {
     
     private String username;
     private String password;
+    private String email;
 
-    public User() 
-    {
-        //super(); //extends Registration
-    }
+    public User() {}
     
     public void setUsername(String username) {
         this.username = username;
@@ -26,6 +24,10 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -33,10 +35,14 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getEmail() {
+        return email;
+    }
     
     public boolean alreadyExists(String username)
     {
-        return true;
+        return false;
     }
 
     public String hashPassword(String password)
