@@ -42,7 +42,7 @@ public class RegistrationServlet extends HttpServlet
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
-                
+                                
                 Registration registration = new Registration(username, email, password);
                 
                 if(!registration.tryRegister())
