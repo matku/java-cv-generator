@@ -72,43 +72,9 @@
         <div class="span5 offset3">
           <!--<div class="hero-unit">-->
                        
-            <form method="post" action="#" class="form-horizontal">
-                <fieldset>
-                    <legend>Registracia</legend>
-
-                    <div class="control-group">
-                      <label class="control-label">Prihlasovacie meno:</label>
-                      <div class="controls">
-                        <input id="textinput" name="username" type="text" class="input-xlarge">
-                      </div>
-                    </div>     
-                    <div class="control-group">
-                      <label class="control-label">E-mail:</label>
-                      <div class="controls">
-                        <input id="textinput" name="email" type="text" class="input-xlarge">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label">Prihlasovacie heslo:</label>
-                      <div class="controls">
-                        <input id="textinput" name="password" type="password" class="input-xlarge">
-                      </div>
-                    </div>
-                    <div class="control-group">
-                      <label class="control-label">Zopakujte heslo:</label>
-                      <div class="controls">
-                        <input id="textinput" name="password2" type="password" class="input-xlarge">
-                      </div>
-                      <br />
-                      <div class="control-group">
-                      <div class="controls">
-                        <input id="textinput" type="submit" class="btn btn-success">
-                      </div>
-                    </div>
-                    </div>
-                    
-                    
-                </fieldset>
+            <form method="post" action="${pageContext.request.contextPath}/registration/process">
+                <input type="text" name="username" />
+                <input type="submit" value="register" class="btn btn-success" />
             </form>
             
           <!--</div>-->
@@ -118,7 +84,7 @@
       <div class="navbar navbar-fixed-bottom">
         <div class="navbar-inner">
             <div class="container">
-                <p class="muted credit">&copy; Copyright Jarvan 2013</p>
+                <p class="muted credit">&copy; Copyright Jarvan 2013 </p>
             </div><!--/.nav-collapse -->
         </div>
       </div>

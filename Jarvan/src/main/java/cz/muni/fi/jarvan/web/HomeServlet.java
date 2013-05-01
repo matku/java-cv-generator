@@ -31,7 +31,6 @@ public class HomeServlet extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
-        //req.getRequestURL();
         String action = req.getPathInfo();
         switch(action)
         {
@@ -39,7 +38,6 @@ public class HomeServlet extends HttpServlet
                 //get POST params from form
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
-                System.out.println("username: " + username + " password: " + password);
                 //resp.sendRedirect(req.getContextPath() + DashboardServlet.URL_MAPPING);
                 if (!allowUser(username, password)) 
                 {
