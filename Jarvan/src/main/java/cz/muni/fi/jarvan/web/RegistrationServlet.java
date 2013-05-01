@@ -17,13 +17,11 @@ public class RegistrationServlet extends HttpServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("getting getting getting");
         req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("posting fucking something.");
         resp.sendRedirect(req.getContextPath() + URL_MAPPING);
     }
     
