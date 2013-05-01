@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<translation>
+    <username> 
+        <translate lang="en">Name</translate>
+        <translate lang="sk">Meno</translate>
+        <translate lang="cz">Jmeno</translate>
+    </username>
+</translation>
