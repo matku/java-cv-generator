@@ -38,6 +38,11 @@ public class HomeServlet extends HttpServlet
                 //get POST params from form
                 String username = req.getParameter("username");
                 String password = req.getParameter("password");
+                if (!validate(username, password, req))
+                {
+                    req.getRequestDispatcher(HOME_JSP).forward(req, resp);
+                    return;
+                }
                 //resp.sendRedirect(req.getContextPath() + DashboardServlet.URL_MAPPING);
                 if (!allowUser(username, password)) 
                 {
@@ -74,4 +79,14 @@ public class HomeServlet extends HttpServlet
         return true;
     }
     
+    private boolean validate(String username, String password, HttpServletRequest req)
+    {
+        if (username.equals("") || password.equals(""))
+        {
+            log.error("one of the attributes is empty string");
+            req.setAttribute("error", "You must fill all text fields.");
+            return false;
+        }
+        return true;
+    }
 }

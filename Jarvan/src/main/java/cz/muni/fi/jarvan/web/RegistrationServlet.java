@@ -37,10 +37,8 @@ public class RegistrationServlet extends HttpServlet
                 String password = req.getParameter("password");
                 String password2 = req.getParameter("password2");
                 
-                if(!password.equals(password2))
+                if(!validate(username, password, password2, email, req))
                 {
-                    log.error("Could not register. Given passwords don't match.");
-                    req.setAttribute("error", "Passwords don't match !!!");
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
@@ -61,5 +59,20 @@ public class RegistrationServlet extends HttpServlet
         }
     }
     
-    
+    private boolean validate(String username, String password, String password2, String email, HttpServletRequest req)
+    {
+        if (username.equals("") || password.equals("") || password2.equals("") || email.equals(""))
+        {
+            log.error("one of the attributes is empty string");
+            req.setAttribute("error", "You must fill all text fields.");
+            return false;
+        }
+        if (!password.equals(password2))
+        {
+            log.error("Could not register. Given passwords don't match.");
+            req.setAttribute("error", "Passwords don't match !!!");
+            return false;
+        }
+        return true;
+    }
 }
