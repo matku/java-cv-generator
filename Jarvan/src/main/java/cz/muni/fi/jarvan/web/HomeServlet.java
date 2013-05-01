@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import javax.servlet.http.HttpSession;
+import sun.security.util.Password;
 
 
 
@@ -23,15 +25,54 @@ public class HomeServlet extends HttpServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(HOME_JSP).forward(req, resp);        
+        req.getRequestDispatcher(HOME_JSP).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         //req.getRequestURL();
+        String action = req.getPathInfo();
+        switch(action)
+        {
+            case "/login":
+                //get POST params from form
+                String username = req.getParameter("username");
+                String password = req.getParameter("password");
+                System.out.println("username: " + username + " password: " + password);
+                //resp.sendRedirect(req.getContextPath() + DashboardServlet.URL_MAPPING);
+                if (!allowUser(username, password)) 
+                {
+                    req.setAttribute("error", "Username or Password invalid.");
+                    req.getRequestDispatcher(HOME_JSP).forward(req, resp);
+                    return;
+                }
+                else 
+                {
+                    HttpSession session = req.getSession();
+                    session.setAttribute("isLogged", username);  // just a marker object
+
+                    if(req.getSession().getAttribute("isLogged") == null)
+                    {
+                        resp.sendRedirect(req.getContextPath() + URL_MAPPING);
+                    }
+                    else
+                    {
+                        resp.sendRedirect(req.getContextPath() + DashboardServlet.URL_MAPPING);
+                    }
+
+                    //res.sendRedirect("/");
+                }
+                return;
+        }
         resp.sendRedirect(req.getContextPath() + URL_MAPPING);
-    }
     
+    
+        
+    }
+
+    protected boolean allowUser(String username, String password) {
+        return true;
+    }
     
 }

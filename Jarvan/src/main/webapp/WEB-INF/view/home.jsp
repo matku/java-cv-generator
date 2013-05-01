@@ -51,15 +51,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Jarvan</a>
+          <a class="brand" href="${pageContext.request.contextPath}/home">Jarvan</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
                 <img src="public/img/logo.png" width="32" height="32" alt="MUNI FI" />
             </p>
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/about">About</a></li>
+              <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -69,21 +69,26 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          
-          <form method="post" action="#">  
+          <form method="post" action="${pageContext.request.contextPath}/home/login">  
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">LOG IN</li>
               <li><p>Username: </p></li>
-              <li><input type="text" name="username" /></li>
+              <li><input type="text" name="username" value="<c:out value='${param.username}'/>"/></li>
               <li><p>Password: </p></li>
-              <li><input type="password" name="password" /></li>
+              <li><input type="password" name="password" value="<c:out value='${param.password}'/>"/></li>
+              <li>
+                  <c:if test="${not empty error}">
+                      <p class="text-error"><c:out value="${error}"/>
+                  </c:if>
+              </li>
               <li><input type="submit" value="Login" class="btn btn-success"></li>
             </ul>
           </div><!--/.well -->
           </form>
           
-        </div><!--/span-->
+        </div><!--/span-->  
+        
         <div class="span9">
           <div class="hero-unit">
             <h1>Hello, world!</h1>
