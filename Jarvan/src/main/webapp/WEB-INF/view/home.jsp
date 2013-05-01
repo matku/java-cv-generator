@@ -91,9 +91,11 @@
         
         <div class="span9">
           <div class="hero-unit">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <h1>Vitaj !</h1>
+            <p>Vitajte na stranke pomocou ktorej si mozete zadarmo vygenerovat svoj CV. 
+               Tato super aplikacia so super prostredim, Vam zabezpeci ze uz nikde inde si 
+               nebudete chciet vytvorit zivotopis. Tak nevahaj. </p>
+            <p><a href="${pageContext.request.contextPath}/registration" class="btn btn-primary btn-large">Zaregistruj sa este dnes &raquo;</a></p>
           </div>
         </div><!--/span-->
       </div><!--/row-->
