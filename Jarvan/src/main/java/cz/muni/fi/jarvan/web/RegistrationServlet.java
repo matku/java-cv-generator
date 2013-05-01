@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.jarvan.auth;
+package cz.muni.fi.jarvan.web;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
