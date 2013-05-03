@@ -64,7 +64,7 @@
           <a class="brand" href="${pageContext.request.contextPath}/home">Jarvan</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-                <img src="public/img/logo.png" width="32" height="32" alt="MUNI FI" />
+                <img src="../public/img/logo.png" width="32" height="32" alt="MUNI FI" />
             </p>
             <ul class="nav">
               <li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
@@ -83,7 +83,7 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Zivotopis</li>
-              <li class="active"><a href="${pageContext.request.contextPath}/dashboard">Hlavna stranka</a></li>
+              <li><a href="${pageContext.request.contextPath}/dashboard">Hlavna stranka</a></li>
               <li class="nav-header">Moznosti CV</li>
               <li><a href="${pageContext.request.contextPath}/auth/create">Vytvorit</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/show">Zobrazit</a></li>
@@ -95,20 +95,34 @@
               <li><a href="${pageContext.request.contextPath}auth/export/en">Prelozit do EN</a></li>
               <li class="nav-header">Nastavenia</li>
               <li><a href="${pageContext.request.contextPath}/auth/changeUsername">Zmenit prihl. meno</a></li>
-              <li><a href="${pageContext.request.contextPath}/auth/changePassword">Zmenit prihl. heslo</a></li>
+              <li class="active"><a href="${pageContext.request.contextPath}/auth/changePassword">Zmenit prihl. heslo</a></li>
               <li><a href="${pageContext.request.contextPath}/logout">Odhlasit sa</a></li>
             </ul>
           </div><!--/.well -->
         </div>
         
         <div class="span9">
-          <div class="hero-unit">
-            <h1>Vitaj <%= session.getAttribute("isLogged")%>!</h1>
+            <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
+            <h3>Zmenit heslo</h3>
             <br />
-            <p>Vitajte na stranke pomocou ktorej si mozete zadarmo vygenerovat svoj CV. 
-               Tato super aplikacia so super prostredim, Vam zabezpeci ze uz nikde inde si 
-               nebudete chciet vytvorit zivotopis. Tak nevahaj. </p>
-          </div>
+            <table width="400">
+                <tr>
+                    <td>Zadaj povodne heslo: </td>
+                    <td><input type="text" name="oldPassword" /></td>
+                </tr>
+                <tr>
+                    <td>Zadaj nove heslo: </td>
+                    <td><input type="text" name="newPassword" /></td>
+                </tr>
+                <tr>
+                    <td>Zopakuj nove heslo: </td>
+                    <td><input type="text" name="new2Password" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Zmenit" name="Change" class="btn btn-success"/></td>
+                </tr>
+            </table>
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->

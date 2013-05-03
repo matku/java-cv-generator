@@ -27,6 +27,12 @@ public class DashboardServlet extends HttpServlet
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("isLogged") == null)
+        {
+            resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
+            return ;
+        }
+        
         req.getRequestDispatcher(DASHBOARD_JSP).forward(req, resp);
     }
 
