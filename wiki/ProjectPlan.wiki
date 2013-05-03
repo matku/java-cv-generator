@@ -9,29 +9,33 @@
 
 == Update 03.05.2013 ==
 
- - UML diagram finished / needs to be rebuild cause of slight changes
- - user can login but can't register yet (storing has to be done)
- - homepage and base system interface is done (durisin will edit text on pages)
- - LateX is on the way still "in progress"
- - Create, Edit, Show, Delete CV aren't ready yet
- - Change password and username aren't ready yet
+ # UML diagram finished / needs to be rebuild cause of slight changes
+ # user can login but can't register yet (storing has to be done)
+ # homepage and base system interface is done (durisin will edit text on pages)
+ # LateX is on the way still "in progress"
+ # Create, Edit, Show, Delete CV aren't ready yet
+ # Change password and username aren't ready yet
  
 
 == Schedule ==
 
 TO DO:
 
-Otahal:  * save registered user into users.xml
+Otahal:  
+         * save registered user into users.xml
          * create links to export CV into language
          * create form on creating new CV
 
-Proks:   * create form for edit CV
+Proks:   
+         * create form for edit CV
          * create form for viewing CV
          * create form for deleting CV
   
-Durisin: * UNIT tests
+Durisin: 
+         * UNIT tests
          * documentation
          * change password and username
 
-Kralik:  * LateX convert 
+Kralik:  
+         * LateX convert 
          * Multilanguage support 
