@@ -21,21 +21,21 @@
 
 TO DO:
 
-Otahal:  
+*Otahal*:  
          * save registered user into users.xml
          * create links to export CV into language
          * create form on creating new CV
 
-Proks:   
+*Proks*:   
          * create form for edit CV
          * create form for viewing CV
          * create form for deleting CV
   
-Durisin: 
+*Durisin*: 
          * UNIT tests
          * documentation
          * change password and username
 
-Kralik:  
+*Kralik*:  
          * LateX convert 
          * Multilanguage support 
