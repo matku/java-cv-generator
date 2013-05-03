@@ -1,14 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.muni.fi.jarvan.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Class for register users, checks if username and email already exists
+ * TO DO: store user data to XML
  * @author martin
  */
 public class Registration {
@@ -24,11 +22,22 @@ public class Registration {
         user.setUsername(username);
     }
     
+    /*
+     * Method for registering user and checking username and email if already
+     * exists
+     */
     public boolean tryRegister()
     {
-        if (user.userAlreadyExists() || user.emailAlreadyExists())
+       
+        if (user.userAlreadyExists())
         {
-            log.error("Could not register. User or email already in use.");
+            log.error("Could not register. User already in use.");
+            return false;
+        }
+        
+        if (user.emailAlreadyExists())
+        {
+            log.error("Could not register. E-mail already in use.");
             return false;
         }
         

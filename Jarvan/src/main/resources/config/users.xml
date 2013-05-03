@@ -3,7 +3,17 @@
 <users>
     <user id="test">
         <username>test</username>
-        <password>098f6bcd4621d373cade4e832627b4f6</password>
+        <password>98f6bcd4621d373cade4e832627b4f6</password>
         <email>test@test.test</email>
+    </user>
+    <user id="test2">
+        <username>test2</username>
+        <password>98f6bcd4621d373cade4e832627b4f6</password>
+        <email>test2@test.test</email>
+    </user>
+    <user id="martin">
+        <username>martin</username>
+        <password>98f6bcd4621d373cade4e832627b4f6</password>
+        <email>test3@test.test</email>
     </user>
 </users>

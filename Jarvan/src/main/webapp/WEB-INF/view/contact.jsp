@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Jarvan</title>
-        <meta name="description" content="Online CV generator">
+        <meta name="description" content="Online CV generator" />
 
         <link rel="stylesheet" href="<c:url value="${webPath}/public/css/bootstrap.css"/>"/>
         

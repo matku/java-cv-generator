@@ -1,32 +1,16 @@
 package cz.muni.fi.jarvan.auth;
 
-import java.io.BufferedReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import java.util.List;
 
 /**
- *
+ * Class for user
+ * Methods: setters and getters for username, password, email
+ * 
  * @author martin
  */
 public class User {
@@ -36,29 +20,11 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private Document doc;
+    private XMLParser parser;
 
     public User()
     {
-        
-        try
-        {
-            String path = getPath();
-            File xmlFile = new File(path);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
-            doc.getDocumentElement().normalize();
-            
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-            NodeList userList = doc.getElementsByTagName("user");
-        }
-        catch(Exception error)
-        {
-            System.out.println("ERROR: " + error);
-        }
-        
-        
+        this.parser = new XMLParser(this.getPath());
     }
     
     public void setUsername(String username) {
@@ -85,16 +51,52 @@ public class User {
         return email;
     }
     
-    public boolean userAlreadyExists()
+    public XMLParser getParser()
     {
+        return parser;
+    }
+    
+    /**
+     * Checks if typed username already exists in xml file
+     * Username is unique
+     * @return true if user exists
+     */
+    public boolean userAlreadyExists()
+    {       
+        List<String> dbUsers = this.parser.getUsers();
+        
+        for(int i=0; i<dbUsers.size(); i++)
+        {
+            if(dbUsers.get(i).equals(this.username))
+                return true;
+        }
+        
         return false;
     }
     
+    /**
+     * Checks if typed email already exists in xml file
+     * Email is unique
+     * @return true if email exists
+     */
     public boolean emailAlreadyExists()
     {
+        List<String> dbEmail = this.parser.getEmails();
+        
+        for(int i=0; i<dbEmail.size(); i++)
+        {
+            
+            if(dbEmail.get(i).equals(this.email))
+                return true;
+        }
+        
         return false;
     }
     
+    /**
+     * Method for hashing password into MD5
+     * @return String hash
+     */
     public static String md5(String input) {
          
         String md5 = null;
@@ -118,8 +120,12 @@ public class User {
         }
         return md5;
     }
-       
-    public String getPath()
+    
+    /**
+     * Method for finding correct path to users.xml
+     * @return path
+     */
+    private String getPath()
     {
         String oldPath = User.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
         String newPath = "";

@@ -1,5 +1,6 @@
 package cz.muni.fi.jarvan.web;
 
+import cz.muni.fi.jarvan.auth.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import javax.servlet.http.HttpSession;
-import sun.security.util.Password;
+//import sun.security.util.Password;
 
 
 
@@ -75,15 +76,43 @@ public class HomeServlet extends HttpServlet
         
     }
 
+    /**
+     * Logges user into dasboard system if username and password are correct.
+     * Otherwise prints error message
+     * @param username
+     * @param password
+     * @return 
+     */
     protected boolean allowUser(String username, String password) {
-        return true;
+        
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        
+        if(user.userAlreadyExists())
+        {
+            
+            if(user.getParser().login(username, user.getPassword()))
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
+    /**
+     * Checks if all fields are filled. If not return error message
+     * @param username
+     * @param password
+     * @param req
+     * @return error message
+     */
     private boolean validate(String username, String password, HttpServletRequest req)
     {
         if (username.equals("") || password.equals(""))
         {
-            log.error("one of the attributes is empty string");
+            log.error("One of the attributes is empty string");
             req.setAttribute("error", "You must fill all text fields.");
             return false;
         }
