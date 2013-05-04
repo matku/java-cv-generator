@@ -22,7 +22,7 @@
 TO DO:
 
 *Otahal*:  
-         * save registered user into users.xml         --hotovo
+         * save registered user into users.xml..........hotovo
          * create links to export CV into language
          * create form on creating new CV
 
