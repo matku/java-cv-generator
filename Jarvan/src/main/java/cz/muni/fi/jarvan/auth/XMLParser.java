@@ -87,8 +87,7 @@ public class XMLParser {
      */
     public boolean login(String username, String password)
     {
-        System.err.println("Username:" + username + "\n Password:" + password);
-
+        
         NodeList user = doc.getElementsByTagName("user");
         
         for(int i=0; i<user.getLength(); i++)

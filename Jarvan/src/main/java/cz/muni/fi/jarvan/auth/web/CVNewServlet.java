@@ -17,11 +17,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author martin
  */
-@WebServlet(CVServlet.URL_MAPPING + "/*")
-public class CVServlet extends HttpServlet
+@WebServlet(CVNewServlet.URL_MAPPING + "/*")
+public class CVNewServlet extends HttpServlet
 {
-    private static final String CVSERVLET = "/WEB-INF/view/cv.jsp";
-    public static final String URL_MAPPING = "/auth/cv/";
+    private static final String CVNEW_JSP = "/WEB-INF/view/cvNew.jsp";
+    public static final String URL_MAPPING = "/auth/cv/create";
     
     private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
     
@@ -32,6 +32,7 @@ public class CVServlet extends HttpServlet
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
             return ;
         }
-        req.getRequestDispatcher(CVSERVLET).forward(req, resp);
+        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+        
     }
 }
