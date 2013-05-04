@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<users>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><users>
     <user id="test">
         <username>test</username>
         <password>98f6bcd4621d373cade4e832627b4f6</password>
@@ -16,4 +14,4 @@
         <password>98f6bcd4621d373cade4e832627b4f6</password>
         <email>test3@test.test</email>
     </user>
-</users>
+<user id="aaa"><username>aaa</username><password>47bce5c74f589f4867dbd57e9ca9f808</password><email>aaa</email></user></users>

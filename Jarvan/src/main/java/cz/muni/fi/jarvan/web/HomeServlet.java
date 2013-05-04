@@ -92,7 +92,7 @@ public class HomeServlet extends HttpServlet
         if(user.userAlreadyExists())
         {
             
-            if(user.getParser().login(username, user.getPassword()))
+            if(User.parser.login(username, user.getPassword()))
             {
                 return true;
             }

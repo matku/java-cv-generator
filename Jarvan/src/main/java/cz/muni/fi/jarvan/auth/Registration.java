@@ -42,7 +42,7 @@ public class Registration {
         }
         
         //save user to XML
-        
+        User.writer.createUser(user);
         
         
         return true;

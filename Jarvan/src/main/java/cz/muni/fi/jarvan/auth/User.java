@@ -20,11 +20,13 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private XMLParser parser;
+    public static XMLParser parser;
+    public static XMLWriter writer;
 
     public User()
     {
-        this.parser = new XMLParser(this.getPath());
+        if (parser == null) parser = new XMLParser(this.getPath());
+        if (writer == null) writer = new XMLWriter(this.getPath());
     }
     
     public void setUsername(String username) {
@@ -51,10 +53,15 @@ public class User {
         return email;
     }
     
-    public XMLParser getParser()
+    /*public XMLParser getParser()
     {
         return parser;
     }
+    
+    public XMLWriter getWriter()
+    {
+        return writer;
+    }*/
     
     /**
      * Checks if typed username already exists in xml file
@@ -63,7 +70,7 @@ public class User {
      */
     public boolean userAlreadyExists()
     {       
-        List<String> dbUsers = this.parser.getUsers();
+        List<String> dbUsers = parser.getUsers();
         
         for(int i=0; i<dbUsers.size(); i++)
         {
@@ -81,7 +88,7 @@ public class User {
      */
     public boolean emailAlreadyExists()
     {
-        List<String> dbEmail = this.parser.getEmails();
+        List<String> dbEmail = parser.getEmails();
         
         for(int i=0; i<dbEmail.size(); i++)
         {
