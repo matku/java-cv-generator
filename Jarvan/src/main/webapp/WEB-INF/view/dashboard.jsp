@@ -85,10 +85,10 @@
               <li class="nav-header">Zivotopis</li>
               <li class="active"><a href="${pageContext.request.contextPath}/dashboard">Hlavna stranka</a></li>
               <li class="nav-header">Moznosti CV</li>
-              <li><a href="${pageContext.request.contextPath}/auth/create">Vytvorit</a></li>
-              <li><a href="${pageContext.request.contextPath}/auth/show">Zobrazit</a></li>
-              <li><a href="${pageContext.request.contextPath}/auth/edit">Upravit</a></li>
-              <li><a href="${pageContext.request.contextPath}/auth/delete">Zmazat</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/cv/create">Vytvorit</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/cv/show">Zobrazit</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/cv/edit">Upravit</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/cv/delete">Zmazat</a></li>
               <li class="nav-header">Exportovat CV</li>
               <li><a href="${pageContext.request.contextPath}/auth/export/cz">Prelozit do CZ</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/export/sk">Prelozit do SK</a></li>
