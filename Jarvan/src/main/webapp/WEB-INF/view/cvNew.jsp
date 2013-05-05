@@ -140,11 +140,11 @@
                     <td><input type="text" name="surname" value="<c:out value='${param.surname}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>Titul pred menom: </td>
+                    <td>Titul(y) pred menom: </td>
                     <td><input type="text" name="titleBefore" value="<c:out value='${param.titleBefore}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Titul za menom: </td>
+                    <td>Titul(y) za menom: </td>
                     <td><input type="text" name="titleAfter" value="<c:out value='${param.titleAfter}'/>" /></td>
                 </tr>
                 <tr>
@@ -313,9 +313,14 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Zadavajte v tvare(Jazyk: uroven)</td>
+                    <td>Zadavajte v tvare(Jazyk: uroven), oddelujte Enterom</td>
                     <td><textarea name="languages">Slovensky jazyk: matersky</textarea></td>
                 </tr>
+                <c:if test="${not empty languageError}">
+                <div class="alert alert-error">
+                    <c:out value="${languageError}"/>
+                </div>
+                </c:if> 
                 
                 <!-- OTHER -->
                 <tr class="success">
@@ -326,6 +331,11 @@
                     <td>Oddelujte ciarkou</td>
                     <td><textarea name="other">flexibilita, spolahlivost ...</textarea></td>
                 </tr>
+                <c:if test="${not empty otherError}">
+                <div class="alert alert-error">
+                    <c:out value="${otherError}"/>
+                </div>
+                </c:if> 
                 
                 <!-- FINALLY END OF THIS SHIT :) -->
                 <tr>

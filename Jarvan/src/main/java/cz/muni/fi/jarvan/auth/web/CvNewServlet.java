@@ -1,8 +1,6 @@
 
 package cz.muni.fi.jarvan.auth.web;
 
-
-import org.slf4j.Logger;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -17,8 +15,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author martin
  */
-@WebServlet(CVNewServlet.URL_MAPPING + "/*")
-public class CVNewServlet extends HttpServlet
+@WebServlet(CvNewServlet.URL_MAPPING + "/*")
+public class CvNewServlet extends HttpServlet
 {
     private static final String CVNEW_JSP = "/WEB-INF/view/cvNew.jsp";
     public static final String URL_MAPPING = "/auth/cv/create";
@@ -46,14 +44,41 @@ public class CVNewServlet extends HttpServlet
                 String sex = req.getParameter("sex");
                 if (sex == null)
                 {
+                    log.error("Sex not selected.");
                     req.setAttribute("sexError", "Sex is required");
                     req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                     return;
                 }
                 String firstName = req.getParameter("name");
                 String lastName = req.getParameter("surname");
-                String titleBefore = req.getParameter("titleBefore");
-                String titleAfter = req.getParameter("titleAfter");
+                String[] titlesBefore = req.getParameter("titleBefore").split("\\.");
+                String titleBefore;
+                System.err.println("Titles Before: " + titlesBefore.length);
+                for (int i = 0; i < titlesBefore.length; i++) {
+                    titleBefore = titlesBefore[i].trim();
+                    if (titleBefore.equals(""))
+                    {
+                        System.err.println("prazdny");
+                        continue;
+                    }
+                    titleBefore += ".";
+                    System.err.println("titleBefore: " + titleBefore);
+                    
+                }
+                String[] titlesAfter = req.getParameter("titleAfter").split("\\.");
+                String titleAfter;
+                System.err.println("Titles After: " + titlesAfter.length);
+                for (int i = 0; i < titlesAfter.length; i++) {
+                    titleAfter = titlesAfter[i].trim();
+                    if (titleAfter.equals(""))
+                    {
+                        System.err.println("prazdny");
+                        continue;
+                    }
+                    titleAfter += ".";
+                    System.err.println("titleAfter: " + titleAfter);
+                    
+                }
                 String birthday = req.getParameter("birthday");
                 //kontaktna adresa
                 String address = req.getParameter("address");
@@ -78,6 +103,7 @@ public class CVNewServlet extends HttpServlet
                     if (schoolCity.equals("") || schoolName.equals("") || 
                         schoolStart.equals(""))
                     {
+                        log.error("Did not fill nothing or everything in high school.");
                         req.setAttribute("schoolError", "You must fill in all required school fields if you have filled one of them");
                         req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                         return;
@@ -89,13 +115,14 @@ public class CVNewServlet extends HttpServlet
                 String universityName = req.getParameter("universityName");
                 String universityCity = req.getParameter("universityCity");
                 String universityFieldOfStudy = req.getParameter("universityFieldOfStudy");
-                if (!schoolCity.equals("") || !schoolEnd.equals("") || 
-                    !schoolName.equals("") || !schoolStart.equals("") || 
-                    !schoolFieldOfStudy.equals(""))
+                if (!universityCity.equals("") || !universityEnd.equals("") || 
+                    !universityName.equals("") || !universityStart.equals("") || 
+                    !universityFieldOfStudy.equals(""))
                 {
                     if (universityCity.equals("") || universityName.equals("") ||
                         universityStart.equals("") || universityFieldOfStudy.equals(""))
                     {
+                        log.error("Did not fill nothing or everything in university.");
                         req.setAttribute("universityError", "You must fill in all required university fields if you have filled one of them");
                         req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                         return;
@@ -112,6 +139,7 @@ public class CVNewServlet extends HttpServlet
                     if (workStart.equals("") || workEnd.equals("") ||
                         workEmployer.equals("") || workJob.equals(""))
                     {
+                        log.error("Did not fill nothing or everything in work.");
                         req.setAttribute("workError", "You must fill in all required work fields if you have filled one of them");
                         req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                         return;
@@ -119,15 +147,14 @@ public class CVNewServlet extends HttpServlet
                 }
                 
                 //languages
-                String languages = req.getParameter("languages");
+                String[] languages = req.getParameter("languages").split("\n");
                 //other
-                String other = req.getParameter("other");
+                String[] other = req.getParameter("other").split(",");
                 
                 
-                /*System.err.println("firstName: " + firstName + "\n" + 
+                
+                System.err.println("firstName: " + firstName + "\n" + 
                                    "lastName: " + lastName + "\n" + 
-                                   "titleBefore: " + titleBefore + "\n" + 
-                                   "titleAfter: " + titleAfter + "\n" + 
                                    "birthday: " + birthday + "\n" + 
                                    "address: " + address + "\n" + 
                                    "psc: " + psc + "\n" + 
@@ -153,11 +180,50 @@ public class CVNewServlet extends HttpServlet
                                    "workStart: " + workStart + "\n" + 
                                    "workEnd: " + workEnd + "\n" + 
                                    "workEmployer: " + workEmployer + "\n" + 
-                                   "workJob: " + workJob + "\n" + 
-                                   "\n" + 
-                                   "languages: " + languages + "\n" + 
-                                   "other: " + other);*/
+                                   "workJob: " + workJob);
+                System.err.println("Languages: ");
+                String[] language;
+                for (int i = 0; i < languages.length; i++) {
+                    
+                    if (languages[i].trim().equals(""))
+                    {
+                        log.error("Wrong format of languages");
+                        req.setAttribute("languageError", "wrong format of languages");
+                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                        return;
+                    }
+                    try
+                    {
+                        language = languages[i].split(":", 2);
+                        if (language[0].trim().equals("") || language[1].trim().equals(""))
+                        {
+                            log.error("Wrong format of languages");
+                            req.setAttribute("languageError", "wrong format of languages");
+                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                            return;
+                        }
+                    } catch (IndexOutOfBoundsException e)
+                    {
+                        log.error("Wrong format of languages");
+                        req.setAttribute("languageError", "wrong format of languages");
+                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                        return;
+                    }
+                    System.err.println(language[0].trim());
+                    System.err.println(language[1].trim());
+                }
                 
+                System.err.println("Other: ");
+                for (int i = 0; i < other.length; i++) {
+                    if (other[i].trim().equals(""))
+                    {
+                        log.error("Wrong format of other");
+                        req.setAttribute("otherError", "wrong format of others");
+                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                        return;
+                    }
+                    System.err.println(other[i].trim());
+                }
                 
                 
                 break;
