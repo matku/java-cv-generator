@@ -67,7 +67,7 @@
                 <img src="../public/img/logo.png" width="32" height="32" alt="MUNI FI" />
             </p>
             <ul class="nav">
-              <li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+              <li class="active"><a href="${pageContext.request.contextPath}/dashboard">Home</a></li>
               <li><a href="${pageContext.request.contextPath}/about">About</a></li>
               <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
             </ul>

@@ -67,7 +67,7 @@
                 <img src="../../public/img/logo.png" width="32" height="32" alt="MUNI FI" />
             </p>
             <ul class="nav">
-              <li class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li>
+              <li class="active"><a href="${pageContext.request.contextPath}/dashboard">Home</a></li>
               <li><a href="${pageContext.request.contextPath}/about">About</a></li>
               <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
             </ul>
@@ -105,72 +105,90 @@
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Vytvorit nove CV</h3>
             <br />
+            <c:if test="${not empty success}">
+                <div class="alert alert-success">
+                    <c:out value="${success}"/>
+                    <a href="${pageContext.request.contextPath}/dashboard">Vratit sa !!!</a>
+                </div>
+            </c:if>   
+            <h6>Policka oznacene * su povinne</h6>
+            <h6>Policka oznacene ** su povinne, ak ste vyplnili aspon jedno policko v danej kategorii</h6>
+            <form method="post" action="${pageContext.request.contextPath}/auth/cv/create/new">
             <table class="table ">
                 <tr class="success">
                     <td>Osobne udaje </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Pohlavie: </td>
+                    <td>Pohlavie:* </td>
                     <td>
-                        <input type="radio" value="Muz" name="sex"/> &nbsp;Muz<br />
+                        <input type="radio" value="Muz" name="sex" /> &nbsp;Muz<br />
                         <input type="radio" value="Zena" name="sex"/>&nbsp;&nbsp;Zena
                     </td>
+                    <c:if test="${not empty sexError}">
+                    <div class="alert alert-error">
+                        <c:out value="${sexError}"/>
+                    </div>
+                    </c:if>   
                 </tr>
                 <tr>
-                    <td>Meno: </td>
-                    <td><input type="text" name="name" /></td>
+                    <td>Meno:* </td>
+                    <td><input type="text" name="name" value="<c:out value='${param.name}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>Priezvisko: </td>
-                    <td><input type="text" name="surname" /></td>
+                    <td>Priezvisko:* </td>
+                    <td><input type="text" name="surname" value="<c:out value='${param.surname}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>Akademicky titul: </td>
-                    <td><input type="text" name="title" /></td>
+                    <td>Titul pred menom: </td>
+                    <td><input type="text" name="titleBefore" value="<c:out value='${param.titleBefore}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Datum narodenia: </td>
-                    <td><input type="text" name="birthday" /></td>
+                    <td>Titul za menom: </td>
+                    <td><input type="text" name="titleAfter" value="<c:out value='${param.titleAfter}'/>" /></td>
+                </tr>
+                <tr>
+                    <td>Datum narodenia:* </td>
+                    <td><input type="text" name="birthday" value="<c:out value='${param.birthday}'/>" required="true" /></td>
                 </tr>
                 <tr class="success">
                     <td>Kontaktna adresa: </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Ulica, cislo: </td>
-                    <td><input type="text" name="address" /></td>
+                    <td>Ulica, cislo:* </td>
+                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>PSC: </td>
-                    <td><input type="text" name="psc" /></td>
+                    <td>PSC:* </td>
+                    <td><input type="text" name="psc" value="<c:out value='${param.psc}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>Mesto: </td>
-                    <td><input type="text" name="birthday" /></td>
+                    <td>Mesto:* </td>
+                    <td><input type="text" name="town" value="<c:out value='${param.town}'/>" required="true" /></td>
                 </tr>
                 <tr>
-                    <td>Stat: </td>
+                    <td>Stat:* </td>
                     <td>
-                        <select name="state">
-                            <option></option>
-                            <option>Slovensko</option>
-                            <option>Cesko</option>
+                        <select name="state" required="true">
+                            <option value=""></option>
+                            <option value="Slovensko">Slovensko</option>
+                            <option value="Cesko">Cesko</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>Telefon Domov: </td>
-                    <td><input type="text" name="homePhone" /></td>
+                    <td><input type="text" name="homePhone" value="<c:out value='${param.homePhone}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Telefon Mobil: </td>
-                    <td><input type="text" name="mobilePhone" /></td>
+                    <td><input type="text" name="mobilePhone" value="<c:out value='${param.mobilePhone}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Vodicsky preukaz: </td>
                     <td>
-                        <select name="driveLicence">
+                        <select name="driverLicence">
                             <option value=""></option>
                             <option value="A">A</option>
                             <option value="B">B</option>
@@ -183,19 +201,19 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Najvyssie doasiahnute vzdelanie </td>
+                    <td>Najvyssie doasiahnute vzdelanie:* </td>
                     <td>
-                        <select name="topEducation">
-                            <option value="0"></option>
-                            <option value="2">zakladne vzdelanie</option>
-                            <option value="8">student strednej skoly</option>
-                            <option value="3">stredoskolské bez maturity</option>
-                            <option value="5">stredoskolske s maturitou</option>
-                            <option value="6">nadstavbove/vysie odborne vzdelanie</option>
-                            <option value="9">student vysokej skoly</option>
-                            <option value="10">vysokoskolske I. stupna</option>
-                            <option value="7">vysokoskolske II. stupna</option>
-                            <option value="11">vysokoskolske III. stupna</option>
+                        <select name="topEducation" required="true">
+                            <option value=""></option>
+                            <option value="zakladne vzdelanie">zakladne vzdelanie</option>
+                            <option value="student strednej skoly">student strednej skoly</option>
+                            <option value="stredoskolské bez maturity">stredoskolské bez maturity</option>
+                            <option value="stredoskolske s maturitou">stredoskolske s maturitou</option>
+                            <option value="nadstavbove/vysie odborne vzdelanie">nadstavbove/vysie odborne vzdelanie</option>
+                            <option value="student vysokej skoly">student vysokej skoly</option>
+                            <option value="vysokoskolske I. stupna">vysokoskolske I. stupna</option>
+                            <option value="vysokoskolske II. stupna">vysokoskolske II. stupna</option>
+                            <option value="vysokoskolske III. stupna">vysokoskolske III. stupna</option>
                         </select>
                     </td>
                 </tr>
@@ -205,25 +223,30 @@
                     <td>Stredna skola</td>
                     <td></td>
                 </tr>
+                <c:if test="${not empty schoolError}">
+                <div class="alert alert-error">
+                    <c:out value="${schoolError}"/>
+                </div>
+                </c:if>   
                 <tr>
-                    <td>Rok nastupu</td>
-                    <td><input type="text" name="schoolStart" /></td>
+                    <td>Rok nastupu:**</td>
+                    <td><input type="text" name="schoolStart" value="<c:out value='${param.schoolStart}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Rok ukoncenia:</td>
-                    <td><input type="text" name="schoolStop" /></td>
+                    <td><input type="text" name="schoolEnd" value="<c:out value='${param.schoolEnd}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Skola:</td>
-                    <td><input type="text" name="schoolName" /></td>
+                    <td>Skola:**</td>
+                    <td><input type="text" name="schoolName" value="<c:out value='${param.schoolName}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Mesto:</td>
-                    <td><input type="text" name="schoolCity" /></td>
+                    <td>Mesto:**</td>
+                    <td><input type="text" name="schoolCity" value="<c:out value='${param.schoolCity}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Odbor/specializacia</td>
-                    <td><input type="text" name="schoolFieldOfStudy" /></td>
+                    <td>Odbor/specializacia:</td>
+                    <td><input type="text" name="schoolFieldOfStudy" value="<c:out value='${param.schoolFieldOfStudy}'/>" /></td>
                 </tr>
                 
                 <!-- VYSOKA SKOLA -->
@@ -231,25 +254,30 @@
                     <td>Vysoka skola</td>
                     <td></td>
                 </tr>
+                <c:if test="${not empty universityError}">
+                <div class="alert alert-error">
+                    <c:out value="${universityError}"/>
+                </div>
+                </c:if> 
                 <tr>
-                    <td>Rok nastupu</td>
-                    <td><input type="text" name="univerzityStart" /></td>
+                    <td>Rok nastupu:**</td>
+                    <td><input type="text" name="universityStart" value="<c:out value='${param.universityStart}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Rok ukoncenia:</td>
-                    <td><input type="text" name="univerzityStop" /></td>
+                    <td><input type="text" name="universityEnd" value="<c:out value='${param.universityEnd}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Skola/fakulta:</td>
-                    <td><input type="text" name="univerzityName" /></td>
+                    <td>Skola/fakulta:**</td>
+                    <td><input type="text" name="universityName" value="<c:out value='${param.universityName}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Mesto:</td>
-                    <td><input type="text" name="univerzityCity" /></td>
+                    <td>Mesto:**</td>
+                    <td><input type="text" name="universityCity" value="<c:out value='${param.universityCity}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Odbor/specializacia</td>
-                    <td><input type="text" name="univerzityFieldOfStudy" /></td>
+                    <td>Odbor/specializacia:**</td>
+                    <td><input type="text" name="universityFieldOfStudy" value="<c:out value='${param.universityFieldOfStudy}'/>" /></td>
                 </tr>
                 
                 <!-- WORK -->
@@ -257,25 +285,26 @@
                     <td>Posledne zamestnanie: </td>
                     <td></td>
                 </tr>
+                <c:if test="${not empty workError}">
+                <div class="alert alert-error">
+                    <c:out value="${workError}"/>
+                </div>
+                </c:if> 
                 <tr>
-                    <td>Od: </td>
-                    <td><input type="text" name="workStart" /></td>
+                    <td>Od:** </td>
+                    <td><input type="text" name="workStart" value="<c:out value='${param.workStart}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Do: </td>
-                    <td><input type="text" name="workEnd" /></td>
+                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Zamestnavatel: </td>
-                    <td><input type="text" name="workemployer" /></td>
+                    <td>Zamestnavatel:** </td>
+                    <td><input type="text" name="workEmployer" value="<c:out value='${param.workEmployer}'/>" /></td>
                 </tr>
                 <tr>
-                    <td>Pracovna pozicia: </td>
-                    <td><input type="text" name="workJob" /></td>
-                </tr>
-                <tr>
-                    <td>Napln prace: </td>
-                    <td><textarea name="workComment"></textarea></td>
+                    <td>Pracovna pozicia:** </td>
+                    <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>" /></td>
                 </tr>
                 
                 <!-- LANGUAGES -->
@@ -285,7 +314,7 @@
                 </tr>
                 <tr>
                     <td>Zadavajte v tvare(Jazyk: uroven)</td>
-                    <td><textarea name="language">Slovensky jazyk: matersky</textarea></td>
+                    <td><textarea name="languages">Slovensky jazyk: matersky</textarea></td>
                 </tr>
                 
                 <!-- OTHER -->
@@ -295,16 +324,17 @@
                 </tr>
                 <tr>
                     <td>Oddelujte ciarkou</td>
-                    <td><textarea name="language">flexibilita, spolahlivost ...</textarea></td>
+                    <td><textarea name="other">flexibilita, spolahlivost ...</textarea></td>
                 </tr>
                 
                 <!-- FINALLY END OF THIS SHIT :) -->
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Zmenit" name="Change" class="btn btn-success"/></td>
+                    <td><input type="submit" value="Vytvorit" name="Create" class="btn btn-success"/></td>
                 </tr>
                 
             </table>
+            </form>
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->
