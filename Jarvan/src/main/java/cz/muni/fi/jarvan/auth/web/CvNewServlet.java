@@ -79,7 +79,9 @@ public class CvNewServlet extends HttpServlet
                     System.err.println("titleAfter: " + titleAfter);
                     
                 }
-                String birthday = req.getParameter("birthday");
+                String birthdayDay = req.getParameter("birthdayDay");
+                String birthdayMonth = req.getParameter("birthdayMonth");
+                String birthdayYear = req.getParameter("birthdayYear");
                 //kontaktna adresa
                 String address = req.getParameter("address");
                 String psc = req.getParameter("psc");
@@ -155,7 +157,9 @@ public class CvNewServlet extends HttpServlet
                 
                 System.err.println("firstName: " + firstName + "\n" + 
                                    "lastName: " + lastName + "\n" + 
-                                   "birthday: " + birthday + "\n" + 
+                                   "birthdayDay: " + birthdayDay + "\n" + 
+                                   "birthdayMonth: " + birthdayMonth + "\n" + 
+                                   "birthdayYear: " + birthdayYear + "\n" + 
                                    "address: " + address + "\n" + 
                                    "psc: " + psc + "\n" + 
                                    "town: " + town + "\n" + 

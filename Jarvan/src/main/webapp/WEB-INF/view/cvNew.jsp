@@ -149,7 +149,11 @@
                 </tr>
                 <tr>
                     <td>Datum narodenia:* </td>
-                    <td><input type="text" name="birthday" value="<c:out value='${param.birthday}'/>" required="true" /></td>
+                    <td>
+                        <input type="text" name="birthdayDay" value="<c:out value='${param.birthdayDay}'/>" style="width: 30px;" required="true" />
+                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${param.birthdayMonth}'/>" style="width: 30px;" required="true" />
+                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${param.birthdayYear}'/>" style="width: 50px;" required="true" />
+                    </td>
                 </tr>
                 <tr class="success">
                     <td>Kontaktna adresa: </td>
@@ -313,7 +317,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Zadavajte v tvare(Jazyk: uroven), oddelujte Enterom</td>
+                    <td>Zadavajte v tvare(Jazyk: uroven)<br />oddelujte Enterom</td>
                     <td><textarea name="languages">Slovensky jazyk: matersky</textarea></td>
                 </tr>
                 <c:if test="${not empty languageError}">
