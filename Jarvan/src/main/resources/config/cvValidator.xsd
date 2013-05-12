@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://xml.netbeans.org/schema/contacts"
+	elementFormDefault="qualified">
+
+	<xs:element name="cv">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="personalInfo" maxOccurs="1">
+					<xs:complexType>
+						<xs:choice minOccurs="1" maxOccurs="unbounded">
+
+							<xs:element name="name" maxOccurs="1">
+								<xs:complexType>
+									<xs:choice minOccurs="1" maxOccurs="unbounded">
+
+										<xs:element name="title" minOccurs="0" maxOccurs="2">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="position">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="before"/>
+																	<xs:enumeration value="after"/>
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:attribute>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+
+										<xs:element name="first" minOccurs="1" maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-z]([a-z])*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="last" minOccurs="1" maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-z]([a-z])*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="sex" minOccurs="0" maxOccurs="1">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="male|female"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+
+							<xs:element name="birthday" maxOccurs="1">
+								<xs:complexType>
+									<xs:all>
+
+										<xs:element name="day">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="31"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="month">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="12"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="year">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2020"/>			<!--xml schema 1.1 - assert stoji za pokus ked bude cas-->
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="nationality" minOccurs="0" maxOccurs="1">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="([a-z])*"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+
+							<xs:element name="address" maxOccurs="1">
+								<xs:complexType>
+									<xs:all>
+
+										<xs:element name="street">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z]([a-z])* ([0-9])*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="city">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z]([a-z ])*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="country">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[A-Z]([a-z ])*"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="zip">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:pattern value="[0-9]{5}|[0-9]{3} [0-9]{2}"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="contact">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="type">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:enumeration value="phoneNumber"/>
+														<xs:enumeration value="homeNumber"/>
+														<xs:enumeration value="email"/>
+														<xs:enumeration value="www"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="education" maxOccurs="1">
+					<xs:complexType>
+						<xs:choice maxOccurs="unbounded">
+							<xs:element name="school">
+								<xs:complexType>
+									<xs:all>
+
+										<xs:element name="name" type="xs:string"/>
+										<xs:element name="specialization" type="xs:string"/>
+										<xs:element name="start">
+											<xs:complexType>
+												<xs:all>
+
+													<xs:element name="day" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1"/>
+																<xs:maxInclusive value="31"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+
+													<xs:element name="month" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1"/>
+																<xs:maxInclusive value="12"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+
+													<xs:element name="year">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1900"/>
+																<xs:maxInclusive value="2050"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="end" minOccurs="0">
+											<xs:complexType>
+												<xs:all>
+
+													<xs:element name="day" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1"/>
+																<xs:maxInclusive value="31"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+
+													<xs:element name="month" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1"/>
+																<xs:maxInclusive value="12"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+
+													<xs:element name="year">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="1900"/>
+																<xs:maxInclusive value="2050"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:choice>
+						<xs:attribute name="highest">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="elementary"/>
+									<xs:enumeration value="highStudent"/>
+									<xs:enumeration value="highGrad"/>
+									<xs:enumeration value="HighNonGrad"/>
+									<xs:enumeration value="higher"/>
+									<xs:enumeration value="univStudent"/>
+									<xs:enumeration value="bachelor"/>
+									<xs:enumeration value="master"/>
+									<xs:enumeration value="postgrad"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="work" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:all>
+
+							<xs:element name="employer" type="xs:string"/>
+							<xs:element name="position" type="xs:string"/>
+							<xs:element name="start">
+								<xs:complexType>
+									<xs:all>
+
+										<xs:element name="day" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="32"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="month" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="12"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="year">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2020"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+
+							<xs:element name="end">
+								<xs:complexType>
+									<xs:all>
+
+										<xs:element name="day" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="32"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="month" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1"/>
+													<xs:maxInclusive value="12"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+
+										<xs:element name="year">
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2020"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="language">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<!--<xs:pattern value="[A-Z]([a-z])*|([a-z])*"/>-->
+								<xs:attribute name="level">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="basic"/>
+											<xs:enumeration value="good"/>
+											<xs:enumeration value="satisfactory"/>
+											<xs:enumeration value="excellent"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:extension>
+						</xs:simpleContent>
+
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="skill">
+					<xs:complexType>
+						<xs:simpleContent>
+							<xs:extension base="xs:string">
+								<xs:attribute name="level">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="basic"/>
+											<xs:enumeration value="good"/>
+											<xs:enumeration value="satisfactory"/>
+											<xs:enumeration value="excellent"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:extension>
+						</xs:simpleContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="lang" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="en"/>
+						<xs:enumeration value="cz"/>
+						<xs:enumeration value="sk"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="created"/>
+			<xs:attribute name="modified"/>
+			<xs:attribute name="user"/>
+			<xs:anyAttribute/>
+			<!--<xs:anyAttribute/>-->
+		</xs:complexType>
+
+	</xs:element>
+</xs:schema>

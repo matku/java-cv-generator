@@ -1,9 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <translation>
-    <username> 
-        <translate lang="en">Name</translate>
-        <translate lang="sk">Meno</translate>
-        <translate lang="cz">Jmeno</translate>
-    </username>
+	<expression exp="curriculum vitae">
+		<tr lang="en">Curriculum Vitae</tr>
+		<tr lang="sk">Životopis</tr>
+		<tr lang="cz">Životopis</tr>
+	</expression>
+	<expression exp="address">
+		<tr lang="en">Address</tr>
+		<tr lang="sk">Adresa</tr>
+		<tr lang="cz">Adresa</tr>
+	</expression>
+	<expression exp="birthday">
+		<tr lang="en">Birthday</tr>
+		<tr lang="sk">Narodeniny</tr>
+		<tr lang="cz">Narozeniny</tr>
+	</expression>
+	<expression exp="education">
+		<tr lang="en">Education</tr>
+		<tr lang="sk">Vzdelanie</tr>
+		<tr lang="cz">Vzdělání</tr>
+	</expression>
+	<expression exp="highest_education">
+		<tr lang="en">Highest education</tr>
+		<tr lang="sk">Dosiahnuté vzdelanie</tr>
+		<tr lang="cz">Dosaženo vzdělání</tr>
+	</expression>
+	<expression exp="specialization">
+		<tr lang="en">Field of study</tr>
+		<tr lang="sk">Odbor</tr>
+		<tr lang="cz">Odbor</tr>
+	</expression>
+	<expression exp="work">
+		<tr lang="en">Work experience</tr>
+		<tr lang="sk">Pracovné skúsenosti</tr>
+		<tr lang="cz">Pracovní zkušenosti</tr>
+	</expression>
+	<expression exp="position">
+		<tr lang="en">Position</tr>
+		<tr lang="sk">Pracovná pozícia</tr>
+		<tr lang="cz">Pracovní pozice</tr>
+	</expression>
+	<expression exp="languages">
+		<tr lang="en">Language skills</tr>
+		<tr lang="sk">Jazykové znalosti</tr>
+		<tr lang="cz">Jazykové znalosti</tr>
+	</expression>
+	<expression exp="skills">
+		<tr lang="en">Other skills</tr>
+		<tr lang="sk">Ostatné znalosti</tr>
+		<tr lang="cz">Ostatní znalosti</tr>
+	</expression>
+	<expression exp="elementary">
+		<tr lang="en">primary</tr>
+		<tr lang="sk">Základné</tr>
+		<tr lang="cz">Základní</tr>
+	</expression>
+	<expression exp="highStudent">
+		<tr lang="en">High school student</tr>
+		<tr lang="sk">Študent strednej školy</tr>
+		<tr lang="cz">Student střední školy</tr>
+	</expression>
+	<expression exp="highGrad">
+		<tr lang="en">High school with diploma</tr>
+		<tr lang="sk">Stredoškolské s maturitou</tr>
+		<tr lang="cz">Středoškolské s maturitou</tr>
+	</expression>
+	<expression exp="HighNonGrad">
+		<tr lang="en">High school without diploma</tr>
+		<tr lang="sk">Stredoškolské bez maturity</tr>
+		<tr lang="cz">Středoškolské bez maturity</tr>
+	</expression>
+	<expression exp="higher">
+		<tr lang="en">Follow-up/Higher</tr>
+		<tr lang="sk">Nadstavbové/Vyššie odborné</tr>
+		<tr lang="cz">Nadstavbové/Vyšší odborné</tr>
+	</expression>
+	<expression exp="univStudent">
+		<tr lang="en">University student</tr>
+		<tr lang="sk">Študent vysokej školy</tr>
+		<tr lang="cz">Student vysoké školy</tr>
+	</expression>
+	<expression exp="bachelor">
+		<tr lang="en">Bachelor's degree</tr>
+		<tr lang="sk">Vysokoškolské 1. stupňa</tr>
+		<tr lang="cz">Vysokoškolské 1. stupně</tr>
+	</expression>
+	<expression exp="master">
+		<tr lang="en">Master's degree</tr>
+		<tr lang="sk">Vysokoškolské 2. stupňa</tr>
+		<tr lang="cz">Vysokoškolské 2. stupně</tr>
+	</expression>
+	<expression exp="postgrad">
+		<tr lang="en">Postgraduate</tr>
+		<tr lang="sk">Postgraduálne</tr>
+		<tr lang="cz">Postgraduální</tr>
+	</expression>
+
 </translation>
