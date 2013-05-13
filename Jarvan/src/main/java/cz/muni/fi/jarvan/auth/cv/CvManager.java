@@ -9,112 +9,145 @@ import java.io.File;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Validation, transformation, compilation
+ *
  * @author matuss
  */
 public class CvManager {
 
 	private String xml;
 	private String xmlSchema;
+	private String xslTransform;
 	private final static Logger log = LoggerFactory.getLogger(CvManager.class);
 
-	public CvManager()
-	{
+	public CvManager() {
 		this.xmlSchema = getPath() + "cvValidator.xsd";
+		this.xslTransform = getPath() + "xml2tex.xsl";
 	}
 
-	private boolean validate() throws IOException, SAXException
-	{
-		Source schemaFile = new StreamSource(new File(this.xmlSchema));
-        Source cvXml = new StreamSource(new File(this.xml));
+	/**
+	 * method to validate xml file against xml schema
+	 * @return success
+	 */
+	private boolean validate() {
+		try {
+			Source schemaFile = new StreamSource(new File(this.xmlSchema));
+			Source cvXml = new StreamSource(new File(this.xml));
 
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = schemaFactory.newSchema(schemaFile);
-        Validator validator = schema.newValidator();
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = schemaFactory.newSchema(schemaFile);
+			Validator validator = schema.newValidator();
 
-        try{
-            validator.validate(cvXml);
-            return true;
-        }
-        catch (SAXException e)
-        {
+
+			validator.validate(cvXml);
+			return true;
+		} catch (SAXException e) {
 			log.error("XML is invalid: " + e.getLocalizedMessage());
 			return false;
-        }
+		} catch (IOException e) {
+			log.error("File opening error: " + e.getLocalizedMessage());
+			return false;
+		}
 	}
 
-	public void generate(String xml) throws IOException, SAXException
-	{
+	/**
+	 * method to generate pdf from xml file
+	 * @param xml xml file name in resources folder
+	 * @return pdf file name
+	 * @throws IllegalArgumentException when given xml doesnt validate against schema
+	 */
+	public String generate(String xml) throws IllegalArgumentException {
 		this.xml = xml;
-		if (!validate())
+		if (!validate()) {
 			throw new IllegalArgumentException("XML file is invalid.");
+		}
+
+		String outputFile = xml.substring(0, xml.length() - 4) + ".tex";
 
 		// transform
+		TransformerFactory factory = TransformerFactory.newInstance();
+		StreamSource xslt = new StreamSource(
+				new File(this.xslTransform));
+		try {
+			Transformer transformer = factory.newTransformer(xslt);
+			StreamSource xmlFile = new StreamSource(new File(getPath() + this.xml));
+			StreamResult tex = new StreamResult(new File(getPath() + outputFile));
+			transformer.transform(xmlFile, tex);
+		} catch (TransformerConfigurationException ex) {
+			System.out.println("config exception: " + ex.getMessage());
+		} catch (TransformerException ex) {
+			System.out.println("transform exception: " + ex.getMessage());
+		}
+		// TODO podat dalej spravu o chybe
 
 		// compile
-		//String cmd = "pdflatex " + " file";
-		//executeCmd(cmd);
+		String cmd = "pdflatex " + outputFile + " && rm -f " + outputFile;
+		executeCmd(cmd);
+		return outputFile.substring(0, outputFile.length() - 4) + ".pdf";
 	}
 
-	public boolean executeCmd(String cmd)
-	{
+	/**
+	 * executes command in terminal
+	 * @param cmd command to be executed
+	 * @return success
+	 */
+	private boolean executeCmd(String cmd) {
 		String output = null;
 
-		 try
-		 {
-            Process p = Runtime.getRuntime().exec(cmd);
+		try {
+			Process p = Runtime.getRuntime().exec(cmd);
 
-            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-            // read the output from the command
+			// read the output from the command
 			// Here is the standard output of the command:
-            while ((output = stdInput.readLine()) != null)
-			{
-                System.out.println(output);
-            }
+			while ((output = stdInput.readLine()) != null) {
+				System.out.println(output);
+			}
 
-            // read any errors from the attempted command
-            System.out.println("Here is the standard error of the command (if any):\n");
-            while ((output = stdError.readLine()) != null)
-			{
-                System.out.println(output);
-            }
+			// read any errors from the attempted command
+			System.out.println("Here is the standard error of the command (if any):\n");
+			while ((output = stdError.readLine()) != null) {
+				System.out.println(output);
+			}
 
 			return true;
-        }
-        catch (IOException e)
-		{
-            log.error("Command error execution: ", e.getMessage());
-        }
+		} catch (IOException e) {
+			log.error("Command error execution: ", e.getMessage());
+		}
 
 		return false;
 	}
 
 	/**
-     * Method for finding correct path to xsl and xsd files
-     * @return path
-     */
-    private String getPath()
-    {
-        String oldPath = CvManager.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
-        String newPath = "";
+	 * Method for finding correct path to xsl and xsd files
+	 *
+	 * @return path
+	 */
+	private String getPath() {
+		String oldPath = CvManager.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
+		String newPath = "";
 
-        String[] parts = oldPath.split("/");
-        int counter = 0;
+		String[] parts = oldPath.split("/");
+		int counter = 0;
 
-        while(!parts[counter].equals("target"))
-        {
-            newPath += parts[counter] + "/";
-            counter++;
-        }
+		while (!parts[counter].equals("target")) {
+			newPath += parts[counter] + "/";
+			counter++;
+		}
 
-        newPath += "src/main/resources/config/";
+		newPath += "src/main/resources/config/";
 
-        return newPath;
-    }
+		return newPath;
+	}
 }
