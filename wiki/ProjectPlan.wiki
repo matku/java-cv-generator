@@ -38,4 +38,4 @@ TO DO:
 
 *Kralik*:  
          * LateX convert 
-         * Multilanguage support 
+         * Multilanguage support ........Done
