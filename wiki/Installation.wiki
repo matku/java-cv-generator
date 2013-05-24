@@ -1,0 +1,14 @@
+= Installation =
+
+== Guide ==
+
+ * Download projekt from our repository or from this [http://code.google.com/p/java-cv-generator/jarvan.zip] 
+ * Copy the folder to Apache Tomcat or other apache system
+ * Open webpage http://localhost/Jarvan
+ * Enjoy
+
+
+== Requirents ==
+
+ * Apache Tomcat 7 or other apache system
+ * >= Java 6.0, Java Web
