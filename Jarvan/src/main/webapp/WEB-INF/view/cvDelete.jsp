@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="layout/layout.jsp" %>
-    
+
     <body>
 
     <%@include file="layout/pageMenu.jsp" %>
@@ -16,8 +16,8 @@
               <li class="nav-header">Moznosti CV</li>
               <li><a href="${pageContext.request.contextPath}/auth/cv/create">Vytvorit</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/cv/show">Zobrazit</a></li>
-              <li class="active"><a href="${pageContext.request.contextPath}/auth/cv/edit">Upravit</a></li>
-              <li><a href="${pageContext.request.contextPath}/auth/cv/delete">Zmazat</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/cv/edit">Upravit</a></li>
+              <li class="active"><a href="${pageContext.request.contextPath}/auth/cv/delete">Zmazat</a></li>
               <li class="nav-header">Exportovat CV</li>
               <li><a href="${pageContext.request.contextPath}/auth/export/cz">Prelozit do CZ</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/export/sk">Prelozit do SK</a></li>
@@ -31,15 +31,15 @@
         </div>
         
         <div class="span9">
-            <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
-            <h3>Upravit CV</h3>
-            <br />
             
+            <h3>Zmazat CV</h3>
+            <br />
+
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->
     
-    <%@include file="layout/footer.jsp" %>
     
+    <%@include file="layout/footer.jsp" %>
     
 </html>
