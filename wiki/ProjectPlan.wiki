@@ -1,41 +1,32 @@
 = Project plan =
 
  * UML Model        
- * Base system 
- * GUI Interface    
- * LateX PDF
  * Unit tests
  * Documentation
 
-== Update 03.05.2013 ==
+== Update 25.05.2013 ==
 
- # UML diagram finished / needs to be rebuild cause of slight changes
- # user can login but can't register yet (storing has to be done)
- # homepage and base system interface is done (durisin will edit text on pages)
- # LateX is on the way still "in progress"
- # Create, Edit, Show, Delete CV aren't ready yet
- # Change password and username aren't ready yet
  
-
 == Schedule ==
 
 TO DO:
 
+*All*:
+         * Každý řešitel navíc samostatně vypracuje závěrečnou zprávu o svém podílu na řešení projektu v rozsahu cca jedné stránky. Za dokumentaci se považují také dobře komentované zdrojové kódy
+         * Závěrečné zprávy k projektu musí být primárně ve formátu DocBook, z něhož se potom generuje např. HTML nebo PDF. Vhodným umístěním je opět sekce Downloads vašeho projektu.
+
 *Otahal*:  
-         * save registered user into users.xml..........hotovo
          * create links to export CV into language
-         * create form on creating new CV
+         * finish create, edit CV
 
 *Proks*:   
-         * create form for edit CV
-         * create form for viewing CV
-         * create form for deleting CV
-  
+         * finish delete cv
+         * Wiki documentation page
+
 *Durisin*: 
          * UNIT tests
-         * documentation
+         * add text to web page 
          * change password and username
 
 *Kralik*:  
-         * LateX convert 
-         * Multilanguage support ........Done
+         * create Exceptions for error handling
