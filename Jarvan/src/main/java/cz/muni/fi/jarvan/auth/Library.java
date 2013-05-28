@@ -47,4 +47,35 @@ public class Library {
             }
         }
     }
+    
+    public boolean addCV(String username, String CvName)
+    {
+        if(username == null)
+        {
+            log.error("Username is null");
+            return false;
+        }
+        
+        if(username.equals(""))
+        {
+            log.error("Username is empty");
+            return false;
+        }
+        
+        if(CvName == null)
+        {
+            log.error("CvName is null");
+            return false;
+        }
+        
+        if(CvName.equals(""))
+        {
+            log.error("CvName is empty");
+            return false;
+        }
+        
+        
+        
+        return true;
+    }
 }
