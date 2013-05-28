@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests for methods from Registration class 
+ * Tests of methods, of class Registration
  * @author joe
  */
 public class RegistrationTest {
@@ -44,7 +44,7 @@ public class RegistrationTest {
     }
     
     @Test
-    public void testNoneExist()
+    public void testNotExist()
     {
         System.out.println("Test 3: None existing values");
         XMLWriter userXml = new XMLWriter(Settings.getPathUser());
