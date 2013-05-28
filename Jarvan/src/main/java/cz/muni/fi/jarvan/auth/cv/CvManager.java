@@ -92,7 +92,9 @@ public class CvManager {
 		}
 
 		// compile
-		String cmd = "pdflatex " + outputFile + " && rm -f " + outputFile;
+		String cmd = "pdflatex " + outputFile;
+		// debug
+		// + " && rm -f " + outputFile;
 		if (!executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
 	}
