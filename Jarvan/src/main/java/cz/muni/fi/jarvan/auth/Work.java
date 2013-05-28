@@ -3,20 +3,24 @@ package cz.muni.fi.jarvan.auth;
 
 public class Work
 {
-    String Employer;
+    String employer;
     String position;
     String from;
     String to;
 
     public Work() {
+        this.employer = null;
+        this.position = null;
+        this.from = null;
+        this.to = null;
     }
 
     public String getEmployer() {
-        return Employer;
+        return employer;
     }
 
     public void setEmployer(String Employer) {
-        this.Employer = Employer;
+        this.employer = Employer;
     }
 
     public String getPosition() {

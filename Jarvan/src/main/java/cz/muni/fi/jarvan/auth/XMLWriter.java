@@ -125,14 +125,14 @@ public class XMLWriter {
             //name w/ titles
             Element name = doc.createElement("name");
             
-            if (newCv.getTitle() != null)
+            if (!newCv.getTitle().equals(""))
             {
                 Element title = doc.createElement("title");
                 title.setAttribute("position", "before");
                 title.setTextContent(newCv.getTitle());
                 name.appendChild(title);
             }
-            if (newCv.getTitleAfter()!= null)
+            if (!newCv.getTitleAfter().equals(""))
             {
                 Element titleAfter = doc.createElement("title");
                 titleAfter.setAttribute("position", "after");
@@ -203,7 +203,7 @@ public class XMLWriter {
             personalInfo.appendChild(address);
             
             //contacts
-            if (newCv.getHomeNumber() != null)
+            if (!newCv.getHomeNumber().equals(""))
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getHomeNumber());
@@ -211,7 +211,7 @@ public class XMLWriter {
                 personalInfo.appendChild(contact);
             }
             
-            if (newCv.getMobileNumber() != null)
+            if (!newCv.getMobileNumber().equals(""))
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getMobileNumber());

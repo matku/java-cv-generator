@@ -1,8 +1,16 @@
 
 package cz.muni.fi.jarvan.auth.web;
 
+import cz.muni.fi.jarvan.auth.Cv;
+import cz.muni.fi.jarvan.auth.CvException;
+import cz.muni.fi.jarvan.auth.Education;
+import cz.muni.fi.jarvan.auth.Work;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,34 +59,8 @@ public class CvNewServlet extends HttpServlet
                 }
                 String firstName = req.getParameter("name");
                 String lastName = req.getParameter("surname");
-                String[] titlesBefore = req.getParameter("titleBefore").split("\\.");
-                String titleBefore;
-                System.err.println("Titles Before: " + titlesBefore.length);
-                for (int i = 0; i < titlesBefore.length; i++) {
-                    titleBefore = titlesBefore[i].trim();
-                    if (titleBefore.equals(""))
-                    {
-                        System.err.println("prazdny");
-                        continue;
-                    }
-                    titleBefore += ".";
-                    System.err.println("titleBefore: " + titleBefore);
-                    
-                }
-                String[] titlesAfter = req.getParameter("titleAfter").split("\\.");
-                String titleAfter;
-                System.err.println("Titles After: " + titlesAfter.length);
-                for (int i = 0; i < titlesAfter.length; i++) {
-                    titleAfter = titlesAfter[i].trim();
-                    if (titleAfter.equals(""))
-                    {
-                        System.err.println("prazdny");
-                        continue;
-                    }
-                    titleAfter += ".";
-                    System.err.println("titleAfter: " + titleAfter);
-                    
-                }
+                String titleBefore = req.getParameter("titleBefore");
+                String titleAfter = req.getParameter("titleAfter");
                 String birthdayDay = req.getParameter("birthdayDay");
                 String birthdayMonth = req.getParameter("birthdayMonth");
                 String birthdayYear = req.getParameter("birthdayYear");
@@ -150,84 +132,131 @@ public class CvNewServlet extends HttpServlet
                 //languages
                 String[] languages = req.getParameter("languages").split("\n");
                 //other
-                String[] other = req.getParameter("other").split(",");
+                String[] skill = req.getParameter("other").split(",");
                 
                 
-                
-                System.err.println("firstName: " + firstName + "\n" + 
-                                   "lastName: " + lastName + "\n" + 
-                                   "birthdayDay: " + birthdayDay + "\n" + 
-                                   "birthdayMonth: " + birthdayMonth + "\n" + 
-                                   "birthdayYear: " + birthdayYear + "\n" + 
-                                   "address: " + address + "\n" + 
-                                   "psc: " + psc + "\n" + 
-                                   "town: " + town + "\n" + 
-                                   "state: " + state + "\n" + 
-                                   "homePhone: " + homePhone + "\n" + 
-                                   "mobilePhone: " + mobilePhone + "\n" + 
-                                   "topEducation: " + topEducation + "\n" + 
-                                   "High School: \n" + 
-                                   "schoolStart: " + schoolStart + "\n" + 
-                                   "schoolEnd: " + schoolEnd + "\n" + 
-                                   "schoolName: " + schoolName + "\n" + 
-                                   "schoolCity: " + schoolCity + "\n" + 
-                                   "schoolFieldOfStudy: " + schoolFieldOfStudy + "\n" + 
-                                   "University: \n" + 
-                                   "universityStart: " + universityStart + "\n" + 
-                                   "universityEnd: " + universityEnd + "\n" + 
-                                   "universityName: " + universityName + "\n" + 
-                                   "universityCity: " + universityCity + "\n" + 
-                                   "universityFieldOfStudy: " + universityFieldOfStudy + "\n" + 
-                                   "Work: \n" + 
-                                   "workStart: " + workStart + "\n" + 
-                                   "workEnd: " + workEnd + "\n" + 
-                                   "workEmployer: " + workEmployer + "\n" + 
-                                   "workJob: " + workJob);
-                System.err.println("Languages: ");
-                String[] language;
-                for (int i = 0; i < languages.length; i++) {
+                try
+                {
+                    Cv cv = new Cv();
+                    cv.setFirstName(firstName);
+                    cv.setLastName(lastName);
+                    cv.setMale(sex.equals("Muz") ? true : false);
+                    cv.setTitle(titleBefore);
+                    cv.setTitleAfter(titleAfter);
+                    cv.setDateOfBirth(birthdayDay + "." + birthdayMonth + "." + birthdayYear);
+                    cv.setStreet(address);
+                    cv.setZip(psc);
+                    cv.setCity(town);
+                    cv.setState(state);
+                    cv.setHomeNumber(homePhone);
+                    cv.setMobileNumber(mobilePhone);
+                    cv.setHighestEducation(topEducation);
                     
-                    if (languages[i].trim().equals(""))
+                    if (!schoolStart.equals(""))
                     {
-                        log.error("Wrong format of languages");
-                        req.setAttribute("languageError", "wrong format of languages");
-                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                        return;
+                        Education school = new Education();
+                        school.setFrom(schoolStart);
+                        if (!schoolEnd.equals(""))
+                        {
+                            school.setTo(schoolEnd);
+                        }
+                        school.setFieldOfStudy(schoolFieldOfStudy);
+                        school.setName(schoolName);
+                        school.setCity(schoolCity);
+                        
+                        List<Education> highSchool = new ArrayList<>();
+                        highSchool.add(school);
+                        cv.setHighSchool(highSchool);
                     }
-                    try
+                    
+                    if (!universityStart.equals(""))
                     {
-                        language = languages[i].split(":", 2);
-                        if (language[0].trim().equals("") || language[1].trim().equals(""))
+                        Education university = new Education();
+                        university.setFrom(universityStart);
+                        if (!universityEnd.equals(""))
+                        {
+                            university.setTo(universityEnd);
+                        }
+                        university.setFieldOfStudy(universityFieldOfStudy);
+                        university.setName(universityName);
+                        university.setCity(universityCity);
+                        
+                        List<Education> universities = new ArrayList<>();
+                        universities.add(university);
+                        cv.setUniversity(universities);
+                    }
+                    
+                    if (!workStart.equals(""))
+                    {
+                        Work work = new Work();
+                        work.setFrom(workStart);
+                        if (!workEnd.equals(""))
+                        {
+                            work.setTo(workEnd);
+                        }
+                        work.setEmployer(workEmployer);
+                        work.setPosition(workJob);
+                        
+                        List<Work> job = new ArrayList<>();
+                        job.add(work);
+                        cv.setWork(job);
+                    }
+                    
+                    Map<String, String> langs = new TreeMap<>();
+                    
+                    String[] language;
+                    for (int i = 0; i < languages.length; i++) 
+                    {
+                        if (languages[i].trim().equals(""))
                         {
                             log.error("Wrong format of languages");
                             req.setAttribute("languageError", "wrong format of languages");
                             req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                             return;
                         }
-                    } catch (IndexOutOfBoundsException e)
-                    {
-                        log.error("Wrong format of languages");
-                        req.setAttribute("languageError", "wrong format of languages");
-                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                        return;
+                        try
+                        {
+                            language = languages[i].split(":", 2);
+                            if (language[0].trim().equals("") || language[1].trim().equals(""))
+                            {
+                                log.error("Wrong format of languages");
+                                req.setAttribute("languageError", "wrong format of languages");
+                                req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                                return;
+                            }
+                        } catch (IndexOutOfBoundsException e)
+                        {
+                            log.error("Wrong format of languages");
+                            req.setAttribute("languageError", "wrong format of languages");
+                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                            return;
+                        }
+                        langs.put(language[0], language[1]);
                     }
-                    System.err.println(language[0].trim());
-                    System.err.println(language[1].trim());
-                }
-                
-                System.err.println("Other: ");
-                for (int i = 0; i < other.length; i++) {
-                    if (other[i].trim().equals(""))
+                    
+                    cv.setLanguages(langs);
+                    
+                    List<String> skills = new ArrayList<>();
+                    for (int i = 0; i < skill.length; i++)
                     {
-                        log.error("Wrong format of other");
-                        req.setAttribute("otherError", "wrong format of others");
-                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                        return;
+                        if (skill[i].trim().equals(""))
+                        {
+                            log.error("Wrong format of other");
+                            req.setAttribute("otherError", "wrong format of others");
+                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                            return;
+                        }
+                        skills.add(skill[i]);
                     }
-                    System.err.println(other[i].trim());
+                    
+                    cv.setSkills(skills);
+                    
+                } catch (CvException e)
+                {
+                    log.error("could not create CV", e);
+                    resp.sendRedirect("/JarvanUpdate/404");
+                    return;
                 }
-                
-                
                 break;
         }
         req.setAttribute("success", "Congratulation ! You have successfully created your CV :) ");

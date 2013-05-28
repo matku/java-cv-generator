@@ -10,6 +10,11 @@ public class Education
     String fieldOfStudy;
 
     public Education() {
+        this.from = null;
+        this.to = null;
+        this.name = null;
+        this.city = null;
+        this.fieldOfStudy = null;
     }
 
     public String getFrom() {
