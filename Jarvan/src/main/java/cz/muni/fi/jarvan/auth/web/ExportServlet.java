@@ -54,7 +54,7 @@ public class ExportServlet extends HttpServlet
         String xmlPath = Settings.getPathCV() + cvName + "_" + mail + ".xml";
         
         
-        XMLWriter writer = new XMLWriter(Settings.getPathCV());
+        XMLWriter writer = new XMLWriter(xmlPath);
         writer.changeCvLanguage(lang);
         
         CvManager create = new CvManager();
