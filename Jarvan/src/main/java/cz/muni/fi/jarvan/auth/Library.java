@@ -20,7 +20,7 @@ public class Library {
     /**
      * Checks if library.xml exists, if not it will create it.
      */
-    public Library()
+    public Library() throws IOException
     {
         
         this.libraryName = Settings.getPathLibrary();
@@ -43,6 +43,7 @@ public class Library {
             catch (IOException e)
             {
                 log.error("File library.xml not created" + e.getMessage());
+                throw new RuntimeException("Library error", e);
             }
         }
     }

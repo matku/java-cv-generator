@@ -13,12 +13,15 @@ public class Cv
     //meta udaje Cv
     String name;            //format: name-given-by-user_user-email
     String lastEdit;
+    
     //udaje
+    String title;
     String firstName;
     String lastName;
     String dateOfBirth;
     boolean male;
     String nationality;
+    
     //kontakt
     String email;
     String homeNumber;
@@ -27,16 +30,211 @@ public class Cv
     String city;
     String zip;
     String state;
+    
     //education
     String highestEducation;
     List<Education> highSchool;
     List<Education> university;
+    
     //work
     List<Work> work;
+    
     //language
-    Map<String, String> languages;
+    Map<String, String> languages;              //key - language, value - level
+    
     //others
-    List<String> other;
+    List<String> skills;
+
+    public Cv() {
+        this.name = null;
+        this.lastEdit = null;
+        this.title = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.dateOfBirth = null;;
+        this.nationality = null;
+        this.email = null;
+        this.homeNumber = null;
+        this.mobileNumber = null;
+        this.street = null;
+        this.city = null;
+        this.zip = null;
+        this.state = null;
+        this.highestEducation = null;
+        this.highSchool = null;
+        this.university = null;
+        this.work = null;
+        this.languages = null;
+        this.skills = null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastEdit() {
+        return lastEdit;
+    }
+
+    public void setLastEdit(String lastEdit) {
+        this.lastEdit = lastEdit;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public boolean isMale() {
+        return male;
+    }
+
+    public void setMale(boolean male) {
+        this.male = male;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHomeNumber() {
+        return homeNumber;
+    }
+
+    public void setHomeNumber(String homeNumber) {
+        this.homeNumber = homeNumber;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getHighestEducation() {
+        return highestEducation;
+    }
+
+    public void setHighestEducation(String highestEducation) {
+        this.highestEducation = highestEducation;
+    }
+
+    public List<Education> getHighSchool() {
+        return highSchool;
+    }
+
+    public void setHighSchool(List<Education> highSchool) {
+        this.highSchool = highSchool;
+    }
+
+    public List<Education> getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(List<Education> university) {
+        this.university = university;
+    }
+
+    public List<Work> getWork() {
+        return work;
+    }
+
+    public void setWork(List<Work> work) {
+        this.work = work;
+    }
+
+    public Map<String, String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(Map<String, String> languages) {
+        this.languages = languages;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
     
     
     
