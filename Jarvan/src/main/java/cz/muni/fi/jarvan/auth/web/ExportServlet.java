@@ -48,10 +48,11 @@ public class ExportServlet extends HttpServlet
         String cvName = req.getParameter("cvName");
         String lang = req.getParameter("lang");
         
-        XMLParser email = new XMLParser(Settings.getPathLibrary());
-        String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
+        XMLParser email = new XMLParser(Settings.getPathUser());
         
-        String xmlPath = Settings.getPathCV() + "/" + cvName + "_" + mail + ".xml";
+        String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
+        String xmlPath = Settings.getPathCV() + cvName + "_" + mail + ".xml";
+        
         
         XMLWriter writer = new XMLWriter(Settings.getPathCV());
         writer.changeCvLanguage(lang);
