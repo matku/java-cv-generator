@@ -131,7 +131,7 @@
                             <option value=""></option>
                             <option value="zakladne vzdelanie">zakladne vzdelanie</option>
                             <option value="student strednej skoly">student strednej skoly</option>
-                            <option value="stredoskolske bez maturity">stredoskolské bez maturity</option>
+                            <option value="stredoskolske bez maturity">stredoskolske bez maturity</option>
                             <option value="stredoskolske s maturitou">stredoskolske s maturitou</option>
                             <option value="nadstavbove/vysie odborne vzdelanie">nadstavbove/vysie odborne vzdelanie</option>
                             <option value="student vysokej skoly">student vysokej skoly</option>
