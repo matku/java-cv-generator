@@ -13,49 +13,41 @@
 			<month>12</month>
 			<year>1992</year>
 		</birthday>
-		<nationality>slovak</nationality> <!-- kurva bigga enumerator -->
 		<address>
 			<street>Slobody 23</street>
 			<city>Kosice</city>
 			<country>Slovakia</country> <!-- kurva bigga enumerator vol. 2 -->
 			<zip>04011</zip>
 		</address>
-		<contact type="phoneNumber"></contact> <!-- lubovolne vela, atribut enumerator -->
-		<contact type="homeNumber"></contact>
+		<contact type="mobile"></contact> <!-- lubovolne vela, atribut enumerator -->
+		<contact type="home"></contact>
 		<contact type="email"></contact>
-		<contact type="www"></contact>
 	</personalInfo>
 
 	<education highest="master">
-		<school> <!-- enumerator -->
+		<school type="univ"> <!-- enumerator -->
 			<name>Masarykova univezrita, Brno</name>
 			<specialization>PDS</specialization>
 			<start> <!-- povinny je iba rok -->
-				<day>1</day>
-				<month>9</month>
-				<year>2011</year>
+				2011
 			</start>
-			<end>
-				<year>2012</year>
-				<month>6</month>
-				<day>31</day>
+			<end>2012
 			</end>
 		</school>
 	</education>
-
-	<work>
-		<start> <!-- povinny je iba rok -->
-			<year>2011</year>
-		</start>
-		<end>
-			<month>8</month>
-			<year>2012</year>
-		</end>
-		<employer>Kybernetika</employer>
-		<position>C++ programator</position>
-	</work>
-
+	<jobs>
+		<work>
+			<start> <!-- povinny je iba rok -->
+				2011
+			</start>
+			<end>
+				2012
+			</end>
+			<employer>Kybernetika</employer>
+			<position>C++ programator</position>
+		</work>
+	</jobs>
 	<language level="excellent">EN</language>
 
-	<skill level="satisfactory">C/C++</skill>
+	<skill>C/C++</skill>
 </cv>

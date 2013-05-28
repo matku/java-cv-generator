@@ -94,14 +94,6 @@
 								</xs:complexType>
 							</xs:element>
 
-							<xs:element name="nationality" minOccurs="0" maxOccurs="1">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xs:pattern value="([a-z])*"/>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-
 							<xs:element name="address" maxOccurs="1">
 								<xs:complexType>
 									<xs:all>
@@ -148,10 +140,9 @@
 											<xs:attribute name="type">
 												<xs:simpleType>
 													<xs:restriction base="xs:string">
-														<xs:enumeration value="phoneNumber"/>
-														<xs:enumeration value="homeNumber"/>
+														<xs:enumeration value="mobile"/>
 														<xs:enumeration value="email"/>
-														<xs:enumeration value="www"/>
+														<xs:enumeration value="home"/>
 													</xs:restriction>
 												</xs:simpleType>
 											</xs:attribute>
@@ -173,72 +164,30 @@
 										<xs:element name="name" type="xs:string"/>
 										<xs:element name="specialization" type="xs:string"/>
 										<xs:element name="start">
-											<xs:complexType>
-												<xs:all>
-
-													<xs:element name="day" minOccurs="0">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1"/>
-																<xs:maxInclusive value="31"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-
-													<xs:element name="month" minOccurs="0">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1"/>
-																<xs:maxInclusive value="12"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-
-													<xs:element name="year">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1900"/>
-																<xs:maxInclusive value="2050"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-												</xs:all>
-											</xs:complexType>
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2050"/>
+												</xs:restriction>
+											</xs:simpleType>
 										</xs:element>
 										<xs:element name="end" minOccurs="0">
-											<xs:complexType>
-												<xs:all>
-
-													<xs:element name="day" minOccurs="0">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1"/>
-																<xs:maxInclusive value="31"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-
-													<xs:element name="month" minOccurs="0">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1"/>
-																<xs:maxInclusive value="12"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-
-													<xs:element name="year">
-														<xs:simpleType>
-															<xs:restriction base="xs:integer">
-																<xs:minInclusive value="1900"/>
-																<xs:maxInclusive value="2050"/>
-															</xs:restriction>
-														</xs:simpleType>
-													</xs:element>
-												</xs:all>
-											</xs:complexType>
+											<xs:simpleType>
+												<xs:restriction base="xs:integer">
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2050"/>
+												</xs:restriction>
+											</xs:simpleType>
 										</xs:element>
 									</xs:all>
+									<xs:attribute name="type" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="high"/>
+												<xs:enumeration value="univ"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
 								</xs:complexType>
 							</xs:element>
 						</xs:choice>
@@ -260,35 +209,24 @@
 					</xs:complexType>
 				</xs:element>
 
-				<xs:element name="work" maxOccurs="unbounded">
+				<xs:element name="jobs" maxOccurs="1">
 					<xs:complexType>
-						<xs:all>
-
-							<xs:element name="employer" type="xs:string"/>
-							<xs:element name="position" type="xs:string"/>
-							<xs:element name="start">
+						<xs:choice maxOccurs="unbounded">
+							<xs:element name="work">
 								<xs:complexType>
 									<xs:all>
-
-										<xs:element name="day" minOccurs="0">
+										<xs:element name="employer" type="xs:string"/>
+										<xs:element name="position" type="xs:string"/>
+										<xs:element name="start">
 											<xs:simpleType>
 												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1"/>
-													<xs:maxInclusive value="32"/>
+													<xs:minInclusive value="1900"/>
+													<xs:maxInclusive value="2020"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
 
-										<xs:element name="month" minOccurs="0">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1"/>
-													<xs:maxInclusive value="12"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-
-										<xs:element name="year">
+										<xs:element name="end">
 											<xs:simpleType>
 												<xs:restriction base="xs:integer">
 													<xs:minInclusive value="1900"/>
@@ -299,41 +237,7 @@
 									</xs:all>
 								</xs:complexType>
 							</xs:element>
-
-							<xs:element name="end">
-								<xs:complexType>
-									<xs:all>
-
-										<xs:element name="day" minOccurs="0">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1"/>
-													<xs:maxInclusive value="32"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-
-										<xs:element name="month" minOccurs="0">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1"/>
-													<xs:maxInclusive value="12"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-
-										<xs:element name="year">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2020"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-									</xs:all>
-								</xs:complexType>
-							</xs:element>
-						</xs:all>
+						</xs:choice>
 					</xs:complexType>
 				</xs:element>
 
@@ -361,18 +265,7 @@
 				<xs:element name="skill">
 					<xs:complexType>
 						<xs:simpleContent>
-							<xs:extension base="xs:string">
-								<xs:attribute name="level">
-									<xs:simpleType>
-										<xs:restriction base="xs:string">
-											<xs:enumeration value="basic"/>
-											<xs:enumeration value="good"/>
-											<xs:enumeration value="satisfactory"/>
-											<xs:enumeration value="excellent"/>
-										</xs:restriction>
-									</xs:simpleType>
-								</xs:attribute>
-							</xs:extension>
+							<xs:extension base="xs:string"/>
 						</xs:simpleContent>
 					</xs:complexType>
 				</xs:element>
@@ -390,7 +283,6 @@
 			<xs:attribute name="modified"/>
 			<xs:attribute name="user"/>
 			<xs:anyAttribute/>
-			<!--<xs:anyAttribute/>-->
 		</xs:complexType>
 
 	</xs:element>
