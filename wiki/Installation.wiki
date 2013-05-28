@@ -13,4 +13,4 @@
  * Apache Tomcat 7 or other apache system
  * >= Java 6.0, Java Web
  * texlive
- * currvita //latex package
+ * currvita or texlive-latex-extra 
