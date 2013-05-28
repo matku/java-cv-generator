@@ -28,7 +28,7 @@ public class ExportServlet extends HttpServlet
     private static final String EXPORT_JSP = "/WEB-INF/view/cvExport.jsp";
     public static final String URL_MAPPING = "/auth/export";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(ExportServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
