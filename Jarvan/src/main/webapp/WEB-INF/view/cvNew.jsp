@@ -1,13 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="layout/layout.jsp" %>
-    
+
     <body>
 
     <%@include file="layout/pageMenu.jsp" %>
 
     <div class="container-fluid">
       <div class="row-fluid">
-        
+
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
@@ -27,7 +27,7 @@
             </ul>
           </div><!--/.well -->
         </div>
-        
+
         <div class="span9">
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Vytvorit nove CV</h3>
@@ -37,7 +37,7 @@
                     <c:out value="${success}"/>
                     <a href="${pageContext.request.contextPath}/dashboard">Vratit sa !!!</a>
                 </div>
-            </c:if>   
+            </c:if>
             <h6>Policka oznacene * su povinne</h6>
             <h6>Policka oznacene ** su povinne, ak ste vyplnili aspon jedno policko v danej kategorii</h6>
             <form method="post" action="${pageContext.request.contextPath}/auth/cv/create/new">
@@ -61,7 +61,7 @@
                     <div class="alert alert-error">
                         <c:out value="${sexError}"/>
                     </div>
-                    </c:if>   
+                    </c:if>
                 </tr>
                 <tr>
                     <td>Meno:* </td>
@@ -93,7 +93,7 @@
                 </tr>
                 <tr>
                     <td>Ulica, cislo:* </td>
-                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" pattern="[A-Z]([a-z])*( ([0-9])+){0,1}"/></td>
+                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" pattern="[A-Z]([a-z])*( ([A-Z]|[a-z])([a-z])*)*( ([0-9])+){0,1}"/></td>
                 </tr>
                 <tr>
                     <td>PSC:* </td>
@@ -142,7 +142,7 @@
                         </select>
                     </td>
                 </tr>
-                
+
                 <!-- STREDNA SKOLA -->
                 <tr class="warning">
                     <td>Stredna skola</td>
@@ -152,7 +152,7 @@
                 <div class="alert alert-error">
                     <c:out value="${schoolError}"/>
                 </div>
-                </c:if>   
+                </c:if>
                 <tr>
                     <td>Rok nastupu:**</td>
                     <td><input type="text" name="schoolStart" value="<c:out value='${param.schoolStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
@@ -173,7 +173,7 @@
                     <td>Odbor/specializacia:</td>
                     <td><input type="text" name="schoolFieldOfStudy" value="<c:out value='${param.schoolFieldOfStudy}'/>" /></td>
                 </tr>
-                
+
                 <!-- VYSOKA SKOLA -->
                 <tr class="warning">
                     <td>Vysoka skola</td>
@@ -183,7 +183,7 @@
                 <div class="alert alert-error">
                     <c:out value="${universityError}"/>
                 </div>
-                </c:if> 
+                </c:if>
                 <tr>
                     <td>Rok nastupu:**</td>
                     <td><input type="text" name="universityStart" value="<c:out value='${param.universityStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
@@ -204,7 +204,7 @@
                     <td>Odbor/specializacia:**</td>
                     <td><input type="text" name="universityFieldOfStudy" value="<c:out value='${param.universityFieldOfStudy}'/>" /></td>
                 </tr>
-                
+
                 <!-- WORK -->
                 <tr class="success">
                     <td>Posledne zamestnanie: </td>
@@ -214,7 +214,7 @@
                 <div class="alert alert-error">
                     <c:out value="${workError}"/>
                 </div>
-                </c:if> 
+                </c:if>
                 <tr>
                     <td>Od:** </td>
                     <td><input type="text" name="workStart" value="<c:out value='${param.workStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
@@ -231,7 +231,7 @@
                     <td>Pracovna pozicia:** </td>
                     <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>" /></td>
                 </tr>
-                
+
                 <!-- LANGUAGES -->
                 <tr class="success">
                     <td>Jazykove znalosti: </td>
@@ -245,8 +245,8 @@
                 <div class="alert alert-error">
                     <c:out value="${languageError}"/>
                 </div>
-                </c:if> 
-                
+                </c:if>
+
                 <!-- OTHER -->
                 <tr class="success">
                     <td>Ine znalosti</td>
@@ -260,21 +260,21 @@
                 <div class="alert alert-error">
                     <c:out value="${otherError}"/>
                 </div>
-                </c:if> 
-                
+                </c:if>
+
                 <!-- FINALLY END OF THIS SHIT :) -->
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Vytvorit" name="Create" class="btn btn-success"/></td>
                 </tr>
-                
+
             </table>
             </form>
         </div><!--/span-->
-      </div><!--/row-->   
+      </div><!--/row-->
     </div><!--/.fluid-container-->
-    
+
     <%@include file="layout/footer.jsp" %>
-    
-    
+
+
 </html>
