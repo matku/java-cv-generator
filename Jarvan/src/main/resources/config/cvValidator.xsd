@@ -36,7 +36,7 @@
 										<xs:element name="first" minOccurs="1" maxOccurs="1">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:pattern value="[A-z]([a-z])*"/>
+													<xs:pattern value="[A-Z]([a-z])*"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -44,7 +44,7 @@
 										<xs:element name="last" minOccurs="1" maxOccurs="1">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:pattern value="[A-z]([a-z])*"/>
+													<xs:pattern value="[A-Z]([a-z])*"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -117,7 +117,8 @@
 										<xs:element name="country">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:pattern value="[A-Z]([a-z ])*"/>
+													<xs:enumeration value="Slovensko"/>
+													<xs:enumeration value="Cesko"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
@@ -194,15 +195,15 @@
 						<xs:attribute name="highest">
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
-									<xs:enumeration value="elementary"/>
-									<xs:enumeration value="highStudent"/>
-									<xs:enumeration value="highGrad"/>
-									<xs:enumeration value="HighNonGrad"/>
-									<xs:enumeration value="higher"/>
-									<xs:enumeration value="univStudent"/>
-									<xs:enumeration value="bachelor"/>
-									<xs:enumeration value="master"/>
-									<xs:enumeration value="postgrad"/>
+									<xs:enumeration value="zakladne vzdelanie"/>
+									<xs:enumeration value="student strednej skoly"/>
+									<xs:enumeration value="stredoskolské bez maturity"/>
+									<xs:enumeration value="stredoskolske s maturitou"/>
+									<xs:enumeration value="nadstavbove/vysie odborne vzdelanie"/>
+									<xs:enumeration value="student vysokej skoly"/>
+									<xs:enumeration value="vysokoskolske I. stupna"/>
+									<xs:enumeration value="vysokoskolske II. stupna"/>
+									<xs:enumeration value="vysokoskolske III. stupna"/>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:attribute>

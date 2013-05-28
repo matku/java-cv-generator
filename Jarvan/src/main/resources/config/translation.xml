@@ -51,50 +51,71 @@
 		<tr lang="sk">Ostatné znalosti</tr>
 		<tr lang="cz">Ostatní znalosti</tr>
 	</expression>
-	<expression exp="elementary">
-		<tr lang="en">primary</tr>
+	<expression exp="zakladne vzdelanie">
+		<tr lang="en">Primary</tr>
 		<tr lang="sk">Základné</tr>
 		<tr lang="cz">Základní</tr>
 	</expression>
-	<expression exp="highStudent">
+	<expression exp="student strednej skoly">
 		<tr lang="en">High school student</tr>
 		<tr lang="sk">Študent strednej školy</tr>
 		<tr lang="cz">Student střední školy</tr>
 	</expression>
-	<expression exp="highGrad">
+	<expression exp="stredoskolske s maturitou">
 		<tr lang="en">High school with diploma</tr>
 		<tr lang="sk">Stredoškolské s maturitou</tr>
 		<tr lang="cz">Středoškolské s maturitou</tr>
 	</expression>
-	<expression exp="HighNonGrad">
+	<expression exp="stredoskolské bez maturity">
 		<tr lang="en">High school without diploma</tr>
 		<tr lang="sk">Stredoškolské bez maturity</tr>
 		<tr lang="cz">Středoškolské bez maturity</tr>
 	</expression>
-	<expression exp="higher">
+	<expression exp="nadstavbove/vysie odborne vzdelanie">
 		<tr lang="en">Follow-up/Higher</tr>
 		<tr lang="sk">Nadstavbové/Vyššie odborné</tr>
 		<tr lang="cz">Nadstavbové/Vyšší odborné</tr>
 	</expression>
-	<expression exp="univStudent">
+	<expression exp="student vysokej skoly">
 		<tr lang="en">University student</tr>
 		<tr lang="sk">Študent vysokej školy</tr>
 		<tr lang="cz">Student vysoké školy</tr>
 	</expression>
-	<expression exp="bachelor">
+	<expression exp="vysokoskolske I. stupna">
 		<tr lang="en">Bachelor's degree</tr>
 		<tr lang="sk">Vysokoškolské 1. stupňa</tr>
 		<tr lang="cz">Vysokoškolské 1. stupně</tr>
 	</expression>
-	<expression exp="master">
+	<expression exp="vysokoskolske II. stupna">
 		<tr lang="en">Master's degree</tr>
 		<tr lang="sk">Vysokoškolské 2. stupňa</tr>
 		<tr lang="cz">Vysokoškolské 2. stupně</tr>
 	</expression>
-	<expression exp="postgrad">
+	<expression exp="vysokoskolske III. stupna">
 		<tr lang="en">Postgraduate</tr>
 		<tr lang="sk">Postgraduálne</tr>
 		<tr lang="cz">Postgraduální</tr>
 	</expression>
+	<expression exp="Cesko">
+		<tr lang="en">Czech republic</tr>
+		<tr lang="sk">Česká repoblika</tr>
+		<tr lang="cz">Česká repoblika</tr>
+	</expression>
+	<expression exp="Slovensko">
+		<tr lang="en">Slovakia</tr>
+		<tr lang="sk">Slovenská republika</tr>
+		<tr lang="cz">Slovensko</tr>
+	</expression>
+	<!--
+	<expression exp="">
+		<tr lang="en"></tr>
+		<tr lang="sk"></tr>
+		<tr lang="cz"></tr>
+	</expression>
+	<expression exp="">
+		<tr lang="en"></tr>
+		<tr lang="sk"></tr>
+		<tr lang="cz"></tr>
+	</expression>-->
 
 </translation>
