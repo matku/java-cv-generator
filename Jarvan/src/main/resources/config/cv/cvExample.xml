@@ -16,7 +16,7 @@
 		<address>
 			<street>Slobody 23</street>
 			<city>Kosice</city>
-			<country>Slovakia</country> <!-- kurva bigga enumerator vol. 2 -->
+			<country>Slovensko</country> <!-- kurva bigga enumerator vol. 2 -->
 			<zip>04011</zip>
 		</address>
 		<contact type="mobile"></contact> <!-- lubovolne vela, atribut enumerator -->
@@ -24,13 +24,12 @@
 		<contact type="email"></contact>
 	</personalInfo>
 
-	<education highest="master">
+	<education highest="vysokoskolske I. stupna">
 		<school type="univ"> <!-- enumerator -->
 			<name>Masarykova univezrita, Brno</name>
 			<specialization>PDS</specialization>
-			<start> <!-- povinny je iba rok -->
-				2011
-			</start>
+			<start>
+				2011</start>
 			<end>2012
 			</end>
 		</school>

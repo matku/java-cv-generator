@@ -197,7 +197,7 @@
 								<xs:restriction base="xs:string">
 									<xs:enumeration value="zakladne vzdelanie"/>
 									<xs:enumeration value="student strednej skoly"/>
-									<xs:enumeration value="stredoskolské bez maturity"/>
+									<xs:enumeration value="stredoskolske bez maturity"/>
 									<xs:enumeration value="stredoskolske s maturitou"/>
 									<xs:enumeration value="nadstavbove/vysie odborne vzdelanie"/>
 									<xs:enumeration value="student vysokej skoly"/>

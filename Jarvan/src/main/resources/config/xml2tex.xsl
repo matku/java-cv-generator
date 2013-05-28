@@ -9,7 +9,7 @@
 				indent="yes" />
 
 	<xsl:variable name="lang" select="/cv/@lang"/>
-	<xsl:variable name="translation" select="document('xml/translation.xml')/translation"/>
+	<xsl:variable name="translation" select="document('translation.xml')/translation"/>
 
 	<xsl:template match="/cv">
 		<xsl:text>\documentclass[12pt]{article}&#xa;</xsl:text>
@@ -51,7 +51,8 @@
 			<xsl:text>&#xa;			\item[]</xsl:text>
 			<xsl:value-of select="address/city"/>
 			<xsl:text> , </xsl:text>
-			<xsl:value-of select="address/country"/>
+			<xsl:variable name="country" select="address/country"/>
+			<xsl:value-of select="$translation/expression[@exp=$country]/tr[@lang=$lang]"/>
 			<xsl:text>&#xa;			\item[] </xsl:text>
 			<xsl:value-of select="address/zip"/>
 			<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
@@ -60,7 +61,8 @@
 			<xsl:value-of select="birthday/day"/>.<xsl:value-of select="birthday/month"/>.<xsl:value-of select="birthday/year"/>
 			<xsl:for-each select="contact[type]">
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
-				<xsl:value-of select="./@type"/>
+				<xsl:variable name="typ" select="@type"/>
+				<xsl:value-of select="$translation/expression[@exp=$typ]/tr[@lang=$lang]"/>
 				<xsl:text>:] </xsl:text>
 				<xsl:value-of select="."/>
 			</xsl:for-each>
@@ -85,28 +87,15 @@
 			<xsl:value-of select="$translation/expression[@exp=$highestEducation]/tr[@lang=$lang]"/>
 			<xsl:for-each select="school">
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
-				<xsl:if test="count(start/day) = 1">
-					<xsl:value-of select="start/day"/>
-					<xsl:text>.</xsl:text>
-					<xsl:if test="count(start/month) = 1">
-						<xsl:value-of select="start/month"/>
-						<xsl:text>.</xsl:text>
-					</xsl:if>
-				</xsl:if>
-				<xsl:value-of select="start/year"/>
+				<xsl:value-of select="start"/>
 				<xsl:text>-</xsl:text>
-				<xsl:if test="count(end/day) = 1">
-					<xsl:value-of select="end/day"/>
-					<xsl:text>.</xsl:text>
-					<xsl:if test="count(end/month) = 1">
-						<xsl:value-of select="end/month"/>
-						<xsl:text>.</xsl:text>
-					</xsl:if>
-				</xsl:if>
-				<xsl:value-of select="end/year"/>
+				<xsl:value-of select="end"/>
 				<xsl:text>] </xsl:text>
 				<xsl:value-of select="name"/>
-				<xsl:text>&#xa;			\item[] </xsl:text>
+				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
+				<xsl:variable name="type" select="@type"/>
+				<xsl:value-of select="$translation/expression[@exp=$type]/tr[@lang=$lang]"/>
+				<xsl:text>] </xsl:text>
 				<xsl:value-of select="$translation/expression[@exp='specialization']/tr[@lang=$lang]"/>
 				<xsl:text>: </xsl:text>
 				<xsl:value-of select="specialization"/>
@@ -116,7 +105,7 @@
 			<xsl:text>&#xa;		\end{cvlist}</xsl:text>
 		</xsl:for-each>
 
-		<xsl:if test="count(work) != 0">
+		<xsl:for-each select="jobs">
 			<xsl:text>&#xa;&#xa;		\begin{cvlist}</xsl:text>
 			<xsl:text>&#xa;		{</xsl:text>
 			<xsl:text>&#xa;			\tikz[]</xsl:text>
@@ -130,25 +119,9 @@
 
 			<xsl:for-each select="work">
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
-				<xsl:if test="count(start/day) = 1">
-					<xsl:value-of select="start/day"/>
-					<xsl:text>.</xsl:text>
-					<xsl:if test="count(start/month) = 1">
-						<xsl:value-of select="start/month"/>
-						<xsl:text>.</xsl:text>
-					</xsl:if>
-				</xsl:if>
-				<xsl:value-of select="start/year"/>
+				<xsl:value-of select="start"/>
 				<xsl:text>-</xsl:text>
-				<xsl:if test="count(end/day) = 1">
-					<xsl:value-of select="end/day"/>
-					<xsl:text>.</xsl:text>
-					<xsl:if test="count(end/month) = 1">
-						<xsl:value-of select="end/month"/>
-						<xsl:text>.</xsl:text>
-					</xsl:if>
-				</xsl:if>
-				<xsl:value-of select="end/year"/>
+				<xsl:value-of select="end"/>
 				<xsl:text>] </xsl:text>
 				<xsl:value-of select="employer"/>
 				<xsl:text>&#xa;			\item[] </xsl:text>
@@ -158,7 +131,7 @@
 
 			</xsl:for-each>
 			<xsl:text>&#xa;		\end{cvlist}</xsl:text>
-		</xsl:if>
+		</xsl:for-each>
 
 		<xsl:if test="count(language) > 0">
 			<xsl:text>&#xa;&#xa;		\begin{cvlist}</xsl:text>
@@ -176,7 +149,16 @@
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
 				<xsl:value-of select="."/>
 				<xsl:text>] </xsl:text>
-				<xsl:value-of select="./@level"/>
+				<xsl:variable name="langLvl" select="./@level"/>
+				<xsl:variable name="lvlPreklad" select="$translation/expression[@exp=$langLvl]/tr[@lang=$lang]"/>
+				<xsl:choose>
+					<xsl:when test="count(lvlPreklad) = 1">
+						<xsl:value-of select="lvlPreklad"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="langLvl"/>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:for-each>
 			<xsl:text>&#xa;		\end{cvlist}</xsl:text>
 		</xsl:if>
@@ -194,10 +176,9 @@
 			<xsl:text>&#xa;		}</xsl:text>
 
 			<xsl:for-each select="skill">
-				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
+				<xsl:text>&#xa;			\item[ </xsl:text>
 				<xsl:value-of select="."/>
-				<xsl:text>] </xsl:text>
-				<xsl:value-of select="./@level"/>
+				<xsl:text>]</xsl:text>
 			</xsl:for-each>
 			<xsl:text>&#xa;		\end{cvlist}</xsl:text>
 		</xsl:if>
