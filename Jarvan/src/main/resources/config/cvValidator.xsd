@@ -6,7 +6,7 @@
 	elementFormDefault="qualified">
 
 	<xs:element name="cv">
-		<xs:complexType>
+        <xs:complexType>
 			<xs:choice maxOccurs="unbounded">
 				<xs:element name="personalInfo" maxOccurs="1">
 					<xs:complexType>
@@ -126,7 +126,7 @@
 										<xs:element name="zip">
 											<xs:simpleType>
 												<xs:restriction base="xs:string">
-													<xs:pattern value="[0-9]{5}|[0-9]{3} [0-9]{2}"/>
+													<xs:pattern value="[0-9]{5}|([0-9]{3} [0-9]{2})"/>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>
