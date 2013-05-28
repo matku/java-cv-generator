@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.jarvan.auth;
 
 import org.junit.After;
@@ -19,9 +15,9 @@ public class RegistrationTest {
     
     
     @Test
-    public void testUserExist()
+    public void testTryRegisterUsrE()
     {
-        System.out.println("Test 1: User already exists");
+        System.out.println("Test 1: tryRegister- user already exists");
         Registration reg = new Registration("zajac", "testval", "testval");
         boolean exResult = false;
         boolean result = reg.tryRegister();
@@ -32,9 +28,9 @@ public class RegistrationTest {
     
     
     @Test
-    public void testEmailExist()
+    public void testTryRegisterEmailE()
     {
-        System.out.println("Test 2: Email already exists");
+        System.out.println("Test 2: testTryRegister- email already exists");
         Registration reg = new Registration("testval", "zajac@zajac.sk", "testval");
         boolean exResult = false;
         boolean result = reg.tryRegister();
@@ -43,10 +39,11 @@ public class RegistrationTest {
         
     }
     
+    
     @Test
     public void testNotExist()
     {
-        System.out.println("Test 3: None existing values");
+        System.out.println("Test 3: testTryRegister- Not existing values");
         XMLWriter userXml = new XMLWriter(Settings.getPathUser());
         Registration reg = new Registration("testval", "testval", "testval");
         boolean exResult = true;
