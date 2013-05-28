@@ -1,10 +1,11 @@
 = Project plan =
 
- * UML Model        
- * Unit tests
- * Documentation
+ * UML Model a Use case diagram       
+ * Unit tests finish
+ * refactoring
+ * Documentation generate java doc add to wiki
 
-== Update 25.05.2013 ==
+== Update 29.05.2013 ==
 
  
 == Schedule ==
@@ -15,18 +16,11 @@ TO DO:
          * Každý řešitel navíc samostatně vypracuje závěrečnou zprávu o svém podílu na řešení projektu v rozsahu cca jedné stránky. Za dokumentaci se považují také dobře komentované zdrojové kódy
          * Závěrečné zprávy k projektu musí být primárně ve formátu DocBook, z něhož se potom generuje např. HTML nebo PDF. Vhodným umístěním je opět sekce Downloads vašeho projektu.
 
-*Otahal*:  
-         * create links to export CV into language
-         * finish create, edit CV
-
-*Proks*:   
-         * finish delete cv
-         * Wiki documentation page
-
-*Durisin*: 
-         * UNIT tests
-         * add text to web page 
-         * change password and username
-
-*Kralik*:  
-         * create Exceptions for error handling
+ * dorobit delete trash from export
+ * change username, password
+ * dorobit edit cv
+ * dorobit delete cv
+ * zobrazit zoznam pdf generovatnych + upravit request dopisat cv list skopirovat z get 
+ * dopisat about
+ * zmenit getPath na adresar iny aby som upravil issue (zmenit resources path)
+ * spravit prezentaciu
