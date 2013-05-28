@@ -3,6 +3,7 @@ package cz.muni.fi.jarvan.auth.web;
 
 
 import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.XMLParser;
 import cz.muni.fi.jarvan.auth.XMLWriter;
 import org.slf4j.Logger;
 import cz.muni.fi.jarvan.web.HomeServlet;
@@ -34,6 +35,8 @@ public class ExportServlet extends HttpServlet
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
             return ;
         }
+        XMLParser parser = new XMLParser(Settings.getPathLibrary());
+        req.setAttribute("cvs", parser.getCvs(req.getSession().getAttribute("isLogged").toString()));
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
 }

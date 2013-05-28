@@ -122,7 +122,20 @@ public class XMLParser {
         for (int i = 0; i < cvs.getLength(); i++)
         {
             Element cv = (Element) cvs.item(i);
-            cvList.add(cv.getAttribute("name"));
+            String[] parts = cv.getAttribute("name").split("_");
+            String mail = "";
+            int counter = 0;
+            
+            XMLParser parser = new XMLParser(Settings.getPathUser());
+            String email = parser.getEmail(username);
+            
+            while(!parts[counter].equals(email))
+            {
+                mail += parts[counter];
+                counter++;
+            }
+            
+            cvList.add(mail);
         }
         
         return cvList;

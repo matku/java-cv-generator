@@ -19,7 +19,7 @@
               <li><a href="${pageContext.request.contextPath}/auth/cv/edit">Upravit</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/cv/delete">Zmazat</a></li>
               <li class="nav-header">Exportovat CV</li>
-              <li class="active"><a href="${pageContext.request.contextPath}/auth/export/">Prelozit</a></li>
+              <li><a href="${pageContext.request.contextPath}/auth/export">Prelozit</a></li>
               <li class="nav-header">Nastavenia</li>
               <li><a href="${pageContext.request.contextPath}/auth/changeUsername">Zmenit prihl. meno</a></li>
               <li><a href="${pageContext.request.contextPath}/auth/changePassword">Zmenit prihl. heslo</a></li>
