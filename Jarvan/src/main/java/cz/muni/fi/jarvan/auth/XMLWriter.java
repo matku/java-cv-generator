@@ -388,4 +388,37 @@ public class XMLWriter {
             TransformerException {
         serializetoXML(output.toURI());
     }
+    
+    
+    /**
+    * Deletes user from users.xml 
+    * @param username username
+    */
+    public boolean deleteUser(String username)
+    {
+        try
+        {
+            NodeList users = doc.getElementsByTagName("user");
+            for (int i = 0; i < users.getLength(); i++) {
+                Element user = (Element) users.item(i);
+                if (user.getAttribute("id").equals(username)){
+                    doc.getElementsByTagName("users").item(0).removeChild(user);
+                    break;
+                }
+            }
+                    
+        } catch (DOMException ex)
+        {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+            System.err.println("Should be serialized");
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        return true;
+    }
 }
