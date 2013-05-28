@@ -151,7 +151,7 @@
 				<xs:element name="education" maxOccurs="1">
 					<xs:complexType>
 						<xs:choice maxOccurs="unbounded">
-							<xs:element name="school">
+							<xs:element name="school" minOccurs="0">
 								<xs:complexType>
 									<xs:all>
 
