@@ -427,4 +427,85 @@ public class XMLWriter {
         }
         return true;
     }
+    
+    /**
+     * Adds user or cv name to library.xml
+     * @param username
+     * @param cvName 
+     * @return 
+     */
+    public boolean addCvToXml(String username, String cvName)
+    {
+        try
+        {
+            NodeList cvUser = doc.getElementsByTagName("user");
+
+            // if user doesn't exists create user and add cvName
+            // only library ta is created
+            if(cvUser == null)
+            {
+                Element library = (Element) doc.getElementsByTagName("library").item(0);
+
+                Element user = doc.createElement("user");
+                user.setAttribute("id", username);
+
+                Element cv = doc.createElement("cv");
+                cv.setAttribute("name", cvName);
+
+                user.appendChild(cv);
+                library.appendChild(user);
+
+            }
+            else
+            {
+                boolean userExists = false;
+                
+                // find user and add cv
+                for (int i = 0; i < cvUser.getLength(); i++)
+                {
+                    Element user = (Element) cvUser.item(i);
+                    if (user.getAttribute("id").equals(username))
+                    {
+                        Element cv = doc.createElement("cv");
+                        cv.setAttribute("name", cvName);
+                        user.appendChild(cv);
+                        userExists = true;
+                        break;
+                    }
+                }
+
+                 
+                // if user doesn't exists
+                if(userExists)
+                {
+                    Element library = (Element) doc.getElementsByTagName("library").item(0);
+
+                    Element user = doc.createElement("user");
+                    user.setAttribute("id", username);
+
+                    Element cv = doc.createElement("cv");
+                    cv.setAttribute("name", cvName);
+
+                    user.appendChild(cv);
+                    library.appendChild(user);
+                }
+            }
+        }
+        catch (DOMException ex)
+        {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+            System.err.println("Should be serialized");
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;
+    }
+    
+        
 }

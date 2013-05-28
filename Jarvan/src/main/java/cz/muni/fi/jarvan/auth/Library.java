@@ -48,7 +48,7 @@ public class Library {
         }
     }
     
-    public boolean addCV(String username, String CvName)
+    public boolean addCV(String username, String cvName)
     {
         if(username == null)
         {
@@ -62,20 +62,22 @@ public class Library {
             return false;
         }
         
-        if(CvName == null)
+        if(cvName == null)
         {
             log.error("CvName is null");
             return false;
         }
         
-        if(CvName.equals(""))
+        if(cvName.equals(""))
         {
             log.error("CvName is empty");
             return false;
         }
         
+        XMLWriter newCV = new XMLWriter(Settings.getPathLibrary());
+        if(newCV.addCvToXml(username, cvName))
+            return true;
         
-        
-        return true;
+        return false;
     }
 }
