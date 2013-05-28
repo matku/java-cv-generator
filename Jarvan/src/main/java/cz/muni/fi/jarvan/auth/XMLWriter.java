@@ -206,7 +206,7 @@ public class XMLWriter {
             personalInfo.appendChild(address);
             
             //contacts
-            if (!newCv.getHomeNumber().equals(""))
+            if (newCv.getHomeNumber() != null)
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getHomeNumber());
@@ -214,7 +214,7 @@ public class XMLWriter {
                 personalInfo.appendChild(contact);
             }
             
-            if (!newCv.getMobileNumber().equals(""))
+            if (newCv.getMobileNumber() != null)
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getMobileNumber());
@@ -442,7 +442,7 @@ public class XMLWriter {
 
             // if user doesn't exists create user and add cvName
             // only library ta is created
-            if(cvUser == null)
+            if(cvUser.getLength() == 0)
             {
                 Element library = (Element) doc.getElementsByTagName("library").item(0);
 

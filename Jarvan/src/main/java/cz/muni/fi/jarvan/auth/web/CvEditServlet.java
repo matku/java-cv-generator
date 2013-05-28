@@ -38,7 +38,7 @@ public class CvEditServlet extends HttpServlet
         }
         XMLParser parser = new XMLParser(Settings.getPathLibrary());
         
-        req.setAttribute("cvs", parser.getCvs("aaa"));//parser.getCvs(req.getSession().getAttribute("isLogged").toString()).get(0));
+        req.setAttribute("cvs", parser.getCvs(req.getSession().getAttribute("isLogged").toString()));
         req.getRequestDispatcher(CVEDIT_JSP).forward(req, resp);
     }
 }

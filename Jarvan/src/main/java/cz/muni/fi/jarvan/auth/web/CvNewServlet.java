@@ -4,6 +4,7 @@ package cz.muni.fi.jarvan.auth.web;
 import cz.muni.fi.jarvan.auth.Cv;
 import cz.muni.fi.jarvan.auth.CvException;
 import cz.muni.fi.jarvan.auth.Education;
+import cz.muni.fi.jarvan.auth.Library;
 import cz.muni.fi.jarvan.auth.Settings;
 import cz.muni.fi.jarvan.auth.User;
 import cz.muni.fi.jarvan.auth.Work;
@@ -164,8 +165,14 @@ public class CvNewServlet extends HttpServlet
                     cv.setZip(psc);
                     cv.setCity(town);
                     cv.setState(state);
-                    cv.setHomeNumber(homePhone);
-                    cv.setMobileNumber(mobilePhone);
+                    if (!homePhone.equals(""))
+                    {
+                        cv.setHomeNumber(homePhone);
+                    }
+                    if (!mobilePhone.equals(""))
+                    {
+                        cv.setMobileNumber(mobilePhone);
+                    }
                     cv.setHighestEducation(topEducation);
                     
                     if (!schoolStart.equals(""))
@@ -276,6 +283,8 @@ public class CvNewServlet extends HttpServlet
                     
                     XMLWriter writer = new XMLWriter(Settings.getPathCV()+ name + "_" + usr.getEmail());
                     writer.createCv(cv, usr);
+                    Library library = new Library();
+                    library.addCV(req.getSession().getAttribute("isLogged").toString(), name + "_" + usr.getEmail());
                     
                 } catch (CvException e)
                 {
