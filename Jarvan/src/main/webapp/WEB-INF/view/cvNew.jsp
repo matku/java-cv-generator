@@ -120,17 +120,6 @@
                     <td>Telefon Mobil: </td>
                     <td><input type="text" name="mobilePhone" value="<c:out value='${param.mobilePhone}'/>" /></td>
                 </tr>
-                <tr>
-                    <td>Vodicsky preukaz: </td>
-                    <td>
-                        <select name="driverLicence">
-                            <option value=""></option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select></td>
-                </tr>
                 <tr class="success">
                     <td>Vzdelanie</td>
                     <td></td>

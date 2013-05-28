@@ -1,6 +1,7 @@
 package cz.muni.fi.jarvan.web;
 
 import cz.muni.fi.jarvan.auth.Registration;
+import cz.muni.fi.jarvan.auth.Settings;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,8 +43,16 @@ public class RegistrationServlet extends HttpServlet
                     req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
-                                
-                Registration registration = new Registration(username, email, password);
+                
+                Registration registration = null;
+                try
+                {
+                    registration = new Registration(username, email, password);
+                } catch (RuntimeException e)
+                {
+                    resp.sendRedirect("/JarvanUpdate/404");
+                    return;
+                }
                 
                 if(!registration.tryRegister())
                 {

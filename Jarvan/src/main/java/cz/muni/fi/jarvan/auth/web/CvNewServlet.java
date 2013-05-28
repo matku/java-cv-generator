@@ -89,7 +89,6 @@ public class CvNewServlet extends HttpServlet
                 String state = req.getParameter("state");
                 String homePhone = req.getParameter("homePhone");
                 String mobilePhone = req.getParameter("mobilePhone");
-                String driverLicence = req.getParameter("driverLicence");
                 //vzdelanie
                 String topEducation = req.getParameter("topEducation");
                 //high school
@@ -166,7 +165,6 @@ public class CvNewServlet extends HttpServlet
                                    "state: " + state + "\n" + 
                                    "homePhone: " + homePhone + "\n" + 
                                    "mobilePhone: " + mobilePhone + "\n" + 
-                                   "driverLicense: " + driverLicence + "\n" + 
                                    "topEducation: " + topEducation + "\n" + 
                                    "High School: \n" + 
                                    "schoolStart: " + schoolStart + "\n" + 
