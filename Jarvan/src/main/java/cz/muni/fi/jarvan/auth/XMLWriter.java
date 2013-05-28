@@ -247,8 +247,12 @@ public class XMLWriter {
                     school.setAttribute("type", "high");
                     
                     Element schoolName = doc.createElement("name");
-                    schoolName.setTextContent(ed.getName() + ", " + ed.getCity());
+                    schoolName.setTextContent(ed.getName());
                     school.appendChild(schoolName);
+                    
+                    Element schoolCity = doc.createElement("city");
+                    schoolName.setTextContent(ed.getCity());
+                    school.appendChild(schoolCity);
                     
                     if (ed.getFieldOfStudy() != null)
                     {
@@ -280,8 +284,12 @@ public class XMLWriter {
                     school.setAttribute("type", "univ");
                     
                     Element schoolName = doc.createElement("name");
-                    schoolName.setTextContent(ed.getName() + ", " + ed.getCity());
+                    schoolName.setTextContent(ed.getName());
                     school.appendChild(schoolName);
+                    
+                    Element schoolCity = doc.createElement("city");
+                    schoolName.setTextContent(ed.getCity());
+                    school.appendChild(schoolCity);
                     
                     Element schoolSpecialization = doc.createElement("specialization");
                     schoolSpecialization.setTextContent(ed.getFieldOfStudy());
