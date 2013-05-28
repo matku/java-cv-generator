@@ -6,7 +6,7 @@
 	elementFormDefault="qualified">
 
 	<xs:element name="cv">
-        <xs:complexType>
+		<xs:complexType>
 			<xs:choice maxOccurs="unbounded">
 				<xs:element name="personalInfo" maxOccurs="1">
 					<xs:complexType>
@@ -82,14 +82,7 @@
 											</xs:simpleType>
 										</xs:element>
 
-										<xs:element name="year">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2020"/>			<!--xml schema 1.1 - assert stoji za pokus ked bude cas-->
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
+										<xs:element name="year" type="year"/>
 									</xs:all>
 								</xs:complexType>
 							</xs:element>
@@ -164,22 +157,8 @@
 
 										<xs:element name="name" type="xs:string"/>
 										<xs:element name="specialization" type="xs:string"/>
-										<xs:element name="start">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2050"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-										<xs:element name="end" minOccurs="0">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2050"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
+										<xs:element name="start" type="year"/>
+										<xs:element name="end" minOccurs="0" type="year"/>
 									</xs:all>
 									<xs:attribute name="type" use="required">
 										<xs:simpleType>
@@ -218,23 +197,8 @@
 									<xs:all>
 										<xs:element name="employer" type="xs:string"/>
 										<xs:element name="position" type="xs:string"/>
-										<xs:element name="start">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2020"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
-
-										<xs:element name="end">
-											<xs:simpleType>
-												<xs:restriction base="xs:integer">
-													<xs:minInclusive value="1900"/>
-													<xs:maxInclusive value="2020"/>
-												</xs:restriction>
-											</xs:simpleType>
-										</xs:element>
+										<xs:element name="start" type="year"/>
+										<xs:element name="end" type="year"/>
 									</xs:all>
 								</xs:complexType>
 							</xs:element>
@@ -287,4 +251,11 @@
 		</xs:complexType>
 
 	</xs:element>
+
+	<xs:simpleType name="year">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1900"/>
+			<xs:maxInclusive value="2100"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
