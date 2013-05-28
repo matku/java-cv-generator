@@ -31,34 +31,36 @@
         <div class="span9">
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Upravit CV</h3>
-            <table class="table">
-                <tr>
-                    <td>Vyberte zivotopis: </td>
-                    <td>
-                        <select name="state" required="true">
-                            <c:forEach var="cv" items="${cvs}">
-                                <option value="${cv}">${cv}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <li>
-                <a href="${pageContext.request.contextPath}/auth/cv/edit/newWork">Pridat pracu</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/auth/cv/edit/newEducation">Pridat skolu</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/auth/cv/edit/editWork">Upravit pracu</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/auth/cv/edit/editEducation">Upravit skolu</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/auth/cv/edit/editCv">Upravit ostatne udaje</a>
-            </li>
-            <br />
+            <form method="post" action="${pageContext.request.contextPath}/auth/cv/edit/edit">
+                <table class="table">
+                    <tr>
+                        <td>Vyberte zivotopis: </td>
+                        <td>
+                            <select name="CV" required="true">
+                                <c:forEach var="cv" items="${cvs}">
+                                    <option value="${cv}">${cv}</option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vyberte akciu: </td>
+                        <td>
+                            <select name="action" required="true">
+                                <option value="newWork">Pridat pracu</option>
+                                <option value="newEducation">Pridat skolu</option>
+                                <option value="editWork">Upravit pracu</option>
+                                <option value="editEducation">Upravit skolu</option>
+                                <option value="editCv">Upravit ostatne udaje</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Editovat" name="Edit" class="btn btn-success"/></td>
+                    </tr>
+                </table>
+            </form>
             
         </div><!--/span-->
       </div><!--/row-->   

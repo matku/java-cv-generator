@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 @WebServlet(NewWorkServlet.URL_MAPPING + "/*")
 public class NewWorkServlet extends HttpServlet
 {
-    private static final String NEWWORK_JSP = "/WEB-INF/view/cvShow.jsp";
-    public static final String URL_MAPPING = "/auth/cv/show";
+    private static final String NEWWORK_JSP = "/WEB-INF/view/newWork.jsp";
+    public static final String URL_MAPPING = "/auth/cv/newWork";
     
     private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
     

@@ -281,8 +281,13 @@ public class CvNewServlet extends HttpServlet
                     
                     cv.setSkills(skills);
                     
-                    XMLWriter writer = new XMLWriter(Settings.getPathCV()+ name + "_" + usr.getEmail());
-                    writer.createCv(cv, usr);
+                    XMLWriter writer = new XMLWriter(Settings.getPathCV()+ name + "_" + usr.getEmail() + ".xml");
+                    if (!writer.createCv(cv, usr))
+                    {
+                        req.setAttribute("otherError", "CV with this name already exists");
+                        req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                        return;
+                    }
                     Library library = new Library();
                     library.addCV(req.getSession().getAttribute("isLogged").toString(), name + "_" + usr.getEmail());
                     

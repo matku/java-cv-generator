@@ -115,8 +115,13 @@ public class XMLWriter {
     {
         try
         {
+            if (doc.getElementsByTagName("personalInfo").getLength() != 0)
+            {
+                return false;
+            }
             //CV
             Element cv = (Element) doc.getElementsByTagName("cv").item(0);
+            
             cv.setAttribute("user", user.getUsername());
             cv.setAttribute("created", new Date().toString());
             cv.setAttribute("modified", new Date().toString());

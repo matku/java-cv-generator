@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 @WebServlet(EditCvServlet.URL_MAPPING + "/*")
 public class EditCvServlet extends HttpServlet
 {
-    private static final String EDITCV_JSP = "/WEB-INF/view/cvShow.jsp";
-    public static final String URL_MAPPING = "/auth/cv/show";
+    private static final String EDITCV_JSP = "/WEB-INF/view/editCv.jsp";
+    public static final String URL_MAPPING = "/auth/cv/editCv";
     
     private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
     
@@ -29,8 +29,9 @@ public class EditCvServlet extends HttpServlet
         if(req.getSession().getAttribute("isLogged") == null)
         {
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
-            return ;
+            return;
         }
+        req.getPathInfo();
         req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
     }
 }
