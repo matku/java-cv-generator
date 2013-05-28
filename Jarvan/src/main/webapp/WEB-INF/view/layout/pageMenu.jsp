@@ -13,6 +13,7 @@
             </p>
             <ul class="nav">
               <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+              <li><a href="${pageContext.request.contextPath}/dashboard">Dashboard</a></li>
               <li><a href="${pageContext.request.contextPath}/about">About</a></li>
               <li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
             </ul>
