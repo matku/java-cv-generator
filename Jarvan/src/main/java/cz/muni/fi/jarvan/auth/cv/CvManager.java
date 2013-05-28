@@ -17,6 +17,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cz.muni.fi.jarvan.auth.Settings;
+
 /**
  * Validation, transformation, compilation
  *
@@ -30,8 +32,8 @@ public class CvManager {
 	private final static Logger log = LoggerFactory.getLogger(CvManager.class);
 
 	public CvManager() {
-		this.xmlSchema = getPath() + "cvValidator.xsd";
-		this.xslTransform = getPath() + "xml2tex.xsl";
+		this.xmlSchema = Settings.getPathManager() + "cvValidator.xsd";
+		this.xslTransform = Settings.getPathManager() + "xml2tex.xsl";
 	}
 
 	/**
@@ -79,8 +81,8 @@ public class CvManager {
 				new File(this.xslTransform));
 		try {
 			Transformer transformer = factory.newTransformer(xslt);
-			StreamSource xmlFile = new StreamSource(new File(getPath() + this.xml));
-			StreamResult tex = new StreamResult(new File(getPath() + outputFile));
+			StreamSource xmlFile = new StreamSource(new File(Settings.getPathManager() + this.xml));
+			StreamResult tex = new StreamResult(new File(Settings.getPathManager() + outputFile));
 			transformer.transform(xmlFile, tex);
 		} catch (TransformerConfigurationException ex) {
 			System.out.println("config exception: " + ex.getMessage());
@@ -129,25 +131,5 @@ public class CvManager {
 		return false;
 	}
 
-	/**
-	 * Method for finding correct path to xsl and xsd files
-	 *
-	 * @return path
-	 */
-	private String getPath() {
-		String oldPath = CvManager.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
-		String newPath = "";
-
-		String[] parts = oldPath.split("/");
-		int counter = 0;
-
-		while (!parts[counter].equals("target")) {
-			newPath += parts[counter] + "/";
-			counter++;
-		}
-
-		newPath += "src/main/resources/config/";
-
-		return newPath;
-	}
+	
 }
