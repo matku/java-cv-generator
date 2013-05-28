@@ -78,4 +78,27 @@ public class Settings {
            return newPath;
    }
     
+    /**
+    * Method for finding correct path to xsl and xsd files
+    *
+    * @return path
+    */
+    public static String getPathCV()
+    {
+           String oldPath = User.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
+           String newPath = "";
+
+           String[] parts = oldPath.split("/");
+           int counter = 0;
+
+           while (!parts[counter].equals("target")) {
+                   newPath += parts[counter] + "/";
+                   counter++;
+           }
+
+           newPath += "src/main/resources/config/cv/";
+
+           return newPath;
+   }
+    
 }
