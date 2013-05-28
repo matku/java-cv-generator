@@ -67,11 +67,11 @@
                 </tr>
                 <tr>
                     <td>Meno:* </td>
-                    <td><input type="text" name="firstName" value="<c:out value='${param.firstName}'/>" required="true" /></td>
+                    <td><input type="text" name="firstName" value="<c:out value='${param.firstName}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
                 </tr>
                 <tr>
                     <td>Priezvisko:* </td>
-                    <td><input type="text" name="surname" value="<c:out value='${param.surname}'/>" required="true" /></td>
+                    <td><input type="text" name="surname" value="<c:out value='${param.surname}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
                 </tr>
                 <tr>
                     <td>Titul(y) pred menom: </td>
@@ -84,9 +84,9 @@
                 <tr>
                     <td>Datum narodenia:* </td>
                     <td>
-                        <input type="text" name="birthdayDay" value="<c:out value='${param.birthdayDay}'/>" style="width: 30px;" required="true" />
-                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${param.birthdayMonth}'/>" style="width: 30px;" required="true" />
-                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${param.birthdayYear}'/>" style="width: 50px;" required="true" />
+                        <input type="text" name="birthdayDay" value="<c:out value='${param.birthdayDay}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|([1-2][0-9])|(3[0-1])"/>
+                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${param.birthdayMonth}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|(1[0-2])"/>
+                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${param.birthdayYear}'/>" style="width: 50px;" required="true" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/>
                     </td>
                 </tr>
                 <tr class="success">
@@ -95,15 +95,15 @@
                 </tr>
                 <tr>
                     <td>Ulica, cislo:* </td>
-                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" /></td>
+                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" pattern="[A-Z]([a-z])*( ([0-9])+){0,1}"/></td>
                 </tr>
                 <tr>
                     <td>PSC:* </td>
-                    <td><input type="text" name="psc" value="<c:out value='${param.psc}'/>" required="true" /></td>
+                    <td><input type="text" name="psc" value="<c:out value='${param.psc}'/>" required="true" pattern="[0-9]{5}|([0-9]{3} [0-9]{2})"/></td>
                 </tr>
                 <tr>
                     <td>Mesto:* </td>
-                    <td><input type="text" name="town" value="<c:out value='${param.town}'/>" required="true" /></td>
+                    <td><input type="text" name="town" value="<c:out value='${param.town}'/>" required="true" pattern="[A-Z]([a-z ])*"/></td>
                 </tr>
                 <tr>
                     <td>Stat:* </td>
@@ -117,11 +117,11 @@
                 </tr>
                 <tr>
                     <td>Telefon Domov: </td>
-                    <td><input type="text" name="homePhone" value="<c:out value='${param.homePhone}'/>" /></td>
+                    <td><input type="text" name="homePhone" value="<c:out value='${param.homePhone}'/>" pattern="([0-9])*"/></td>
                 </tr>
                 <tr>
                     <td>Telefon Mobil: </td>
-                    <td><input type="text" name="mobilePhone" value="<c:out value='${param.mobilePhone}'/>" /></td>
+                    <td><input type="text" name="mobilePhone" value="<c:out value='${param.mobilePhone}'/>" pattern="([0-9])*"/></td>
                 </tr>
                 <tr class="success">
                     <td>Vzdelanie</td>
@@ -157,11 +157,11 @@
                 </c:if>   
                 <tr>
                     <td>Rok nastupu:**</td>
-                    <td><input type="text" name="schoolStart" value="<c:out value='${param.schoolStart}'/>" /></td>
+                    <td><input type="text" name="schoolStart" value="<c:out value='${param.schoolStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Rok ukoncenia:</td>
-                    <td><input type="text" name="schoolEnd" value="<c:out value='${param.schoolEnd}'/>" /></td>
+                    <td><input type="text" name="schoolEnd" value="<c:out value='${param.schoolEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Skola:**</td>
@@ -188,11 +188,11 @@
                 </c:if> 
                 <tr>
                     <td>Rok nastupu:**</td>
-                    <td><input type="text" name="universityStart" value="<c:out value='${param.universityStart}'/>" /></td>
+                    <td><input type="text" name="universityStart" value="<c:out value='${param.universityStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Rok ukoncenia:</td>
-                    <td><input type="text" name="universityEnd" value="<c:out value='${param.universityEnd}'/>" /></td>
+                    <td><input type="text" name="universityEnd" value="<c:out value='${param.universityEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Skola/fakulta:**</td>
@@ -219,11 +219,11 @@
                 </c:if> 
                 <tr>
                     <td>Od:** </td>
-                    <td><input type="text" name="workStart" value="<c:out value='${param.workStart}'/>" /></td>
+                    <td><input type="text" name="workStart" value="<c:out value='${param.workStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Do: </td>
-                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" /></td>
+                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
                     <td>Zamestnavatel:** </td>
