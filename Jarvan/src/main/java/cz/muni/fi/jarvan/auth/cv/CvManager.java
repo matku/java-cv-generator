@@ -65,12 +65,12 @@ public class CvManager {
 	 * method to generate pdf from xml file
 	 * @param xml xml file name in resources folder
 	 * @return pdf file name
-	 * @throws IllegalArgumentException when given xml doesnt validate against schema
+	 * @throws XmlException when given xml doesnt validate against schema or something veery bad happens
 	 */
-	public String generate(String xml) throws IllegalArgumentException {
+	public String generate(String xml) throws XmlException {
 		this.xml = xml;
 		if (!validate()) {
-			throw new IllegalArgumentException("XML file is invalid.");
+			throw new XmlException("XML file is invalid.");
 		}
 
 		String outputFile = xml.substring(0, xml.length() - 4) + ".tex";
@@ -86,14 +86,17 @@ public class CvManager {
 			transformer.transform(xmlFile, tex);
 		} catch (TransformerConfigurationException ex) {
 			System.out.println("config exception: " + ex.getMessage());
+			throw new XmlException("Bad thing happened: " + ex.getMessage());
 		} catch (TransformerException ex) {
 			System.out.println("transform exception: " + ex.getMessage());
+			throw new XmlException("Bad thing happened: " + ex.getMessage());
 		}
-		// TODO podat dalej spravu o chybe
 
 		// compile
 		String cmd = "pdflatex " + outputFile + " && rm -f " + outputFile;
-		executeCmd(cmd);
+		if (!executeCmd(cmd))
+			throw new XmlException("Unable to run compilation.");
+		
 		return outputFile.substring(0, outputFile.length() - 4) + ".pdf";
 	}
 
@@ -110,7 +113,8 @@ public class CvManager {
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
+// debug only
+{
 			// read the output from the command
 			// Here is the standard output of the command:
 			while ((output = stdInput.readLine()) != null) {
@@ -122,7 +126,7 @@ public class CvManager {
 			while ((output = stdError.readLine()) != null) {
 				System.out.println(output);
 			}
-
+}
 			return true;
 		} catch (IOException e) {
 			log.error("Command error execution: ", e.getMessage());
@@ -131,5 +135,5 @@ public class CvManager {
 		return false;
 	}
 
-	
+
 }
