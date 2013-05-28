@@ -63,11 +63,10 @@ public class CvManager {
 
 	/**
 	 * method to generate pdf from xml file
-	 * @param xml xml file name in resources folder
-	 * @return pdf file name
+	 * @param xml xml file name to convert
 	 * @throws XmlException when given xml doesnt validate against schema or something veery bad happens
 	 */
-	public String generate(String xml) throws XmlException {
+	public void generate(String xml) throws XmlException {
 		this.xml = xml;
 		if (!validate()) {
 			throw new XmlException("XML file is invalid.");
@@ -96,8 +95,6 @@ public class CvManager {
 		String cmd = "pdflatex " + outputFile + " && rm -f " + outputFile;
 		if (!executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
-		
-		return outputFile.substring(0, outputFile.length() - 4) + ".pdf";
 	}
 
 	/**
