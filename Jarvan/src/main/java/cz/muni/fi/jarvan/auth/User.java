@@ -25,8 +25,11 @@ public class User {
 
     public User()
     {
-        if (parser == null) parser = new XMLParser(this.getPath());
-        if (writer == null) writer = new XMLWriter(this.getPath());
+        //if (parser == null) parser = new XMLParser(this.getPath());
+        //if (writer == null) writer = new XMLWriter(this.getPath());
+        
+        if (parser == null) parser = new XMLParser(Settings.getPathUser());
+        if (writer == null) writer = new XMLWriter(Settings.getPathUser());
     }
     
     public void setUsername(String username) {
@@ -131,7 +134,7 @@ public class User {
     /**
      * Method for finding correct path to users.xml
      * @return path
-     */
+     
     private String getPath()
     {
         String oldPath = User.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
@@ -150,4 +153,5 @@ public class User {
         
         return newPath;
     }
+    */
 }
