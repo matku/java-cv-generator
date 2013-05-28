@@ -5,6 +5,8 @@ package cz.muni.fi.jarvan.auth.web;
 import cz.muni.fi.jarvan.auth.Settings;
 import cz.muni.fi.jarvan.auth.XMLParser;
 import cz.muni.fi.jarvan.auth.XMLWriter;
+import cz.muni.fi.jarvan.auth.cv.CvManager;
+import cz.muni.fi.jarvan.auth.cv.XmlException;
 import org.slf4j.Logger;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
@@ -37,6 +39,35 @@ public class ExportServlet extends HttpServlet
         }
         XMLParser parser = new XMLParser(Settings.getPathLibrary());
         req.setAttribute("cvs", parser.getCvs(req.getSession().getAttribute("isLogged").toString()));
+        req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String cvName = req.getParameter("cvName");
+        String lang = req.getParameter("lang");
+        
+        XMLParser email = new XMLParser(Settings.getPathLibrary());
+        String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
+        
+        String xmlPath = Settings.getPathCV() + "/" + cvName + "_" + mail + ".xml";
+        
+        XMLWriter writer = new XMLWriter(Settings.getPathCV());
+        writer.changeCvLanguage(lang);
+        
+        CvManager create = new CvManager();
+        
+        try
+        {
+            create.generate(xmlPath);
+        }
+        catch (XmlException e)
+        {
+            log.error("Generate error " + e.getMessage());
+        }
+        
+        req.setAttribute("success", "Congratulation ! You have successfully exported your CV :) ");
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
 }

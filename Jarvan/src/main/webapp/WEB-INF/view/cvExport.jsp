@@ -33,12 +33,19 @@
             <h3>Prelozit CV</h3>
             <br />
 
-            <form method="post" action="/process">
+            <c:if test="${not empty success}">
+                <div class="alert alert-success">
+                    <c:out value="${success}"/>
+                </div>
+            </c:if>
+                        
+            <form method="post" action="${pageContext.request.contextPath}/auth/export/process">
             <table class="table">
                 <tr>
                     <td>Vyberte zivotopis: </td>
                     <td>
-                        <select name="state" required="true">
+                        <select name="cvName" required="true">
+                            <option value=""></option>
                             <c:forEach var="cv" items="${cvs}">
                                 <option value="${cv}">${cv}</option>
                             </c:forEach>
@@ -52,6 +59,9 @@
                             <option value="en">EN</option>
                         </select>
                     </td>
+                    <td>
+                        <input type="submit" class="btn btn-success" value="Prelozit" />
+                    </td>
                 </tr>
             </table>
             
@@ -60,7 +70,7 @@
             <hr />
             
             <table class="table">
-                <tr class="info"><td>Nazov Cv</td><td>Jazyk</td><td>Stiahnut</td>
+                <tr class="info"><td>Nazov</td><td>Jazyk</td><td>Stiahnut</td>
                 <tr><td>TEST</td><td>EN</td><td><a href="#">Stiahnut</a></td>
             </table>
             
