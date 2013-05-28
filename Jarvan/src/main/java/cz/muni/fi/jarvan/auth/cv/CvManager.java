@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cz.muni.fi.jarvan.auth.Settings;
+import javax.sound.midi.Soundbank;
 
 /**
  * Validation, transformation, compilation
@@ -80,8 +81,8 @@ public class CvManager {
 				new File(this.xslTransform));
 		try {
 			Transformer transformer = factory.newTransformer(xslt);
-			StreamSource xmlFile = new StreamSource(new File(Settings.getPathManager() + this.xml));
-			StreamResult tex = new StreamResult(new File(Settings.getPathManager() + outputFile));
+			StreamSource xmlFile = new StreamSource(new File(this.xml));
+			StreamResult tex = new StreamResult(new File(outputFile));
 			transformer.transform(xmlFile, tex);
 		} catch (TransformerConfigurationException ex) {
 			System.out.println("config exception: " + ex.getMessage());
@@ -92,47 +93,15 @@ public class CvManager {
 		}
 
 		// compile
-		String cmd = "pdflatex " + outputFile;
-		// debug
-		// + " && rm -f " + outputFile;
-		if (!executeCmd(cmd))
+		String cmd = "pdflatex -output-directory " + Settings.getPathCV() + " " + outputFile;
+		System.out.println("Executing: '" + cmd + "'");
+		if (!Settings.executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
+		cmd = "rm -f " + outputFile.substring(0, outputFile.length() - 3) + "tex";
+		Settings.executeCmd(cmd);
+		cmd = cmd.substring(0, cmd.length() - 3) + "aux";
+		Settings.executeCmd(cmd);
+		cmd = cmd.substring(0, cmd.length() - 3) + "log";
+		Settings.executeCmd(cmd);
 	}
-
-	/**
-	 * executes command in terminal
-	 * @param cmd command to be executed
-	 * @return success
-	 */
-	private boolean executeCmd(String cmd) {
-		String output = null;
-
-		try {
-			Process p = Runtime.getRuntime().exec(cmd);
-
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-// debug only
-{
-			// read the output from the command
-			// Here is the standard output of the command:
-			while ((output = stdInput.readLine()) != null) {
-				System.out.println(output);
-			}
-
-			// read any errors from the attempted command
-			System.out.println("Here is the standard error of the command (if any):\n");
-			while ((output = stdError.readLine()) != null) {
-				System.out.println(output);
-			}
-}
-			return true;
-		} catch (IOException e) {
-			log.error("Command error execution: ", e.getMessage());
-		}
-
-		return false;
-	}
-
-
 }

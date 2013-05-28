@@ -1,14 +1,21 @@
 
 package cz.muni.fi.jarvan.auth;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Class for getPath metdhods
  * @author martin
  */
 public class Settings {
-    
+
+	private final static Logger log = LoggerFactory.getLogger(Settings.class);
     public Settings(){}
-        
+
     /**
      * Method for finding correct path to users.xml
      * @return path
@@ -17,21 +24,21 @@ public class Settings {
     {
         String oldPath = User.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
         String newPath = "";
-        
+
         String[] parts = oldPath.split("/");
         int counter = 0;
-        
+
         while(!parts[counter].equals("target"))
         {
             newPath += parts[counter] + "/";
             counter++;
         }
-        
+
         newPath += "src/main/resources/config/users.xml";
-        
+
         return newPath;
     }
-    
+
     /**
      * Method for finding correct path to users.xml
      * @return path
@@ -40,21 +47,21 @@ public class Settings {
     {
         String oldPath = User.class.getProtectionDomain().getCodeSource().getLocation().getPath().toString();
         String newPath = "";
-        
+
         String[] parts = oldPath.split("/");
         int counter = 0;
-        
+
         while(!parts[counter].equals("target"))
         {
             newPath += parts[counter] + "/";
             counter++;
         }
-        
+
         newPath += "src/main/resources/config/library.xml";
-        
+
         return newPath;
     }
-    
+
     /**
     * Method for finding correct path to xsl and xsd files
     *
@@ -77,7 +84,7 @@ public class Settings {
 
            return newPath;
    }
-    
+
     /**
     * Method for finding correct path to xsl and xsd files
     *
@@ -100,5 +107,28 @@ public class Settings {
 
            return newPath;
    }
-    
+
+
+		/**
+	 * executes command in terminal
+	 * @param cmd command to be executed
+	 * @return success
+	 */
+	public static boolean executeCmd(String cmd) {
+		String output = null;
+
+		try {
+			Process p = Runtime.getRuntime().exec(cmd);
+
+			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+
+			return true;
+		} catch (IOException e) {
+			log.error("Command error execution: ", e.getMessage());
+		}
+
+		return false;
+	}
+
 }
