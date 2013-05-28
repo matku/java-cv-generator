@@ -204,7 +204,7 @@ public class Cv
     }
 
     public void setStreet(String street) throws CvException {
-        if (street.matches("[A-Z]([a-z])* ([0-9])*"))
+        if (street.matches("[A-Z]([a-z])*( ([A-Z]|[a-z])([a-z])*)*( ([0-9])+){0,1}"))
         {
             this.street = street;
         }

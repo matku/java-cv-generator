@@ -15,9 +15,9 @@ public class RegistrationTest {
     
     
     @Test
-    public void testTryRegisterUsrE()
+    public void testTryRegisterUsrExists()
     {
-        System.out.println("Test 1: tryRegister- user already exists");
+        System.out.println("Test 1: tryRegister -user already exists");
         Registration reg = new Registration("zajac", "testval", "testval");
         boolean exResult = false;
         boolean result = reg.tryRegister();
@@ -28,9 +28,9 @@ public class RegistrationTest {
     
     
     @Test
-    public void testTryRegisterEmailE()
+    public void testTryRegisterEmailExists()
     {
-        System.out.println("Test 2: testTryRegister- email already exists");
+        System.out.println("Test 2: testTryRegister -email already exists");
         Registration reg = new Registration("testval", "zajac@zajac.sk", "testval");
         boolean exResult = false;
         boolean result = reg.tryRegister();
@@ -41,9 +41,9 @@ public class RegistrationTest {
     
     
     @Test
-    public void testNotExist()
+    public void testTryRegisterValNotExists()
     {
-        System.out.println("Test 3: testTryRegister- Not existing values");
+        System.out.println("Test 3: testTryRegister -Not existing values");
         XMLWriter userXml = new XMLWriter(Settings.getPathUser());
         Registration reg = new Registration("testval", "testval", "testval");
         boolean exResult = true;

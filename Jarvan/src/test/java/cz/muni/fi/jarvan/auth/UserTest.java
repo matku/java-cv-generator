@@ -47,7 +47,7 @@ public class UserTest {
      */
     @Test
     public void testEmailAlreadyExists() {
-        System.out.println("Test 3: emailAlreadyExists- email exists");
+        System.out.println("Test 3: emailAlreadyExists -email exists");
         User user = new User();
         user.setEmail("zajac@zajac.sk");
         boolean expResult = true;
@@ -60,7 +60,7 @@ public class UserTest {
      */
     @Test
     public void testEmailNotExists() {
-        System.out.println("Test 4: emailAlreadyExists- email not exists");
+        System.out.println("Test 4: emailAlreadyExists -email not exists");
         User user = new User();
         user.setEmail("testval");
         boolean expResult = false;
@@ -75,7 +75,7 @@ public class UserTest {
      */
     @Test
     public void testMd5() {
-        System.out.println("Test 5: md5- hash algorithm test");
+        System.out.println("Test 5: md5 -hash algorithm test");
         String input = "testval";
         String expResult = "48ea7adc1abf301837f93f0ec24b3072";
         String result = User.md5(input);

@@ -1,7 +1,5 @@
 package cz.muni.fi.jarvan.auth;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,14 +8,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests of methods, of class Work
+ * Tests of methods, of class Education
  * @author joe
  */
-public class WorkTest {
+public class EducationTest {
     
 
     /**
-     * Test of setFrom method, of class Work
+     * Test of setFrom method, of class Education.
      */
     @Test
     public void testExSetFrom() {
@@ -31,8 +29,9 @@ public class WorkTest {
         } catch (CvException ex) {
         }
     }
-
- 
+    
+    
+    
     /**
      * Test of setFrom method, of class Work
      */
@@ -48,10 +47,10 @@ public class WorkTest {
         } catch (CvException ex) {
         }
     }
-    
+
     
     /**
-     * Test of setFrom method, of class Work.
+     * Test of setFrom method, of class Education
      */
     @Test
     public void testSetFrom2() {
@@ -68,10 +67,10 @@ public class WorkTest {
     
     
     /**
-     * Test of setTo method, of class Work.
+     * Test of setTo method, of class Education.
      */
     @Test
-    public void testExSetTo3() {
+    public void testExSetTo3() throws Exception {
         System.out.println("Test 4: setTo -not supported value");
         Work instance = new Work();
         String to = "1899";
@@ -84,8 +83,7 @@ public class WorkTest {
     }
     
     
-    
-        /**
+    /**
      * Test of setTo method, of class Work.
      */
     @Test
@@ -103,11 +101,11 @@ public class WorkTest {
     
     
     /**
-    * Test of setTo method, of class Work.
+    * Test of setTo method, of class Education.
     */
     @Test
-    public void testSetTo() {
-        System.out.println("Test 6: setTo- supported value");
+    public void testSetTo5() {
+        System.out.println("Test 6: setTo -supported value");
         Work work = new Work();
         String to = "2000";
         try {
