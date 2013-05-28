@@ -23,13 +23,12 @@ public class CvTest {
      */
     @Test
     public void testExSetFirstName() {
-        System.out.println("Test 1: setFirstName -not supported vallue 1");
+        System.out.println("Test 1: setFirstName -not supported value 1");
         String firstName = "testval";
         Cv instance = new Cv();
         try {
             instance.setFirstName(firstName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -41,13 +40,12 @@ public class CvTest {
      */
     @Test
     public void testExSetFirstName1() {
-        System.out.println("Test 2: setFirstName -not supported vallue 2");
+        System.out.println("Test 2: setFirstName -not supported value 2");
         String firstName = "t3stval";
         Cv instance = new Cv();
         try {
             instance.setFirstName(firstName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -59,13 +57,12 @@ public class CvTest {
      */
     @Test
     public void testExSetFirstName2() {
-        System.out.println("Test 3: setFirstName -not supported vallue 3");
+        System.out.println("Test 3: setFirstName -not supported value 3");
         String firstName = "TEstval";
         Cv instance = new Cv();
         try {
             instance.setFirstName(firstName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -76,13 +73,12 @@ public class CvTest {
      */
     @Test
     public void testExSetFirstName3() {
-        System.out.println("Test 4: setFirstName- not supported vallue 4");
+        System.out.println("Test 4: setFirstName- not supported value 4");
         String firstName = "T3stval";
         Cv instance = new Cv();
         try {
             instance.setFirstName(firstName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -93,14 +89,13 @@ public class CvTest {
      */
     @Test
     public void testSetFirstName4() {
-        System.out.println("Test 5: setFirstName -supported vallue");
+        System.out.println("Test 5: setFirstName -supported value");
         String firstName = "Testval";
         Cv instance = new Cv();
         try {
             instance.setFirstName(firstName);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
 
@@ -116,8 +111,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setLastName(lastName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -134,8 +128,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setLastName(lastName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -152,8 +145,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setLastName(lastName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -171,8 +163,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setLastName(lastName);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -190,8 +181,7 @@ public class CvTest {
         try {
             instance.setLastName(lastName);
         } catch (CvException ex) {
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
 
@@ -206,8 +196,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -226,8 +215,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -244,8 +232,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -261,8 +248,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -278,8 +264,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -295,8 +280,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setDateOfBirth(dateOfBirth);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -313,8 +297,7 @@ public class CvTest {
         try {
             instance.setDateOfBirth(dateOfBirth);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -329,8 +312,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setHomeNumber(homeNumber);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -348,8 +330,7 @@ public class CvTest {
         try {
             instance.setHomeNumber(homeNumber);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -364,8 +345,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setMobileNumber(mobileNumber);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -382,8 +362,7 @@ public class CvTest {
         try {
             instance.setMobileNumber(mobileNumber);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -398,8 +377,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -415,8 +393,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -432,8 +409,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -449,8 +425,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -466,8 +441,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -478,14 +452,13 @@ public class CvTest {
      */
     @Test
     public void testSetStreet5() {
-        System.out.println("Test 27: setStreet -supported value");
+        System.out.println("Test 27: setStreet -supported value 1");
         String street = "Testval 3";
         Cv instance = new Cv();
         try {
             instance.setStreet(street);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -500,8 +473,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setCity(city);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -517,8 +489,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setCity(city);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -534,8 +505,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setCity(city);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -551,8 +521,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setCity(city);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -569,8 +538,7 @@ public class CvTest {
         try {
             instance.setCity(city);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -585,8 +553,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setZip(zip);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -602,8 +569,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setZip(zip);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -619,8 +585,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setZip(zip);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -636,8 +601,7 @@ public class CvTest {
         Cv instance = new Cv();
         try {
             instance.setZip(zip);
-            System.out.println("Error: exception not caught");
-            fail();
+            fail("Error: exception not thrown");
         } catch (CvException ex) {
         }
     }
@@ -654,8 +618,7 @@ public class CvTest {
         try {
             instance.setZip(zip);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -671,8 +634,7 @@ public class CvTest {
         try {
             instance.setZip(zip);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
     
@@ -688,8 +650,7 @@ public class CvTest {
         try {
             instance.setStreet(street);
         } catch (CvException ex) {
-            System.out.println("Error: exception caught");
-            fail();
+            fail("Error: exception thrown");
         }
     }
 }
