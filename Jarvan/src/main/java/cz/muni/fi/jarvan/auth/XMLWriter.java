@@ -507,5 +507,29 @@ public class XMLWriter {
         return true;
     }
     
+    public boolean changeCvLanguage(String lang)
+    {
         
+        try
+        {
+            NodeList cv = doc.getElementsByTagName("cv");
+            Element root = (Element) cv.item(0);
+            root.setAttribute("lang", lang);
+                    
+        } catch (DOMException ex)
+        {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+            System.err.println("Should be serialized");
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;
+        
+    }
 }
