@@ -96,6 +96,38 @@ public class XMLParser {
         return null;
     }
     
+    public List<String> getCvs(String username)
+    {
+        NodeList users = doc.getElementsByTagName("user");
+        
+        Element user = null;
+        for (int i = 0; i < users.getLength(); i++)
+        {
+            Element userElement = (Element) users.item(i);
+            if (userElement.getAttribute("id").equals(username))
+            {
+                user = userElement;
+                break;
+            }
+        }
+        
+        if (user == null)
+        {
+            return null;
+        }
+        List<String> cvList = new ArrayList<>();
+        
+        NodeList cvs = user.getChildNodes();
+        
+        for (int i = 0; i < cvs.getLength(); i++)
+        {
+            Element cv = (Element) cvs.item(i);
+            cvList.add(cv.getAttribute("name"));
+        }
+        
+        return cvList;
+    }
+    
     /**
      * Login method for user 
      * If false prints error message

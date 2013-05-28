@@ -1,9 +1,14 @@
 package cz.muni.fi.jarvan.auth.web;
 
 
+import cz.muni.fi.jarvan.auth.Library;
+import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.XMLParser;
 import org.slf4j.Logger;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +34,11 @@ public class CvEditServlet extends HttpServlet
         if(req.getSession().getAttribute("isLogged") == null)
         {
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
-            return ;
+            return;
         }
+        XMLParser parser = new XMLParser(Settings.getPathLibrary());
+        
+        req.setAttribute("cvs", parser.getCvs("aaa"));//parser.getCvs(req.getSession().getAttribute("isLogged").toString()).get(0));
         req.getRequestDispatcher(CVEDIT_JSP).forward(req, resp);
     }
 }

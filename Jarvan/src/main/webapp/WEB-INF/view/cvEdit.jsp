@@ -33,6 +33,33 @@
         <div class="span9">
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Upravit CV</h3>
+            <table class="table">
+                <tr>
+                    <td>Vyberte zivotopis: </td>
+                    <td>
+                        <select name="state" required="true">
+                            <c:forEach var="cv" items="${cvs}">
+                                <option value="${cv}">${cv}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <li>
+                <a href="${pageContext.request.contextPath}/auth/cv/edit/newWork">Pridat pracu</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/auth/cv/edit/newEducation">Pridat skolu</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/auth/cv/edit/editWork">Upravit pracu</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/auth/cv/edit/editEducation">Upravit skolu</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/auth/cv/edit/editCv">Upravit ostatne udaje</a>
+            </li>
             <br />
             
         </div><!--/span-->
