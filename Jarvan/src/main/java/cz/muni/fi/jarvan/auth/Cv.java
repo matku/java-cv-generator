@@ -136,12 +136,12 @@ public class Cv
     }
 
     public void setDateOfBirth(String dateOfBirth) throws CvException {
-        String[] split = dateOfBirth.split(".", 3);
+        String[] split = dateOfBirth.split("\\.", 3);
         if (Integer.parseInt(split[0]) > 0 && Integer.parseInt(split[0]) <= 31 &&
             Integer.parseInt(split[1]) > 0 && Integer.parseInt(split[1]) <= 12 &&
             Integer.parseInt(split[2]) > 1900 && Integer.parseInt(split[2]) <= 2100)
         {
-            if (Integer.parseInt(split[2]) > Calendar.YEAR)
+            if (Integer.parseInt(split[2]) > Calendar.getInstance().get(Calendar.YEAR))
             {
                 throw new CvException("birth date not yet passed");
             }

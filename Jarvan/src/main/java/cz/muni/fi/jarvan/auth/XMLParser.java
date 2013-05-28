@@ -80,6 +80,22 @@ public class XMLParser {
         return emailList;
     }
     
+    public String getEmail(String username)
+    {
+        NodeList users = doc.getElementsByTagName("user");
+        
+        for(int i=0; i<users.getLength(); i++)
+        {
+            Element userElement = (Element) users.item(i);
+            if (userElement.getAttribute("id").equals(username))
+            {
+                Element email = (Element) userElement.getElementsByTagName("email").item(0);
+                return email.getTextContent();
+            }
+        }
+        return null;
+    }
+    
     /**
      * Login method for user 
      * If false prints error message

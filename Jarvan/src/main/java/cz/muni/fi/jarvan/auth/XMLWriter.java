@@ -48,6 +48,8 @@ public class XMLWriter {
                     FileWriter fw = new FileWriter(this.xmlFile);    
                     BufferedWriter bw = new BufferedWriter(fw);
                     bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+                    bw.write("<cv>");
+                    bw.write("</cv>");
                     bw.close();
                 }
                 catch (IOException e)
@@ -55,6 +57,7 @@ public class XMLWriter {
                     log.error("File " + path + " not created" + e.getMessage());
                     throw new RuntimeException("File creation error", e);
                 }
+                log.info("File created");
             }
             
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -113,7 +116,7 @@ public class XMLWriter {
         try
         {
             //CV
-            Element cv = doc.createElement("cv");
+            Element cv = (Element) doc.getElementsByTagName("cv").item(0);
             cv.setAttribute("user", user.getUsername());
             cv.setAttribute("created", new Date().toString());
             cv.setAttribute("modified", new Date().toString());
@@ -166,7 +169,7 @@ public class XMLWriter {
             
             try
             {
-                String[] birth = newCv.getDateOfBirth().split(".", 3);
+                String[] birth = newCv.getDateOfBirth().split("\\.", 3);
                 Element day = doc.createElement("day");
                 day.setTextContent(birth[0]);
                 birthday.appendChild(day);
@@ -207,7 +210,7 @@ public class XMLWriter {
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getHomeNumber());
-                contact.setAttribute("type", "homeNumber");
+                contact.setAttribute("type", "home");
                 personalInfo.appendChild(contact);
             }
             
@@ -215,7 +218,7 @@ public class XMLWriter {
             {
                 Element contact = doc.createElement("contact");
                 contact.setTextContent(newCv.getMobileNumber());
-                contact.setAttribute("type", "mobileNumber");
+                contact.setAttribute("type", "mobile");
                 personalInfo.appendChild(contact);
             }
             
@@ -242,9 +245,12 @@ public class XMLWriter {
                     schoolName.setTextContent(ed.getName() + ", " + ed.getCity());
                     school.appendChild(schoolName);
                     
-                    Element schoolSpecialization = doc.createElement("specialization");
-                    schoolSpecialization.setTextContent(ed.getFieldOfStudy());
-                    school.appendChild(schoolSpecialization);
+                    if (ed.getFieldOfStudy() != null)
+                    {
+                        Element schoolSpecialization = doc.createElement("specialization");
+                        schoolSpecialization.setTextContent(ed.getFieldOfStudy());
+                        school.appendChild(schoolSpecialization);
+                    }
                     
                     Element schoolStart = doc.createElement("start");
                     schoolStart.setTextContent(ed.getFrom());

@@ -34,8 +34,6 @@
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Vytvorit nove CV</h3>
             <br />
-            <a href="#">Pridat vzdelanie</a> / <a href="#">Pridat zamestnanie</a> / <a href="#">Pridat bonus</a>
-            <br />
             <c:if test="${not empty success}">
                 <div class="alert alert-success">
                     <c:out value="${success}"/>
@@ -46,6 +44,11 @@
             <h6>Policka oznacene ** su povinne, ak ste vyplnili aspon jedno policko v danej kategorii</h6>
             <form method="post" action="${pageContext.request.contextPath}/auth/cv/create/new">
             <table class="table ">
+                <tr>
+                    <td>Nazov CV:* </td>
+                    <td>
+                        <input type="text" name="name" value="<c:out value='${param.name}'/>" required="true" />
+                    </td>
                 <tr class="success">
                     <td>Osobne udaje </td>
                     <td></td>
@@ -64,7 +67,7 @@
                 </tr>
                 <tr>
                     <td>Meno:* </td>
-                    <td><input type="text" name="name" value="<c:out value='${param.name}'/>" required="true" /></td>
+                    <td><input type="text" name="firstName" value="<c:out value='${param.firstName}'/>" required="true" /></td>
                 </tr>
                 <tr>
                     <td>Priezvisko:* </td>
@@ -238,7 +241,7 @@
                 </tr>
                 <tr>
                     <td>Zadavajte v tvare(Jazyk: uroven)<br />oddelujte Enterom</td>
-                    <td><textarea name="languages">Slovensky jazyk: matersky</textarea></td>
+                    <td><textarea name="languages"></textarea></td>
                 </tr>
                 <c:if test="${not empty languageError}">
                 <div class="alert alert-error">
@@ -253,7 +256,7 @@
                 </tr>
                 <tr>
                     <td>Oddelujte ciarkou</td>
-                    <td><textarea name="other">flexibilita, spolahlivost ...</textarea></td>
+                    <td><textarea name="other"></textarea></td>
                 </tr>
                 <c:if test="${not empty otherError}">
                 <div class="alert alert-error">

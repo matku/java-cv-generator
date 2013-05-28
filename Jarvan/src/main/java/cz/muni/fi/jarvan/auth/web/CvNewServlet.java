@@ -4,7 +4,10 @@ package cz.muni.fi.jarvan.auth.web;
 import cz.muni.fi.jarvan.auth.Cv;
 import cz.muni.fi.jarvan.auth.CvException;
 import cz.muni.fi.jarvan.auth.Education;
+import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.User;
 import cz.muni.fi.jarvan.auth.Work;
+import cz.muni.fi.jarvan.auth.XMLWriter;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +52,7 @@ public class CvNewServlet extends HttpServlet
         {
             case "/new":
                 //personal info
+                String name = req.getParameter("name");
                 String sex = req.getParameter("sex");
                 if (sex == null)
                 {
@@ -57,7 +61,7 @@ public class CvNewServlet extends HttpServlet
                     req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                     return;
                 }
-                String firstName = req.getParameter("name");
+                String firstName = req.getParameter("firstName");
                 String lastName = req.getParameter("surname");
                 String titleBefore = req.getParameter("titleBefore");
                 String titleAfter = req.getParameter("titleAfter");
@@ -130,14 +134,26 @@ public class CvNewServlet extends HttpServlet
                 }
                 
                 //languages
-                String[] languages = req.getParameter("languages").split("\n");
+                String[] languages = null;
+                if (!req.getParameter("languages").equals(""))
+                {
+                    languages = req.getParameter("languages").split("\n");
+                }
                 //other
-                String[] skill = req.getParameter("other").split(",");
+                String[] skill = null;
+                if (!req.getParameter("other").equals(""))
+                {
+                    skill = req.getParameter("other").split(",");
+                }
                 
                 
                 try
                 {
+                    User usr = new User();
+                    usr.setUsername(req.getSession().getAttribute("isLogged").toString());
+                    usr.setEmail(User.parser.getEmail(req.getSession().getAttribute("isLogged").toString()));
                     Cv cv = new Cv();
+                    cv.setName(name + "_" + usr.getEmail());
                     cv.setFirstName(firstName);
                     cv.setLastName(lastName);
                     cv.setMale(sex.equals("Muz") ? true : false);
@@ -204,52 +220,62 @@ public class CvNewServlet extends HttpServlet
                     
                     Map<String, String> langs = new TreeMap<>();
                     
-                    String[] language;
-                    for (int i = 0; i < languages.length; i++) 
+                    if (languages != null)
                     {
-                        if (languages[i].trim().equals(""))
+                        String[] language;
+                        for (int i = 0; i < languages.length; i++) 
                         {
-                            log.error("Wrong format of languages");
-                            req.setAttribute("languageError", "wrong format of languages");
-                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                            return;
-                        }
-                        try
-                        {
-                            language = languages[i].split(":", 2);
-                            if (language[0].trim().equals("") || language[1].trim().equals(""))
+                            if (languages[i].trim().equals(""))
                             {
                                 log.error("Wrong format of languages");
                                 req.setAttribute("languageError", "wrong format of languages");
                                 req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                                 return;
                             }
-                        } catch (IndexOutOfBoundsException e)
-                        {
-                            log.error("Wrong format of languages");
-                            req.setAttribute("languageError", "wrong format of languages");
-                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                            return;
+                            try
+                            {
+                                language = languages[i].split(":", 2);
+                                if (language[0].trim().equals("") || language[1].trim().equals(""))
+                                {
+                                    log.error("Wrong format of languages");
+                                    req.setAttribute("languageError", "wrong format of languages");
+                                    req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                                    return;
+                                }
+                            } catch (IndexOutOfBoundsException e)
+                            {
+                                log.error("Wrong format of languages");
+                                req.setAttribute("languageError", "wrong format of languages");
+                                req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                                return;
+                            }
+                            langs.put(language[0], language[1]);
                         }
-                        langs.put(language[0], language[1]);
                     }
                     
                     cv.setLanguages(langs);
                     
                     List<String> skills = new ArrayList<>();
-                    for (int i = 0; i < skill.length; i++)
+                    
+                    if (skill != null)
                     {
-                        if (skill[i].trim().equals(""))
+                        for (int i = 0; i < skill.length; i++)
                         {
-                            log.error("Wrong format of other");
-                            req.setAttribute("otherError", "wrong format of others");
-                            req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
-                            return;
+                            if (skill[i].trim().equals(""))
+                            {
+                                log.error("Wrong format of other");
+                                req.setAttribute("otherError", "wrong format of others");
+                                req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
+                                return;
+                            }
+                            skills.add(skill[i]);
                         }
-                        skills.add(skill[i]);
                     }
                     
                     cv.setSkills(skills);
+                    
+                    XMLWriter writer = new XMLWriter(Settings.getPathCV()+ name + "_" + usr.getEmail());
+                    writer.createCv(cv, usr);
                     
                 } catch (CvException e)
                 {
