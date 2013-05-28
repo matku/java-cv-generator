@@ -30,7 +30,7 @@
         
         <div class="span9">
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
-            <h3>Vytvorit nove CV</h3>
+            <h3>Upravit CV</h3>
             <br />
             <c:if test="${not empty success}">
                 <div class="alert alert-success">
@@ -44,7 +44,7 @@
                 <tr>
                     <td>Nazov CV:* </td>
                     <td>
-                        <input type="text" name="name" value="<c:out value='${param.name}'/>" required="true" />
+                        <input type="text" name="name" value="<c:out value='${name}'/>" required="true" />
                     </td>
                 <tr class="success">
                     <td>Osobne udaje </td>
@@ -64,26 +64,26 @@
                 </tr>
                 <tr>
                     <td>Meno:* </td>
-                    <td><input type="text" name="firstName" value="<c:out value='${param.firstName}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
+                    <td><input type="text" name="firstName" value="<c:out value='${firstName}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
                 </tr>
                 <tr>
                     <td>Priezvisko:* </td>
-                    <td><input type="text" name="surname" value="<c:out value='${param.surname}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
+                    <td><input type="text" name="surname" value="<c:out value='${surname}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
                 </tr>
                 <tr>
                     <td>Titul(y) pred menom: </td>
-                    <td><input type="text" name="titleBefore" value="<c:out value='${param.titleBefore}'/>" /></td>
+                    <td><input type="text" name="titleBefore" value="<c:out value='${titleBefore}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Titul(y) za menom: </td>
-                    <td><input type="text" name="titleAfter" value="<c:out value='${param.titleAfter}'/>" /></td>
+                    <td><input type="text" name="titleAfter" value="<c:out value='${titleAfter}'/>" /></td>
                 </tr>
                 <tr>
                     <td>Datum narodenia:* </td>
                     <td>
-                        <input type="text" name="birthdayDay" value="<c:out value='${param.birthdayDay}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|([1-2][0-9])|(3[0-1])"/>
-                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${param.birthdayMonth}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|(1[0-2])"/>
-                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${param.birthdayYear}'/>" style="width: 50px;" required="true" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/>
+                        <input type="text" name="birthdayDay" value="<c:out value='${birthdayDay}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|([1-2][0-9])|(3[0-1])"/>
+                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${birthdayMonth}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|(1[0-2])"/>
+                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${birthdayYear}'/>" style="width: 50px;" required="true" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/>
                     </td>
                 </tr>
                 <tr class="success">
@@ -92,15 +92,15 @@
                 </tr>
                 <tr>
                     <td>Ulica, cislo:* </td>
-                    <td><input type="text" name="address" value="<c:out value='${param.address}'/>" required="true" pattern="[A-Z]([a-z])*( ([0-9])+){0,1}"/></td>
+                    <td><input type="text" name="address" value="<c:out value='${address}'/>" required="true" pattern="[A-Z]([a-z])*( ([A-Z]|[a-z])([a-z])*)*( ([0-9])+){0,1}"/></td>
                 </tr>
                 <tr>
                     <td>PSC:* </td>
-                    <td><input type="text" name="psc" value="<c:out value='${param.psc}'/>" required="true" pattern="[0-9]{5}|([0-9]{3} [0-9]{2})"/></td>
+                    <td><input type="text" name="psc" value="<c:out value='${psc}'/>" required="true" pattern="[0-9]{5}|([0-9]{3} [0-9]{2})"/></td>
                 </tr>
                 <tr>
                     <td>Mesto:* </td>
-                    <td><input type="text" name="town" value="<c:out value='${param.town}'/>" required="true" pattern="[A-Z]([a-z ])*"/></td>
+                    <td><input type="text" name="town" value="<c:out value='${town}'/>" required="true" pattern="[A-Z]([a-z ])*"/></td>
                 </tr>
                 <tr>
                     <td>Stat:* </td>
@@ -114,11 +114,11 @@
                 </tr>
                 <tr>
                     <td>Telefon Domov: </td>
-                    <td><input type="text" name="homePhone" value="<c:out value='${param.homePhone}'/>" pattern="([0-9])*"/></td>
+                    <td><input type="text" name="homePhone" value="<c:out value='${homePhone}'/>" pattern="([0-9])*"/></td>
                 </tr>
                 <tr>
                     <td>Telefon Mobil: </td>
-                    <td><input type="text" name="mobilePhone" value="<c:out value='${param.mobilePhone}'/>" pattern="([0-9])*"/></td>
+                    <td><input type="text" name="mobilePhone" value="<c:out value='${mobilePhone}'/>" pattern="([0-9])*"/></td>
                 </tr>
                 <tr class="success">
                     <td>Vzdelanie</td>
@@ -141,37 +141,6 @@
                         </select>
                     </td>
                 </tr>
-                
-                <!-- LANGUAGES -->
-                <tr class="success">
-                    <td>Jazykove znalosti: </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Zadavajte v tvare(Jazyk: uroven)<br />oddelujte Enterom</td>
-                    <td><textarea name="languages"></textarea></td>
-                </tr>
-                <c:if test="${not empty languageError}">
-                <div class="alert alert-error">
-                    <c:out value="${languageError}"/>
-                </div>
-                </c:if> 
-                
-                <!-- OTHER -->
-                <tr class="success">
-                    <td>Ine znalosti</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Oddelujte ciarkou</td>
-                    <td><textarea name="other"></textarea></td>
-                </tr>
-                <c:if test="${not empty otherError}">
-                <div class="alert alert-error">
-                    <c:out value="${otherError}"/>
-                </div>
-                </c:if> 
-                
                 <!-- FINALLY END OF THIS SHIT :) -->
                 <tr>
                     <td></td>
