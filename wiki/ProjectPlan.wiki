@@ -18,7 +18,6 @@ TO DO:
 
  * change username, password
 
- * dorobit delete cv
  * dopisat about
  * zmenit getPath na adresar iny aby som upravil issue (zmenit resources path)
  * spravit prezentaciu
