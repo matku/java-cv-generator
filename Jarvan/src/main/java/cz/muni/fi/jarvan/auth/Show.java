@@ -36,10 +36,15 @@ public class Show {
                 for (Path entry: ds)
                 {
                     String tmpFileName = entry.toString();
-                    String newPath = tmpFileName.substring(0, tmpFileName.length() - 4) + ".xml";
-
-                    XMLParser tmpParser = new XMLParser(newPath);
-                    String tmpLang = tmpParser.getLang();
+                    
+                    String[] parts = tmpFileName.split("_");
+                    int counter  = 0;
+                    while(!parts[counter].equals("CZ") && !parts[counter].equals("SK") && !parts[counter].equals("EN"))
+                    {
+                        counter++;
+                    }
+                    
+                    String tmpLang = parts[counter];
 
                     // add to list FILENAME, LANG, FILEPATH
                     cvList.add("<tr><td>" + entry.getFileName().toString() + "</td>");
@@ -74,10 +79,15 @@ public class Show {
                 for (Path entry: ds)
                 {
                     String tmpFileName = entry.toString();
-                    String newPath = tmpFileName.substring(0, tmpFileName.length() - 4) + ".xml";
-
-                    XMLParser tmpParser = new XMLParser(newPath);
-                    String tmpLang = tmpParser.getLang();
+                    
+                    String[] parts = tmpFileName.split("_");
+                    int counter  = 0;
+                    while(!parts[counter].equals("CZ") && !parts[counter].equals("SK") && !parts[counter].equals("EN"))
+                    {
+                        counter++;
+                    }
+                    
+                    String tmpLang = parts[counter];
 
                     // add to list FILENAME, LANG, FILEPATH
                     cvList.add("<tr><td>" + entry.getFileName().toString() + "</td>");

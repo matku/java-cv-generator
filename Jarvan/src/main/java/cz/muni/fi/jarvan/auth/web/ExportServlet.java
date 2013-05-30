@@ -69,11 +69,13 @@ public class ExportServlet extends HttpServlet
         XMLWriter writer = new XMLWriter(xmlPath);
         writer.changeCvLanguage(lang);
         
+        String output = Settings.getPathCV() + cvName + "_" + lang.toUpperCase() + "_" + mail + ".xml";
+        
         CvManager create = new CvManager();
         
         try
         {
-            create.generate(xmlPath);
+            create.generate(xmlPath, output);
         }
         catch (XmlException e)
         {
