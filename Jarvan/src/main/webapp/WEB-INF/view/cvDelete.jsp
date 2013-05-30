@@ -32,6 +32,30 @@
             
             <h3>Zmazat CV</h3>
             <br />
+            
+            <c:if test="${not empty success}">
+                <div class="alert alert-success">
+                    <c:out value="${success}"/>
+                </div>
+            </c:if> 
+            
+            <form method="post" action="${pageContext.request.contextPath}/auth/cv/delete/process">
+            <table>
+            <tr>
+                <td>
+                    <select name="file" style="width: 250px;" required="true">
+                        <option value="">Select one ...</option>
+                        <c:forEach var="list" items="${list}">
+                            <option value="${list}">${list}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+                <td>
+                    <input type="submit" class="btn btn-success" value="Delete" />
+                </td>
+            </tr>
+            </table>
+            </form>
 
         </div><!--/span-->
       </div><!--/row-->   

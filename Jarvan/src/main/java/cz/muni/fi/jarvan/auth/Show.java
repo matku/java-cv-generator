@@ -63,7 +63,7 @@ public class Show {
     
     
     /***
-     * Method for selecting PDF FILENAME, LANGUAGE and DOWNLOAD LINK
+     * Method for selecting PDF FILENAME, LANGUAGE
      * @param mail
      * @return list of data
      */
@@ -94,6 +94,35 @@ public class Show {
                     cvList.add("<td>" + tmpLang + "</td>");
                     cvList.add("<td><a href=\"http://localhost:8084/JarvanUpdate/auth/cv/edit\">Upravit</td>");
                     cvList.add("<td><a href=\"http://localhost:8084/JarvanUpdate/auth/cv/delete\">Zmazat</td>");
+                }
+                
+                return cvList;
+                
+            } catch (IOException e) {
+                log.error("Files not found in cv " + e.getMessage());
+            }
+            
+            return cvList;
+    }
+    
+     /***
+     * Method for selecting PDF FILENAME
+     * @param mail
+     * @return list of data
+     */
+    public List<String> getPdfFiles(String mail)
+    {
+        String prefix = "{*" + mail + ".pdf}";
+            List<String> cvList = new ArrayList<>();
+
+            Path dir = Paths.get(Settings.getPathCV());
+            try 
+            {
+                DirectoryStream<Path> ds = Files.newDirectoryStream(dir, prefix);
+                for (Path entry: ds)
+                {
+                    // add to list FILENAME, LANG, FILEPATH
+                    cvList.add(entry.getFileName().toString());
                 }
                 
                 return cvList;
