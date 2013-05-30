@@ -95,7 +95,7 @@ public class CvManager {
 		}
 
 		// compile
-		String cmd = Settings.getPathCV() + "compileCv.sh " + outputFile;
+		String cmd = Settings.getPathCV() + "../compileCv.sh " + outputFile;
 		System.out.println("Executing: '" + cmd + "'");
 		if (!Settings.executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
