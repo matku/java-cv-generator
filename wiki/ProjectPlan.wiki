@@ -1,6 +1,6 @@
 = Project plan =
 
- * UML Model a Use case diagram       
+ * UML Model (after otahal's work)
  * Unit tests finish
  * refactoring
  * Documentation generate java doc add to wiki
@@ -19,3 +19,4 @@ TO DO:
  * change username, password
  * dopisat about
  * spravit prezentaciu
+ * add 404 from GitHub
