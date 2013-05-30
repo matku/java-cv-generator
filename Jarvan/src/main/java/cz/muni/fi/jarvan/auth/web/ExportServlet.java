@@ -69,6 +69,7 @@ public class ExportServlet extends HttpServlet
         }
         
         req.setAttribute("success", "Congratulation ! You have successfully exported your CV :) ");
+        //resp.sendRedirect(req.getContextPath() + ExportServlet.URL_MAPPING);
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
 }

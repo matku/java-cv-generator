@@ -97,11 +97,16 @@ public class CvManager {
 		System.out.println("Executing: '" + cmd + "'");
 		if (!Settings.executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
-		cmd = "rm -f " + outputFile.substring(0, outputFile.length() - 3) + "tex";
-		Settings.executeCmd(cmd);
-		cmd = cmd.substring(0, cmd.length() - 3) + "aux";
-		Settings.executeCmd(cmd);
-		cmd = cmd.substring(0, cmd.length() - 3) + "log";
-		Settings.executeCmd(cmd);
+		
+                cmd = "rm -f \"" + outputFile.substring(0, outputFile.length() - 3) + "tex\"";
+                Settings.executeCmd(cmd);
+                
+		cmd = cmd.substring(0, cmd.length() - 4) + "aux\"";
+                if (!Settings.executeCmd(cmd))
+                    System.out.println("aux error");
+		
+                cmd = cmd.substring(0, cmd.length() - 4) + "log\"";
+                if (!Settings.executeCmd(cmd))
+                    System.out.println("log error");
 	}
 }
