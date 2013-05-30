@@ -33,6 +33,13 @@
             <h3>Zobrazit CV</h3>
             <br />
 
+            <table class="table">
+                <tr class="info"><td>Nazov</td><td>Jazyk</td><td>Upravit</td><td>Zmazat</td>
+                <c:forEach var="list" items="${list}">
+                    ${list}
+                </c:forEach>
+            </table>
+            
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->

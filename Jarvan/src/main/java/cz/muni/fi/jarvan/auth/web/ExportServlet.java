@@ -3,6 +3,7 @@ package cz.muni.fi.jarvan.auth.web;
 
 
 import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.Show;
 import cz.muni.fi.jarvan.auth.XMLParser;
 import cz.muni.fi.jarvan.auth.XMLWriter;
 import cz.muni.fi.jarvan.auth.cv.CvManager;
@@ -44,7 +45,8 @@ public class ExportServlet extends HttpServlet
         XMLParser email = new XMLParser(Settings.getPathUser());
         String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
         
-        req.setAttribute("list", email.getList(mail));
+        Show show = new Show();
+        req.setAttribute("list", show.getList(mail));
         
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
@@ -63,7 +65,7 @@ public class ExportServlet extends HttpServlet
         String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
         String xmlPath = Settings.getPathCV() + cvName + "_" + mail + ".xml";
         
-        // change language
+        // change language in xml file
         XMLWriter writer = new XMLWriter(xmlPath);
         writer.changeCvLanguage(lang);
         
@@ -79,8 +81,8 @@ public class ExportServlet extends HttpServlet
         }
         
         //system ls
-        XMLParser cvList = new XMLParser(Settings.getPathCV());
-        req.setAttribute("list", cvList.getList(mail));
+        Show show = new Show();
+        req.setAttribute("list", show.getList(mail));
         
         req.setAttribute("success", "Congratulation ! You have successfully exported your CV :) ");
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
