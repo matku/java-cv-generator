@@ -65,15 +65,17 @@ public class CvManager {
 	/**
 	 * method to generate pdf from xml file
 	 * @param xml xml file name to convert
+	 * @param outputFile file name of output with extension
 	 * @throws XmlException when given xml doesnt validate against schema or something veery bad happens
 	 */
-	public void generate(String xml) throws XmlException {
+	public void generate(String xml, String outputFile) throws XmlException {
 		this.xml = xml;
 		if (!validate()) {
 			throw new XmlException("XML file is invalid.");
 		}
 
-		String outputFile = xml.substring(0, xml.length() - 4) + ".tex";
+		outputFile = outputFile.substring(0, outputFile.length() - 4) + ".tex";
+
 
 		// transform
 		TransformerFactory factory = TransformerFactory.newInstance();
@@ -93,20 +95,9 @@ public class CvManager {
 		}
 
 		// compile
-		String cmd = "pdflatex -output-directory " + Settings.getPathCV() + " " + outputFile;
+		String cmd = Settings.getPathCV() + "compileCv.sh " + outputFile;
 		System.out.println("Executing: '" + cmd + "'");
 		if (!Settings.executeCmd(cmd))
 			throw new XmlException("Unable to run compilation.");
-		
-                cmd = "rm -f \"" + outputFile.substring(0, outputFile.length() - 3) + "tex\"";
-                Settings.executeCmd(cmd);
-                
-		cmd = cmd.substring(0, cmd.length() - 4) + "aux\"";
-                if (!Settings.executeCmd(cmd))
-                    System.out.println("aux error");
-		
-                cmd = cmd.substring(0, cmd.length() - 4) + "log\"";
-                if (!Settings.executeCmd(cmd))
-                    System.out.println("log error");
 	}
 }
