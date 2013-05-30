@@ -34,7 +34,7 @@ public class Settings {
             counter++;
         }
 
-        newPath += "src/main/resources/config/users.xml";
+        newPath += "config/users.xml";
 
         return newPath;
     }
@@ -57,7 +57,7 @@ public class Settings {
             counter++;
         }
 
-        newPath += "src/main/resources/config/library.xml";
+        newPath += "config/library.xml";
 
         return newPath;
     }
@@ -80,7 +80,7 @@ public class Settings {
                    counter++;
            }
 
-           newPath += "src/main/resources/config/";
+           newPath += "config/";
 
            return newPath;
    }
@@ -103,7 +103,7 @@ public class Settings {
                    counter++;
            }
 
-           newPath += "src/main/resources/config/cv/";
+           newPath += "config/cv/";
 
            return newPath;
    }
