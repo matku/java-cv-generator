@@ -2,6 +2,10 @@ package cz.muni.fi.jarvan.auth;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -341,4 +345,57 @@ public class XMLParser {
         return false;
         
     }
-}
+    
+    /**
+     * Finds language of cv
+     * @return language 
+     */
+    public String getLang()
+    {
+        String lang;
+        
+        NodeList cv = doc.getElementsByTagName("cv");
+                
+        Element findLang = (Element) cv.item(0);
+        lang = (String) findLang.getAttribute("lang");       
+        
+        return lang;
+    }
+    
+    /***
+     * Method for selecting PDF FILENAME, LANGUAGE and DOWNLOAD LINK
+     * @param mail
+     * @return list of data
+     */
+    public List<String> getList(String mail)
+    {
+        String prefix = "{*" + mail + ".pdf}";
+            List<String> cvList = new ArrayList<>();
+
+            Path dir = Paths.get(Settings.getPathCV());
+            try 
+            {
+                DirectoryStream<Path> ds = Files.newDirectoryStream(dir, prefix);
+                for (Path entry: ds)
+                {
+                    String tmpFileName = entry.toString();
+                    String newPath = tmpFileName.substring(0, tmpFileName.length() - 4) + ".xml";
+
+                    XMLParser tmpParser = new XMLParser(newPath);
+                    String tmpLang = tmpParser.getLang();
+
+                    // add to list FILENAME, LANG, FILEPATH
+                    cvList.add("<tr><td>" + entry.getFileName().toString() + "</td>");
+                    cvList.add("<td>" + tmpLang + "</td>");
+                    cvList.add("<td><a href=file:///" + entry.toString() + " target=\"_blank\">"+ "Stiahnut" + "</a></td></tr>");
+                }
+                
+                return cvList;
+                
+            } catch (IOException e) {
+                log.error("Files not found in cv " + e.getMessage());
+            }
+            
+            return cvList;
+    }
+ }
