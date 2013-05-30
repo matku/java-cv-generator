@@ -71,9 +71,10 @@
             
             <table class="table">
                 <tr class="info"><td>Nazov</td><td>Jazyk</td><td>Stiahnut</td>
-                <tr><td>TEST</td><td>EN</td><td><a href="#">Stiahnut</a></td>
+                <c:forEach var="list" items="${list}">
+                    ${list}
+                </c:forEach>
             </table>
-            
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->

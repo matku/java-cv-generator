@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[LabelsAligned,NoDate]{currvita}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\begin{document}
+\renewcommand*{\cvheadingfont}{\huge\bfseries}
+\renewcommand*{\cvlistheadingfont}{\large\bfseries}
+\setlength{\cvlabelwidth}{41mm}
+
+	\begin{cv}{ A A}
+		\begin{cvlist}{}
+			\item[\hspace{3mm}Adresa:] A 5
+			\item[]A , Slovenská republika
+			\item[] 43895
+			\item[\hspace{3mm}Narodeniny:] 1.1.2000
+		\end{cvlist}
+
+		\begin{cvlist}
+		{
+			\tikz[]
+			{
+				\node[shape=rectangle, text width=4in, fill=red!26!green!39!blue!26, text=black, minimum width=4in]
+				{Vzdelanie};
+			}
+		}
+			\item[\hspace{3mm}Dosiahnuté vzdelanie:]Stredoškolské s maturitou
+		\end{cvlist}
+	\end{cv}
+\end{document}

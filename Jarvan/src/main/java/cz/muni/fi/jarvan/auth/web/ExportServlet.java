@@ -39,21 +39,31 @@ public class ExportServlet extends HttpServlet
         }
         XMLParser parser = new XMLParser(Settings.getPathLibrary());
         req.setAttribute("cvs", parser.getCvs(req.getSession().getAttribute("isLogged").toString()));
+        
+        //system ls
+        XMLParser email = new XMLParser(Settings.getPathUser());
+        String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
+        
+        req.setAttribute("list", email.getList(mail));
+        
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        XMLParser cvsParser = new XMLParser(Settings.getPathLibrary());
+        req.setAttribute("cvs", cvsParser.getCvs(req.getSession().getAttribute("isLogged").toString()));
+        
         req.setCharacterEncoding("utf-8");
         String cvName = req.getParameter("cvName");
         String lang = req.getParameter("lang");
         
-        XMLParser email = new XMLParser(Settings.getPathUser());
         
+        XMLParser email = new XMLParser(Settings.getPathUser());
         String mail = email.getEmail(req.getSession().getAttribute("isLogged").toString());
         String xmlPath = Settings.getPathCV() + cvName + "_" + mail + ".xml";
         
-        
+        // change language
         XMLWriter writer = new XMLWriter(xmlPath);
         writer.changeCvLanguage(lang);
         
@@ -68,8 +78,11 @@ public class ExportServlet extends HttpServlet
             log.error("Generate error " + e.getMessage());
         }
         
+        //system ls
+        XMLParser cvList = new XMLParser(Settings.getPathCV());
+        req.setAttribute("list", cvList.getList(mail));
+        
         req.setAttribute("success", "Congratulation ! You have successfully exported your CV :) ");
-        //resp.sendRedirect(req.getContextPath() + ExportServlet.URL_MAPPING);
         req.getRequestDispatcher(EXPORT_JSP).forward(req, resp);
     }
 }
