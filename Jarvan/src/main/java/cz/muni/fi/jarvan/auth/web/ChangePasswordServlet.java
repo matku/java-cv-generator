@@ -1,6 +1,9 @@
 
 package cz.muni.fi.jarvan.auth.web;
 
+import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.User;
+import cz.muni.fi.jarvan.auth.XMLWriter;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,5 +36,35 @@ public class ChangePasswordServlet extends HttpServlet
         }
         req.getRequestDispatcher(CHANGEPASSWORD_JSP).forward(req, resp);
     }
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String oldPassword = req.getParameter("oldPassword");
+        String newPassword = req.getParameter("newPassword");
+        String new2Password = req.getParameter("new2Password");
+        
+        if(!newPassword.equals(new2Password))
+        {
+            req.setAttribute("error", "Passwords doesn't match !");
+        }
+        else
+        {        
+                User tmpUser = new User();
+                tmpUser.setPassword(newPassword);
+                XMLWriter writer = new XMLWriter(Settings.getPathUser());
+                if(writer.changePassword(req.getSession().getAttribute("isLogged").toString(), oldPassword, newPassword) == 1)
+                {
+                    req.setAttribute("error", "Old password isn't correct");
+                }
+                else
+                {
+                    req.setAttribute("success", "Congratulation ! Your password has been chaged ! ");
+                }
+        }
+        
+        req.getRequestDispatcher(CHANGEPASSWORD_JSP).forward(req, resp);
+    }
+    
     
 }

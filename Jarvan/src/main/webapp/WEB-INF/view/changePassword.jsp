@@ -32,24 +32,39 @@
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
             <h3>Zmenit heslo</h3>
             <br />
+            
+            <c:if test="${not empty success}">
+                <div class="alert alert-success">
+                    <c:out value="${success}"/>
+                </div>
+            </c:if>
+            
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger">
+                    <c:out value="${error}"/>
+                </div>
+            </c:if>
+            
+            <form method="post" action="${pageContext.request.contextPath}/auth/changePassword/process">
             <table width="400">
                 <tr>
                     <td>Zadaj povodne heslo: </td>
-                    <td><input type="text" name="oldPassword" /></td>
+                    <td><input type="password" name="oldPassword" required="true" /></td>
                 </tr>
                 <tr>
                     <td>Zadaj nove heslo: </td>
-                    <td><input type="text" name="newPassword" /></td>
+                    <td><input type="password" name="newPassword" required="true" /></td>
                 </tr>
                 <tr>
                     <td>Zopakuj nove heslo: </td>
-                    <td><input type="text" name="new2Password" /></td>
+                    <td><input type="password" name="new2Password" required="true" /></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Zmenit" name="Change" class="btn btn-success"/></td>
                 </tr>
             </table>
+            </form>
         </div><!--/span-->
       </div><!--/row-->   
     </div><!--/.fluid-container-->

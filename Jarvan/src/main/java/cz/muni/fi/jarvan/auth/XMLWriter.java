@@ -105,10 +105,89 @@ public class XMLWriter {
         return true;
     }
     
-    public boolean changePassword(String username, String newPassword)
+    /***
+     * Changes user password
+     * @param oldPassword
+     * @param newPassword
+     * @return 0 correct changes
+     * @return 1 old password isn't correct
+     * @return -1 error writing in users.xml file
+     */
+    public int changePassword(String username, String oldPassword, String newPassword)
     {
         
-        return true;
+        try
+        {
+            NodeList users = doc.getElementsByTagName("user");
+            for (int i = 0; i < users.getLength(); i++) {
+                Element user = (Element) users.item(i);
+                if (user.getAttribute("id").equals(username))
+                {
+                    
+                    Element data = (Element) user.getChildNodes();
+                    String tmpPassword = User.md5(oldPassword);
+                    if(tmpPassword.equals(data.getElementsByTagName("password").item(0).getTextContent()))
+                    {
+                        data.getElementsByTagName("password").item(0).setTextContent(User.md5(newPassword));
+                        break;
+                    }
+                    else
+                    {
+                        return 1;
+                    }
+                }
+            }
+                    
+        } catch (DOMException ex)
+        {
+            log.error("Error: ", ex.getMessage());
+            return -1;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+            System.err.println("Should be serialized");
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return -1;
+        }        
+        
+        return 0;
+    }
+    
+    public boolean changeUsername(String oldUsername, String username)
+    {
+        
+        try
+        {
+            NodeList users = doc.getElementsByTagName("user");
+            for (int i = 0; i < users.getLength(); i++) {
+                Element user = (Element) users.item(i);
+                if (user.getAttribute("id").equals(oldUsername))
+                {
+                    user.setAttribute("id", username);
+                    Element data = (Element) user.getChildNodes();
+                    if(oldUsername.equals(data.getElementsByTagName("username").item(0).getTextContent()))
+                    {
+                        data.getElementsByTagName("username").item(0).setTextContent(username);
+                        break;
+                    }
+                }
+            }
+                    
+        } catch (DOMException ex)
+        {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+            System.err.println("Should be serialized");
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;       
     }
     
     public boolean createCv(Cv newCv, User user)
@@ -542,7 +621,6 @@ public class XMLWriter {
             return false;
         }
         
-        return true;
-        
+        return true;       
     }
 }
