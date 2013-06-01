@@ -39,13 +39,11 @@
                 </div>
             </c:if>   
             <h6>Policka oznacene * su povinne</h6>
-            <form method="post" action="${pageContext.request.contextPath}/auth/cv/create/new">
+            <form method="post" action="${pageContext.request.contextPath}/auth/cv/editCv/${cvName}/edit">
             <table class="table ">
                 <tr>
                     <td>Nazov CV:* </td>
-                    <td>
-                        <input type="text" name="name" value="<c:out value='${name}'/>" required="true" />
-                    </td>
+                    <td>${name}</td>
                 <tr class="success">
                     <td>Osobne udaje </td>
                     <td></td>
@@ -125,7 +123,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Najvyssie doasiahnute vzdelanie:* </td>
+                    <td>Najvyssie dosiahnute vzdelanie:* </td>
                     <td>
                         <select name="topEducation" required="true">
                             <option value=""></option>
@@ -141,10 +139,41 @@
                         </select>
                     </td>
                 </tr>
+                
+                <!-- LANGUAGES -->
+                <tr class="success">
+                    <td>Jazykove znalosti: </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Zadavajte v tvare(Jazyk: uroven)<br />oddelujte Enterom</td>
+                    <td><textarea name="languages">${languages}</textarea></td>
+                </tr>
+                <c:if test="${not empty languageError}">
+                <div class="alert alert-error">
+                    <c:out value="${languageError}"/>
+                </div>
+                </c:if>
+
+                <!-- OTHER -->
+                <tr class="success">
+                    <td>Ine znalosti</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Oddelujte ciarkou</td>
+                    <td><textarea name="other">${skills}</textarea></td>
+                </tr>
+                <c:if test="${not empty otherError}">
+                <div class="alert alert-error">
+                    <c:out value="${otherError}"/>
+                </div>
+                </c:if>
+                
                 <!-- FINALLY END OF THIS SHIT :) -->
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Vytvorit" name="Create" class="btn btn-success"/></td>
+                    <td><input type="submit" value="Upravit" name="Edit" class="btn btn-success"/></td>
                 </tr>
                 
             </table>

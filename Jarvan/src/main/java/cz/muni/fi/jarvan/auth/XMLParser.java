@@ -202,10 +202,16 @@ public class XMLParser {
                 switch(contact.getAttribute("type"))
                 {
                     case "home":
-                        cv.setHomeNumber(contact.getTextContent());
+                        if (!"".equals(contact.getTextContent()))
+                            cv.setHomeNumber(contact.getTextContent());
+                        else
+                            cv.setHomeNumber("");
                         break;
                     case "mobile":
-                        cv.setMobileNumber(contact.getTextContent());
+                        if (!"".equals(contact.getTextContent()))
+                            cv.setMobileNumber(contact.getTextContent());
+                        else
+                            cv.setMobileNumber("");
                         break;
                     case "email":
                         cv.setEmail(contact.getTextContent());
@@ -299,7 +305,7 @@ public class XMLParser {
 
             for (int i = 0; i < skills.getLength(); i++)
             {
-                Element skill = (Element) skills.item(0);
+                Element skill = (Element) skills.item(i);
                 others.add(skill.getTextContent());
             }
             cv.setSkills(others);

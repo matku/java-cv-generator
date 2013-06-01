@@ -94,7 +94,7 @@ public class Cv
     }
     
     public String getTitleAfter() {
-        return title;
+        return titleAfter;
     }
 
     public void setTitleAfter(String titleAfter) {
@@ -174,13 +174,20 @@ public class Cv
     }
 
     public void setHomeNumber(String homeNumber) throws CvException {
-        try
+        if ("".equals(homeNumber))
         {
-            Integer.parseInt(homeNumber);
-            this.homeNumber = homeNumber;
-        } catch (NumberFormatException e)
+            this.homeNumber = "";
+        }
+        else
         {
-            throw new CvException("wrong home number format");
+            try
+            {
+                Long.parseLong(homeNumber);
+                this.homeNumber = homeNumber;
+            } catch (NumberFormatException e)
+            {
+                throw new CvException("wrong home number format");
+            }
         }
     }
 
@@ -189,13 +196,20 @@ public class Cv
     }
 
     public void setMobileNumber(String mobileNumber) throws CvException {
-        try
+        if ("".equals(mobileNumber))
         {
-            Integer.parseInt(mobileNumber);
-            this.mobileNumber = mobileNumber;
-        } catch (NumberFormatException e)
+            this.mobileNumber = "";
+        }
+        else
         {
-            throw new CvException("wrong mobile number format");
+            try
+            {
+                Long.parseLong(mobileNumber);
+                this.mobileNumber = mobileNumber;
+            } catch (NumberFormatException e)
+            {
+                throw new CvException("wrong mobile number format");
+            }
         }
     }
 

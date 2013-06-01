@@ -89,7 +89,6 @@ public class XMLWriter {
 
             NodeList users = doc.getElementsByTagName("users");
             users.item(0).appendChild(user);
-            System.err.println("Should be registered.");
         } catch (DOMException ex)
         {
             log.error("Error: ", ex.getMessage());
@@ -97,7 +96,7 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
+            
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
@@ -145,7 +144,6 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return -1;
@@ -181,7 +179,6 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
@@ -223,7 +220,7 @@ public class XMLWriter {
             {
                 Element titleAfter = doc.createElement("title");
                 titleAfter.setAttribute("position", "after");
-                titleAfter.setTextContent(newCv.getTitle());
+                titleAfter.setTextContent(newCv.getTitleAfter());
                 name.appendChild(titleAfter);
             }
             Element first = doc.createElement("first");
@@ -330,7 +327,7 @@ public class XMLWriter {
                     school.appendChild(schoolName);
                     
                     Element schoolCity = doc.createElement("city");
-                    schoolName.setTextContent(ed.getCity());
+                    schoolCity.setTextContent(ed.getCity());
                     school.appendChild(schoolCity);
                     
                     if (ed.getFieldOfStudy() != null)
@@ -367,7 +364,7 @@ public class XMLWriter {
                     school.appendChild(schoolName);
                     
                     Element schoolCity = doc.createElement("city");
-                    schoolName.setTextContent(ed.getCity());
+                    schoolCity.setTextContent(ed.getCity());
                     school.appendChild(schoolCity);
                     
                     Element schoolSpecialization = doc.createElement("specialization");
@@ -460,7 +457,6 @@ public class XMLWriter {
         
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
@@ -512,7 +508,6 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
@@ -568,7 +563,7 @@ public class XMLWriter {
 
                  
                 // if user doesn't exists
-                if(userExists)
+                if(!userExists)
                 {
                     Element library = (Element) doc.getElementsByTagName("library").item(0);
 
@@ -590,7 +585,6 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
@@ -615,12 +609,202 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            System.err.println("Should be serialized");
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
         }
         
         return true;       
+    }
+    
+    public boolean editCv(Cv cv)
+    {
+        try
+        {
+            Element root = (Element) doc.getElementsByTagName("cv").item(0);
+            root.setAttribute("modified", new Date().toString());
+            
+            Element personalInfo = (Element) root.getElementsByTagName("personalInfo").item(0);
+            
+            Element name = (Element) personalInfo.getElementsByTagName("name").item(0);
+            
+            NodeList titles = name.getElementsByTagName("title");
+            Element titleBefore = null;
+            Element titleAfter = null;
+            if (titles.getLength() != 0)
+            {
+                for (int i = 0; i < titles.getLength(); i++)
+                {
+                    Element title = (Element) titles.item(i);
+                    if (title.getAttribute("position").equals("before"))
+                    {
+                        titleBefore = title;
+                    }
+                    else
+                    {
+                        titleAfter = title;
+                    }
+                }
+            }
+            if (titleBefore == null && !"".equals(cv.getTitle()))
+            {
+                titleBefore = doc.createElement("title");
+                titleBefore.setAttribute("position", "before");
+                titleBefore.setTextContent(cv.getTitle());
+                name.appendChild(titleBefore);
+            }
+            else
+            {
+                if (!"".equals(cv.getTitle()))
+                {
+                    titleBefore.setTextContent(cv.getTitle());
+                }
+                else
+                {
+                    personalInfo.removeChild(titleBefore);
+                }
+            }
+            if (titleAfter == null && !"".equals(cv.getTitleAfter()))
+            {
+                titleAfter = doc.createElement("title");
+                titleAfter.setAttribute("position", "after");
+                titleAfter.setTextContent(cv.getTitleAfter());
+                name.appendChild(titleBefore);
+            }
+            else
+            {
+                if (!"".equals(cv.getTitleAfter()))
+                {
+                    titleAfter.setTextContent(cv.getTitleAfter());
+                }
+                else
+                {
+                    personalInfo.removeChild(titleAfter);
+                }
+            }
+            
+            Element firstName = (Element) name.getElementsByTagName("first").item(0);
+            firstName.setTextContent(cv.getFirstName());
+            Element lastName = (Element) name.getElementsByTagName("last").item(0);
+            lastName.setTextContent(cv.getLastName());
+            
+            Element sex = (Element) personalInfo.getElementsByTagName("sex").item(0);
+            sex.setTextContent(cv.isMale() ? "male" : "female");
+            
+            Element birthday = (Element) personalInfo.getElementsByTagName("birthday").item(0);
+            Element day = (Element) birthday.getElementsByTagName("day").item(0);
+            Element month = (Element) birthday.getElementsByTagName("month").item(0);
+            Element year = (Element) birthday.getElementsByTagName("year").item(0);
+            
+            try
+            {
+                String[] birth = cv.getDateOfBirth().split("\\.", 3);
+                day.setTextContent(birth[0]);
+                month.setTextContent(birth[1]);
+                year.setTextContent(birth[2]);
+            } catch (IndexOutOfBoundsException e)
+            {
+                log.error("Wrong birth date format");
+                return false;
+            }
+            
+            Element address = (Element) personalInfo.getElementsByTagName("address").item(0);
+            
+            Element street = (Element) address.getElementsByTagName("street").item(0);
+            street.setTextContent(cv.getStreet());
+            Element city = (Element) address.getElementsByTagName("city").item(0);
+            city.setTextContent(cv.getCity());
+            Element country = (Element) address.getElementsByTagName("country").item(0);
+            country.setTextContent(cv.getState());
+            Element zip = (Element) address.getElementsByTagName("zip").item(0);
+            zip.setTextContent(cv.getZip());
+            
+            
+            NodeList contacts = personalInfo.getElementsByTagName("contact");
+            
+            Element home = null;
+            Element mobile = null;
+            
+            for (int i = 0; i < contacts.getLength(); i++)
+            {
+                Element contact = (Element) contacts.item(i);
+                switch(contact.getAttribute("type"))
+                {
+                    case "home":
+                        home = contact;
+                        break;
+                    case "mobile":
+                        mobile = contact;
+                        break;
+                    case "email":
+                        break;
+                }
+            }
+            
+            if (mobile == null && !"".equals(cv.getMobileNumber()))
+            {
+                mobile = doc.createElement("contact");
+                mobile.setAttribute("type", "mobile");
+                mobile.setTextContent(cv.getMobileNumber());
+                personalInfo.appendChild(mobile);
+            }
+            else
+            {
+                if (!"".equals(cv.getMobileNumber()))
+                {
+                    mobile.setTextContent(cv.getMobileNumber());
+                }
+                else
+                {
+                    personalInfo.removeChild(mobile);
+                }
+            }
+            
+            if (home == null && !"".equals(cv.getHomeNumber()))
+            {
+                home = doc.createElement("contact");
+                home.setAttribute("type", "home");
+                home.setTextContent(cv.getHomeNumber());
+                personalInfo.appendChild(home);
+            }
+            else
+            {
+                if (!"".equals(cv.getHomeNumber()))
+                {
+                    home.setTextContent(cv.getHomeNumber());
+                }
+                else
+                {
+                    personalInfo.removeChild(home);
+                }
+            }
+            
+            Element education = (Element) root.getElementsByTagName("education").item(0);
+            education.setAttribute("highest", cv.getHighestEducation());
+            
+            
+            
+            /*
+             * <language level="dobry">anglictina</language>
+    <language level="C1">nemcina</language>
+    <language level="matersky">slovencina</language>
+    <skill>skill1</skill>
+    <skill>skill2</skill>
+    <skill>skill3</skill>
+             */
+            
+        } catch (DOMException e)
+        {
+            log.error("Error: ", e.getMessage());
+            return false;
+        }
+        
+        try {
+            this.serializetoXML(xmlFile);
+        } catch (IOException | TransformerException ex) {
+            log.error("Error: ", ex.getMessage());
+            return false;
+        }
+        return true;
     }
 }

@@ -47,6 +47,11 @@ public class CvNewServlet extends HttpServlet
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("isLogged") == null)
+        {
+            resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
+            return ;
+        }
         req.setCharacterEncoding("utf-8");
         String action = req.getPathInfo();
         switch(action)
@@ -165,6 +170,7 @@ public class CvNewServlet extends HttpServlet
                     cv.setZip(psc);
                     cv.setCity(town);
                     cv.setState(state);
+                    cv.setEmail(usr.getEmail());
                     if (!homePhone.equals(""))
                     {
                         cv.setHomeNumber(homePhone);
@@ -256,7 +262,7 @@ public class CvNewServlet extends HttpServlet
                                 req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                                 return;
                             }
-                            langs.put(language[0], language[1]);
+                            langs.put(language[0].trim(), language[1].trim());
                         }
                     }
                     
@@ -275,7 +281,7 @@ public class CvNewServlet extends HttpServlet
                                 req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
                                 return;
                             }
-                            skills.add(skill[i]);
+                            skills.add(skill[i].trim());
                         }
                     }
                     
