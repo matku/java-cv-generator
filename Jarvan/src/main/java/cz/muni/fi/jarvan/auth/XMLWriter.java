@@ -31,18 +31,18 @@ public class XMLWriter {
     private File xmlFile;
     private Document doc;
     private final static Logger log = LoggerFactory.getLogger(XMLWriter.class);
-    
+
     /**
-     * Creates an XMLWriter object and sets File and Document, 
+     * Creates an XMLWriter object and sets File and Document,
      * creating them in the process if they don't exist
-     * @param path 
+     * @param path
      */
     public XMLWriter(String path)
     {
         try
         {
             this.xmlFile = new File(path);
-            
+
             if(!this.xmlFile.exists())
             {
                 log.info("File at location " + path + " doesn't exist. Creating ...");
@@ -50,7 +50,7 @@ public class XMLWriter {
                 try
                 {
                     this.xmlFile.createNewFile();
-                    FileWriter fw = new FileWriter(this.xmlFile);    
+                    FileWriter fw = new FileWriter(this.xmlFile);
                     BufferedWriter bw = new BufferedWriter(fw);
                     bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
                     bw.write("<cv>");
@@ -64,7 +64,7 @@ public class XMLWriter {
                 }
                 log.info("File created");
             }
-            
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             this.doc = dBuilder.parse(xmlFile);
@@ -75,7 +75,7 @@ public class XMLWriter {
             throw new RuntimeException("DOM error", error);
         }
     }
-    
+
     /**
      * Creates user if he doesn't exist - writes his info into the users.xml file
      * @param usr   User object to be saved to file
@@ -106,14 +106,14 @@ public class XMLWriter {
         }
         try {
             this.serializetoXML(xmlFile);
-            
+
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return false;
         }
         return true;
     }
-    
+
     /***
      * Changes user password
      * @param oldPassword
@@ -124,7 +124,7 @@ public class XMLWriter {
      */
     public int changePassword(String username, String oldPassword, String newPassword)
     {
-        
+
         try
         {
             NodeList users = doc.getElementsByTagName("user");
@@ -132,7 +132,7 @@ public class XMLWriter {
                 Element user = (Element) users.item(i);
                 if (user.getAttribute("id").equals(username))
                 {
-                    
+
                     Element data = (Element) user.getChildNodes();
                     String tmpPassword = User.md5(oldPassword);
                     if(tmpPassword.equals(data.getElementsByTagName("password").item(0).getTextContent()))
@@ -146,7 +146,7 @@ public class XMLWriter {
                     }
                 }
             }
-                    
+
         } catch (DOMException ex)
         {
             log.error("Error: ", ex.getMessage());
@@ -157,11 +157,11 @@ public class XMLWriter {
         } catch (IOException | TransformerException ex) {
             log.error("Error: ", ex.getMessage());
             return -1;
-        }        
-        
+        }
+
         return 0;
     }
-    
+
     /**
      * Method for changing username, checks if username already exists. If not system will
      * allow changing username otherwise it will print error message.
@@ -172,7 +172,7 @@ public class XMLWriter {
      */
     public boolean changeUsername(String oldUsername, String username)
     {
-        
+
         try
         {
             NodeList users = doc.getElementsByTagName("user");
@@ -189,7 +189,7 @@ public class XMLWriter {
                     }
                 }
             }
-                    
+
         } catch (DOMException ex)
         {
             log.error("Error: ", ex.getMessage());
@@ -201,12 +201,12 @@ public class XMLWriter {
             log.error("Error: ", ex.getMessage());
             return false;
         }
-        
-        return true;       
+
+        return true;
     }
-    
+
     /**
-     * Creates new CV in a blank XML file, 
+     * Creates new CV in a blank XML file,
      * does nothing if there already is a CV stored in the file
      * @param newCv     CV object for saving
      * @param user      User to which the new CV should belong
@@ -222,18 +222,18 @@ public class XMLWriter {
             }
             //CV
             Element cv = (Element) doc.getElementsByTagName("cv").item(0);
-            
+
             cv.setAttribute("user", user.getUsername());
             cv.setAttribute("created", new Date().toString());
             cv.setAttribute("modified", new Date().toString());
             cv.setAttribute("lang", "en");
-            
+
             //personal info:
             Element personalInfo = doc.createElement("personalInfo");
-            
+
             //name w/ titles
             Element name = doc.createElement("name");
-            
+
             if (!newCv.getTitle().equals(""))
             {
                 Element title = doc.createElement("title");
@@ -254,9 +254,9 @@ public class XMLWriter {
             Element last = doc.createElement("last");
             last.setTextContent(newCv.getLastName());
             name.appendChild(last);
-            
+
             personalInfo.appendChild(name);
-            
+
             //sex
             Element sex = doc.createElement("sex");
             if (newCv.isMale())
@@ -267,12 +267,12 @@ public class XMLWriter {
             {
                 sex.setTextContent("female");
             }
-            
+
             personalInfo.appendChild(sex);
-            
+
             //birthday
             Element birthday = doc.createElement("birthday");
-            
+
             try
             {
                 String[] birth = newCv.getDateOfBirth().split("\\.", 3);
@@ -290,12 +290,12 @@ public class XMLWriter {
                 log.error("Wrong birth date format");
                 return false;
             }
-            
+
             personalInfo.appendChild(birthday);
-            
+
             //address
             Element address = doc.createElement("address");
-            
+
             Element street = doc.createElement("street");
             street.setTextContent(newCv.getStreet());
             address.appendChild(street);
@@ -308,9 +308,9 @@ public class XMLWriter {
             Element zip = doc.createElement("zip");
             zip.setTextContent(newCv.getZip());
             address.appendChild(zip);
-            
+
             personalInfo.appendChild(address);
-            
+
             //contacts
             if (newCv.getHomeNumber() != null)
             {
@@ -319,7 +319,7 @@ public class XMLWriter {
                 contact.setAttribute("type", "home");
                 personalInfo.appendChild(contact);
             }
-            
+
             if (newCv.getMobileNumber() != null)
             {
                 Element contact = doc.createElement("contact");
@@ -327,92 +327,92 @@ public class XMLWriter {
                 contact.setAttribute("type", "mobile");
                 personalInfo.appendChild(contact);
             }
-            
+
             Element contact = doc.createElement("contact");
             contact.setTextContent(newCv.getEmail());
             contact.setAttribute("type", "email");
             personalInfo.appendChild(contact);
-            
+
             cv.appendChild(personalInfo);
             //end personal info
-            
+
             //education
             Element education = doc.createElement("education");
             education.setAttribute("highest", newCv.getHighestEducation());
-            
+
             if (newCv.getHighSchool() != null)
             {
                 for (Education ed : newCv.getHighSchool())
                 {
                     Element school = doc.createElement("school");
                     school.setAttribute("type", "high");
-                    
+
                     Element schoolStart = doc.createElement("start");
                     schoolStart.setTextContent(ed.getFrom());
                     school.appendChild(schoolStart);
-                    
+
                     if (ed.getTo() != null)
                     {
                         Element schoolEnd = doc.createElement("end");
                         schoolEnd.setTextContent(ed.getTo());
                         school.appendChild(schoolEnd);
                     }
-                    
+
                     Element schoolName = doc.createElement("name");
                     schoolName.setTextContent(ed.getName());
                     school.appendChild(schoolName);
-                    
+
                     Element schoolCity = doc.createElement("city");
                     schoolCity.setTextContent(ed.getCity());
                     school.appendChild(schoolCity);
-                    
+
                     if (ed.getFieldOfStudy() != null)
                     {
                         Element schoolSpecialization = doc.createElement("specialization");
                         schoolSpecialization.setTextContent(ed.getFieldOfStudy());
                         school.appendChild(schoolSpecialization);
                     }
-                    
+
                     education.appendChild(school);
                 }
             }
-            
+
             if (newCv.getUniversity() != null)
             {
                 for (Education ed : newCv.getUniversity())
                 {
                     Element school = doc.createElement("school");
                     school.setAttribute("type", "univ");
-                    
+
                     Element schoolStart = doc.createElement("start");
                     schoolStart.setTextContent(ed.getFrom());
                     school.appendChild(schoolStart);
-                    
+
                     if (ed.getTo() != null)
                     {
                         Element schoolEnd = doc.createElement("end");
                         schoolEnd.setTextContent(ed.getTo());
                         school.appendChild(schoolEnd);
                     }
-                    
+
                     Element schoolName = doc.createElement("name");
                     schoolName.setTextContent(ed.getName());
                     school.appendChild(schoolName);
-                    
+
                     Element schoolCity = doc.createElement("city");
                     schoolCity.setTextContent(ed.getCity());
                     school.appendChild(schoolCity);
-                    
+
                     Element schoolSpecialization = doc.createElement("specialization");
                     schoolSpecialization.setTextContent(ed.getFieldOfStudy());
                     school.appendChild(schoolSpecialization);
-                    
+
                     education.appendChild(school);
                 }
             }
             cv.appendChild(education);
             //end education
-            
+
             //work
             if (newCv.getWork() != null)
             {
@@ -420,33 +420,33 @@ public class XMLWriter {
                 for (Work w : newCv.getWork())
                 {
                     Element work = doc.createElement("work");
-                    
+
                     Element workStart = doc.createElement("start");
                     workStart.setTextContent(w.getFrom());
                     work.appendChild(workStart);
-                    
+
                     if (w.getTo() != null)
                     {
                         Element workEnd = doc.createElement("end");
                         workEnd.setTextContent(w.getTo());
                         work.appendChild(workEnd);
                     }
-                    
+
                     Element workEmployer = doc.createElement("employer");
                     workEmployer.setTextContent(w.getEmployer());
                     work.appendChild(workEmployer);
-                    
+
                     Element workPosition = doc.createElement("position");
                     workPosition.setTextContent(w.getPosition());
                     work.appendChild(workPosition);
-                    
+
                     jobs.appendChild(work);
                 }
-                
+
                 cv.appendChild(jobs);
             }
             //end work
-            
+
             //languages
             if (newCv.getLanguages() != null)
             {
@@ -455,12 +455,12 @@ public class XMLWriter {
                     Element language = doc.createElement("language");
                     language.setAttribute("level", e.getValue());
                     language.setTextContent(e.getKey());
-                    
+
                     cv.appendChild(language);
                 }
             }
             //end languages
-            
+
             //skills
             if (newCv.getSkills() != null)
             {
@@ -468,18 +468,18 @@ public class XMLWriter {
                 {
                     Element skill = doc.createElement("skill");
                     skill.setTextContent(sk);
-                    
+
                     cv.appendChild(skill);
                 }
             }
             //end skills
-            
+
         } catch (DOMException e)
         {
             log.error("Error: ", e.getMessage());
             return false;
         }
-        
+
         try {
             this.serializetoXML(xmlFile);
         } catch (IOException | TransformerException ex) {
@@ -488,13 +488,13 @@ public class XMLWriter {
         }
         return true;
     }
-    
+
     /**
      * Method for serializing Document into the XML file itself
      * @param output
      * @throws IOException
      * @throws TransformerConfigurationException
-     * @throws TransformerException 
+     * @throws TransformerException
      */
     public void serializetoXML(URI output)
             throws IOException, TransformerConfigurationException, TransformerException {
@@ -514,10 +514,10 @@ public class XMLWriter {
             TransformerException {
         serializetoXML(output.toURI());
     }
-    
-    
+
+
     /**
-    * Deletes user from users.xml 
+    * Deletes user from users.xml
     * @param username username
     */
     public boolean deleteUser(String username)
@@ -532,7 +532,7 @@ public class XMLWriter {
                     break;
                 }
             }
-                    
+
         } catch (DOMException ex)
         {
             log.error("Error: ", ex.getMessage());
@@ -546,12 +546,12 @@ public class XMLWriter {
         }
         return true;
     }
-    
+
     /**
      * Adds user or cv name to library.xml
      * @param username
-     * @param cvName 
-     * @return 
+     * @param cvName
+     * @return
      */
     public boolean addCvToXml(String username, String cvName)
     {
@@ -578,7 +578,7 @@ public class XMLWriter {
             else
             {
                 boolean userExists = false;
-                
+
                 // find user and add cv
                 for (int i = 0; i < cvUser.getLength(); i++)
                 {
@@ -593,7 +593,7 @@ public class XMLWriter {
                     }
                 }
 
-                 
+
                 // if user doesn't exists
                 if(!userExists)
                 {
@@ -621,19 +621,19 @@ public class XMLWriter {
             log.error("Error: ", ex.getMessage());
             return false;
         }
-        
+
         return true;
     }
-    
+
     public boolean changeCvLanguage(String lang)
     {
-        
+
         try
         {
             NodeList cv = doc.getElementsByTagName("cv");
             Element root = (Element) cv.item(0);
             root.setAttribute("lang", lang);
-                    
+
         } catch (DOMException ex)
         {
             log.error("Error: ", ex.getMessage());
@@ -645,10 +645,10 @@ public class XMLWriter {
             log.error("Error: ", ex.getMessage());
             return false;
         }
-        
-        return true;       
+
+        return true;
     }
-    
+
     /**
      * Edits majority of CV elements, except school, work, sex and birthday
      * @param cv    new CV with information to replace the old one
@@ -660,11 +660,11 @@ public class XMLWriter {
         {
             Element root = (Element) doc.getElementsByTagName("cv").item(0);
             root.setAttribute("modified", new Date().toString());
-            
+
             Element personalInfo = (Element) root.getElementsByTagName("personalInfo").item(0);
-            
+
             Element name = (Element) personalInfo.getElementsByTagName("name").item(0);
-            
+
             NodeList titles = name.getElementsByTagName("title");
             Element titleBefore = null;
             Element titleAfter = null;
@@ -693,13 +693,10 @@ public class XMLWriter {
             else
             {
                 if (!"".equals(cv.getTitle()))
-                {
                     titleBefore.setTextContent(cv.getTitle());
-                }
                 else
-                {
-                    personalInfo.removeChild(titleBefore);
-                }
+					if (titleBefore != null)
+						personalInfo.removeChild(titleBefore);
             }
             if (titleAfter == null && !"".equals(cv.getTitleAfter()))
             {
@@ -711,22 +708,19 @@ public class XMLWriter {
             else
             {
                 if (!"".equals(cv.getTitleAfter()))
-                {
                     titleAfter.setTextContent(cv.getTitleAfter());
-                }
                 else
-                {
-                    personalInfo.removeChild(titleAfter);
-                }
+					if (titleAfter != null)
+						personalInfo.removeChild(titleAfter);
             }
-            
+
             Element firstName = (Element) name.getElementsByTagName("first").item(0);
             firstName.setTextContent(cv.getFirstName());
             Element lastName = (Element) name.getElementsByTagName("last").item(0);
             lastName.setTextContent(cv.getLastName());
-            
+
             Element address = (Element) personalInfo.getElementsByTagName("address").item(0);
-            
+
             Element street = (Element) address.getElementsByTagName("street").item(0);
             street.setTextContent(cv.getStreet());
             Element city = (Element) address.getElementsByTagName("city").item(0);
@@ -735,13 +729,13 @@ public class XMLWriter {
             country.setTextContent(cv.getState());
             Element zip = (Element) address.getElementsByTagName("zip").item(0);
             zip.setTextContent(cv.getZip());
-            
-            
+
+
             NodeList contacts = personalInfo.getElementsByTagName("contact");
-            
+
             Element home = null;
             Element mobile = null;
-            
+
             for (int i = 0; i < contacts.getLength(); i++)
             {
                 Element contact = (Element) contacts.item(i);
@@ -757,7 +751,7 @@ public class XMLWriter {
                         break;
                 }
             }
-            
+
             if (mobile == null && !"".equals(cv.getMobileNumber()))
             {
                 mobile = doc.createElement("contact");
@@ -768,15 +762,12 @@ public class XMLWriter {
             else
             {
                 if (!"".equals(cv.getMobileNumber()))
-                {
                     mobile.setTextContent(cv.getMobileNumber());
-                }
                 else
-                {
-                    personalInfo.removeChild(mobile);
-                }
+					if (mobile != null)
+						personalInfo.removeChild(mobile);
             }
-            
+
             if (home == null && !"".equals(cv.getHomeNumber()))
             {
                 home = doc.createElement("contact");
@@ -787,59 +778,46 @@ public class XMLWriter {
             else
             {
                 if (!"".equals(cv.getHomeNumber()))
-                {
                     home.setTextContent(cv.getHomeNumber());
-                }
                 else
-                {
-                    personalInfo.removeChild(home);
-                }
+					if (home != null)
+						personalInfo.removeChild(home);
             }
-            
+
             Element education = (Element) root.getElementsByTagName("education").item(0);
             education.setAttribute("highest", cv.getHighestEducation());
-            
+
             NodeList languages = root.getElementsByTagName("language");
             int maxLang = languages.getLength();
-            System.err.println("maxL: " + maxLang);
             for (int i = 0; i < maxLang; i++)
-            {
-                System.err.println("removed " + languages.item(0).getTextContent());
                 root.removeChild(languages.item(0));
-            }
-            
+
             for (Map.Entry<String, String> e : cv.getLanguages().entrySet())
             {
                 Element language = doc.createElement("language");
                 language.setAttribute("level", e.getValue());
                 language.setTextContent(e.getKey());
                 root.appendChild(language);
-                System.err.println("added " + language.getTextContent());
             }
-            
+
             NodeList skills = root.getElementsByTagName("skill");
             int maxSkill = skills.getLength();
-            System.err.println("maxS: " + maxSkill);
             for (int i = 0; i < maxSkill; i++)
-            {
-                System.err.println("removed " + skills.item(0).getTextContent());
                 root.removeChild(skills.item(0));
-            }
-            
+
             for (String sk : cv.getSkills())
             {
                 Element skill = doc.createElement("skill");
                 skill.setTextContent(sk);
                 root.appendChild(skill);
-                System.err.println("added" + skill.getTextContent());
             }
-            
+
         } catch (DOMException e)
         {
             log.error("Error DOM: ", e.getMessage());
             return false;
         }
-        
+
         try {
             this.serializetoXML(xmlFile);
         } catch (IOException | TransformerException ex) {
@@ -848,7 +826,7 @@ public class XMLWriter {
         }
         return true;
     }
-    
+
     /**
      * Adds a new work to an existing CV, creating <jobs> element in the process
      * if it doesn't exist
@@ -870,9 +848,9 @@ public class XMLWriter {
             {
                 job = (Element) jobs.item(0);
             }
-            
+
             Element work = doc.createElement("work");
-            
+
             Element start = doc.createElement("start");
             start.setTextContent(newWork.getFrom());
             work.appendChild(start);
@@ -888,9 +866,9 @@ public class XMLWriter {
             Element position = doc.createElement("position");
             position.setTextContent(newWork.getPosition());
             work.appendChild(position);
-            
+
             job.appendChild(work);
-            
+
         } catch (DOMException e)
         {
             log.error("Error DOM: ", e.getMessage());
@@ -902,15 +880,15 @@ public class XMLWriter {
             log.error("Error serialize: ", ex.getMessage());
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Adds a new school to an existing CV
      * @param newEdu    new Education
-     * @param type  can have 2 values: [highSchool, university] 
-     *              determines the type of the school, 
+     * @param type  can have 2 values: [highSchool, university]
+     *              determines the type of the school,
      *              therefore the need for specialization element
      * @return  false on error, true on success
      */
@@ -919,7 +897,7 @@ public class XMLWriter {
         try
         {
             Element education = (Element) doc.getElementsByTagName("education").item(0);
-            
+
             Element school = doc.createElement("school");
             if (type.equals("highSchool"))
             {
@@ -933,7 +911,7 @@ public class XMLWriter {
             {
                 return false;
             }
-            
+
             Element start = doc.createElement("start");
             start.setTextContent(newEdu.getFrom());
             school.appendChild(start);
@@ -955,25 +933,25 @@ public class XMLWriter {
                 specialization.setTextContent(newEdu.getFieldOfStudy());
                 school.appendChild(specialization);
             }
-            
+
             education.appendChild(school);
-            
+
         } catch (DOMException e)
         {
             log.error("Error DOM: ", e.getMessage());
             return false;
         }
-        
+
         try {
             this.serializetoXML(xmlFile);
         } catch (IOException | TransformerException ex) {
             log.error("Error serialize: ", ex.getMessage());
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Edits an existing work in current CV
      * @param work  start and name of the employer of the work altered (as primary key)
@@ -1033,10 +1011,10 @@ public class XMLWriter {
             log.error("Error serialize: ", ex.getMessage());
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * Edits an existing school in current CV
      * @param school    start, name and city of the school altered (as primary key)
@@ -1116,7 +1094,7 @@ public class XMLWriter {
             log.error("Error serialize: ", ex.getMessage());
             return false;
         }
-        
+
         return true;
     }
 }
