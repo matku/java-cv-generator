@@ -48,17 +48,18 @@ public class RegistrationServlet extends HttpServlet
                 try
                 {
                     registration = new Registration(username, email, password);
+                    
+                    if(!registration.tryRegister())
+                    {
+                        log.error("Could not register. Given username or email already used.");
+                        req.setAttribute("error", "User or email already exists !!!");
+                        req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
+                        return;
+                    }
+                    
                 } catch (RuntimeException e)
                 {
                     resp.sendRedirect("/JarvanUpdate/404");
-                    return;
-                }
-                
-                if(!registration.tryRegister())
-                {
-                    log.error("Could not register. Given username or email already used.");
-                    req.setAttribute("error", "User or email already exists !!!");
-                    req.getRequestDispatcher(REGISTRATION_JSP).forward(req, resp);
                     return;
                 }
                 

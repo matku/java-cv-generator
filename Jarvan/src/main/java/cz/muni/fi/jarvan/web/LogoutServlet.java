@@ -20,12 +20,12 @@ public class LogoutServlet extends HttpServlet
     private static final String LOGOUT_JSP = "/WEB-INF/view/logout.jsp";
     public static final String URL_MAPPING = "/logout";
     
-    private final static Logger log = LoggerFactory.getLogger(AboutServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(LogoutServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("isLogged", null);
-        //resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
+        System.gc();
         req.getRequestDispatcher(LOGOUT_JSP).forward(req, resp);
     }
 }

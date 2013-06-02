@@ -20,7 +20,7 @@ public class E404Servlet extends HttpServlet
     private static final String ERROR_JSP = "/WEB-INF/view/404.jsp";
     public static final String URL_MAPPING = "/404";
     
-    private final static Logger log = LoggerFactory.getLogger(AboutServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(E404Servlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

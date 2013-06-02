@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import javax.servlet.http.HttpSession;
-//import sun.security.util.Password;
-
-
 
 @WebServlet(HomeServlet.URL_MAPPING + "/*")
 public class HomeServlet extends HttpServlet
