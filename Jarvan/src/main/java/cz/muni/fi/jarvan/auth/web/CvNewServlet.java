@@ -303,9 +303,10 @@ public class CvNewServlet extends HttpServlet
                     resp.sendRedirect("/JarvanUpdate/404");
                     return;
                 }
+                req.setAttribute("success", "Congratulation ! You have successfully created your CV :) ");
                 break;
         }
-        req.setAttribute("success", "Congratulation ! You have successfully created your CV :) ");
+        
         req.getRequestDispatcher(CVNEW_JSP).forward(req, resp);
     }
     

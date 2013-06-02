@@ -220,9 +220,10 @@ public class EditCvServlet extends HttpServlet
                     resp.sendRedirect("/JarvanUpdate/404");
                     return;
                 }
+                req.setAttribute("success", "Congratulation ! You have successfully edited your CV :) ");
                 break;
         }
-        req.setAttribute("success", "Congratulation ! You have successfully edited your CV :) ");
+        
         req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
     }
 }

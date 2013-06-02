@@ -95,9 +95,9 @@ public class NewWorkServlet extends HttpServlet
                     resp.sendRedirect("/JarvanUpdate/404");
                     return;
                 }
+                req.setAttribute("success", "Congratulation ! You have successfully added your work :) ");
                 break;
         }
-        req.setAttribute("success", "Congratulation ! You have successfully added your work :) ");
         req.getRequestDispatcher(NEWWORK_JSP).forward(req, resp);
     }
 }

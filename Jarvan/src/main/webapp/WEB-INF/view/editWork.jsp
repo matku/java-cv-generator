@@ -30,7 +30,7 @@
         
         <div class="span9">
             <!--<h4><a href="#">Dashboard</a> >> <a href="#"> Zmenit heslo</a></h4>-->
-            <h3>Upravit Prace</h3>
+            <h3>Upravit Pracu</h3>
             <br />
             <c:if test="${not empty success}">
                 <div class="alert alert-success">
@@ -38,7 +38,6 @@
                     <a href="${pageContext.request.contextPath}/dashboard">Vratit sa !!!</a>
                 </div>
             </c:if>   
-            <h6>Policka oznacene * su povinne</h6>
             <form method="post" action="${pageContext.request.contextPath}/auth/cv/editWork/${cvName}/edit">
             <table class="table ">
                 <tr>
@@ -57,20 +56,22 @@
                 </div>
                 </c:if>
                 <tr>
-                    <td>Od:* </td>
-                    <td><input type="text" name="workStart" value="<c:out value='${param.workStart}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
+                    <td>Work: </td>
+                    <td>
+                        <select name="work" required="true">
+                            <c:forEach var="work" items="${works}">
+                                <option value="${work}">${work}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Do: </td>
+                    <td>Pracoval Do: </td>
                     <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
                 </tr>
                 <tr>
-                    <td>Zamestnavatel:* </td>
-                    <td><input type="text" name="workEmployer" value="<c:out value='${param.workEmployer}'/>" /></td>
-                </tr>
-                <tr>
-                    <td>Pracovna pozicia:* </td>
-                    <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>" /></td>
+                    <td>Pracovna pozicia: </td>
+                    <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>"/></td>
                 </tr>
                 
                 <!-- FINALLY END OF THIS SHIT :) -->

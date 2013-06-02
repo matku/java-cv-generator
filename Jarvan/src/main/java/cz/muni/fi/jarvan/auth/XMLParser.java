@@ -82,6 +82,11 @@ public class XMLParser {
         return emailList;
     }
     
+    /**
+     * Finds and returns email for user, specified by username
+     * @param username
+     * @return  email of user if found, null when the user does not exist
+     */
     public String getEmail(String username)
     {
         NodeList users = doc.getElementsByTagName("user");
@@ -98,6 +103,11 @@ public class XMLParser {
         return null;
     }
     
+    /**
+     * Finds all CVs of a user specified by username
+     * @param username
+     * @return  names of all user's CVs, empty List when user has none
+     */
     public List<String> getCvs(String username)
     {
         NodeList users = doc.getElementsByTagName("user");
@@ -143,6 +153,11 @@ public class XMLParser {
         return cvList;
     }
     
+    /**
+     * Parses an XML with CV, storing it into Objects in local memory
+     * @return  CV object filled with information from XML file, 
+     *          null if there was an error in parsing
+     */
     public Cv getCv()
     {
         Cv cv = new Cv();
@@ -176,7 +191,7 @@ public class XMLParser {
             }
             
             Element sex = (Element) personalInfo.getElementsByTagName("sex").item(0);
-            cv.setMale(sex.equals("male") ? true : false);
+            cv.setMale(sex.getTextContent().equals("male") ? true : false);
             
             Element birthday = (Element) personalInfo.getElementsByTagName("birthday").item(0);
             Element day = (Element) birthday.getElementsByTagName("day").item(0);
@@ -313,6 +328,7 @@ public class XMLParser {
         } catch (CvException | DOMException e)
         {
             log.error("nejaka chyba pri parsovani XML" + e);
+            return null;
         }
         
         return cv;
@@ -364,4 +380,60 @@ public class XMLParser {
         return lang;
     }
     
+    /**
+     * Finds all jobs in current working XML and returns them all in format
+     *      "od (Start of job); (name of the employer)
+     * @return  all jobs from current XML
+     */
+    public List<String> getWorks()
+    {
+        List<String> jobs = new ArrayList<>();
+        
+        try
+        {
+            NodeList works = doc.getElementsByTagName("work");
+            
+            for (int i = 0; i < works.getLength(); i++)
+            {
+                Element work = (Element) works.item(i);
+                Element employer = (Element) work.getElementsByTagName("employer").item(0);
+                Element start = (Element) work.getElementsByTagName("start").item(0);
+                jobs.add("od " + start.getTextContent() + "; " + employer.getTextContent());
+            }
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e);
+        }
+        
+        return jobs;
+    }
+    
+    /**
+     * Finds all schools in current working XML and returns them all in format
+     *      "od (Start of school); (name of the school), (city of school)
+     * @return  all schools from current XML
+     */
+    public List<String> getSchools()
+    {
+        List<String> schools = new ArrayList<>();
+        
+        try
+        {
+            NodeList school = doc.getElementsByTagName("school");
+            
+            for (int i = 0; i < school.getLength(); i++)
+            {
+                Element sc = (Element) school.item(i);
+                Element name = (Element) sc.getElementsByTagName("name").item(0);
+                Element city = (Element) sc.getElementsByTagName("city").item(0);
+                Element start = (Element) sc.getElementsByTagName("start").item(0);
+                schools.add("od " + start.getTextContent() + "; " + name.getTextContent() + ", " + city.getTextContent());
+            }
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e);
+        }
+        
+        return schools;
+    }
  }

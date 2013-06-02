@@ -112,9 +112,10 @@ public class NewEducationServlet extends HttpServlet
                     resp.sendRedirect("/JarvanUpdate/404");
                     return;
                 }
+                req.setAttribute("success", "Congratulation ! You have successfully added your education :) ");
                 break;
         }
-        req.setAttribute("success", "Congratulation ! You have successfully added your education :) ");
+        
         req.getRequestDispatcher(NEWEDU_JSP).forward(req, resp);
     }
 }

@@ -32,6 +32,11 @@ public class XMLWriter {
     private Document doc;
     private final static Logger log = LoggerFactory.getLogger(User.class);
     
+    /**
+     * Creates an XMLWriter object and sets File and Document, 
+     * creating them in the process if they don't exist
+     * @param path 
+     */
     public XMLWriter(String path)
     {
         try
@@ -71,6 +76,11 @@ public class XMLWriter {
         }
     }
     
+    /**
+     * Creates user if he doesn't exist - writes his info into the users.xml file
+     * @param usr   User object to be saved to file
+     * @return  false on error, true on success
+     */
     public boolean createUser(User usr)
     {
         try
@@ -187,6 +197,13 @@ public class XMLWriter {
         return true;       
     }
     
+    /**
+     * Creates new CV in a blank XML file, 
+     * does nothing if there already is a CV stored in the file
+     * @param newCv     CV object for saving
+     * @param user      User to which the new CV should belong
+     * @return          false on error, true on success
+     */
     public boolean createCv(Cv newCv, User user)
     {
         try
@@ -464,6 +481,13 @@ public class XMLWriter {
         return true;
     }
     
+    /**
+     * Method for serializing Document into the XML file itself
+     * @param output
+     * @throws IOException
+     * @throws TransformerConfigurationException
+     * @throws TransformerException 
+     */
     public void serializetoXML(URI output)
             throws IOException, TransformerConfigurationException, TransformerException {
         // Vytvorime instanci tovarni tridy
@@ -617,6 +641,11 @@ public class XMLWriter {
         return true;       
     }
     
+    /**
+     * Edits majority of CV elements, except school, work, sex and birthday
+     * @param cv    new CV with information to replace the old one
+     * @return      false on error, true on success
+     */
     public boolean editCv(Cv cv)
     {
         try
@@ -812,6 +841,12 @@ public class XMLWriter {
         return true;
     }
     
+    /**
+     * Adds a new work to an existing CV, creating <jobs> element in the process
+     * if it doesn't exist
+     * @param newWork   work to be added
+     * @return  false on error, true on success
+     */
     public boolean addWork(Work newWork)
     {
         try
@@ -863,6 +898,14 @@ public class XMLWriter {
         return true;
     }
     
+    /**
+     * Adds a new school to an existing CV
+     * @param newEdu    new Education
+     * @param type  can have 2 values: [highSchool, university] 
+     *              determines the type of the school, 
+     *              therefore the need for specialization element
+     * @return  false on error, true on success
+     */
     public boolean addEducation(Education newEdu, String type)
     {
         try
@@ -874,9 +917,13 @@ public class XMLWriter {
             {
                 school.setAttribute("type", "high");
             }
-            else
+            else if (type.equals("university"))
             {
                 school.setAttribute("type", "univ");
+            }
+            else
+            {
+                return false;
             }
             
             Element start = doc.createElement("start");
@@ -909,6 +956,152 @@ public class XMLWriter {
             return false;
         }
         
+        try {
+            this.serializetoXML(xmlFile);
+        } catch (IOException | TransformerException ex) {
+            log.error("Error serialize: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Edits an existing work in current CV
+     * @param work  start and name of the employer of the work altered (as primary key)
+     * @param job   working position, can be empty string
+     * @param end   end year of work, can be empty string
+     * @return  false on error, true on success
+     */
+    public boolean editWork(String work, String job, String end)
+    {
+        boolean edited = false;
+        try
+        {
+            NodeList works = doc.getElementsByTagName("work");
+            String[] workSplit = work.split(";", 2);
+            for (int i = 0; i < works.getLength(); i++)
+            {
+                Element w = (Element) works.item(i);
+                Element employer = (Element) w.getElementsByTagName("employer").item(0);
+                if (workSplit[1].trim().equals(employer.getTextContent()))
+                {
+                    Element from = (Element) w.getElementsByTagName("start").item(0);
+                    if (workSplit[0].substring(2).trim().equals(from.getTextContent()))
+                    {
+                        if (!"".equals(end))
+                        {
+                            Element to = (Element) w.getElementsByTagName("end").item(0);
+                            if (to == null)
+                            {
+                                to = doc.createElement("end");
+                                w.appendChild(to);
+                            }
+                            to.setTextContent(end);
+                        }
+                        if (!"".equals(job))
+                        {
+                            Element position = (Element) w.getElementsByTagName("position").item(0);
+                            position.setTextContent(job);
+                        }
+                        edited = true;
+                        break;
+                    }
+                }
+
+            }
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e.getMessage());
+            return false;
+        }
+        if (!edited)
+        {
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+        } catch (IOException | TransformerException ex) {
+            log.error("Error serialize: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Edits an existing school in current CV
+     * @param school    start, name and city of the school altered (as primary key)
+     * @param field     new field of study at the school, can be empty string
+     * @param end       new end year of study, can be empty string
+     * @return  false on error, true on success
+     */
+    public boolean editSchool(String school, String field, String end)
+    {
+        boolean edited = false;
+        try
+        {
+            NodeList schools = doc.getElementsByTagName("school");
+            String[] schoolSplit = school.split("; ", 2);
+            String[] schoolSplit2 = schoolSplit[1].split(",");
+            String from = schoolSplit[0].substring(2).trim();
+            String city = schoolSplit2[schoolSplit2.length - 1].trim();
+            String name = "";
+            for (int i = 0; i < schoolSplit2.length - 1; i++)
+            {
+                if (!name.equals(""))
+                    name += ",";
+                name += schoolSplit2[i];
+            }
+            for (int i = 0; i < schools.getLength(); i++)
+            {
+                Element s = (Element) schools.item(i);
+                Element schoolName = (Element) s.getElementsByTagName("name").item(0);
+                if (name.equals(schoolName.getTextContent()))
+                {
+                    Element schoolCity = (Element) s.getElementsByTagName("city").item(0);
+                    if (city.equals(schoolCity.getTextContent()))
+                    {
+                        Element start = (Element) s.getElementsByTagName("start").item(0);
+                        if (from.equals(start.getTextContent()))
+                        {
+                            if (!"".equals(end))
+                            {
+                                Element to = (Element) s.getElementsByTagName("end").item(0);
+                                if (to == null)
+                                {
+                                    to = doc.createElement("end");
+                                    s.appendChild(to);
+                                }
+                                System.err.println(end);
+                                to.setTextContent(end);
+                            }
+                            if (!"".equals(field))
+                            {
+                                Element specialization = (Element) s.getElementsByTagName("specialization").item(0);
+                                if (specialization == null)
+                                {
+                                    specialization = doc.createElement("specialization");
+                                    s.appendChild(specialization);
+                                }
+                                specialization.setTextContent(field);
+                            }
+                            edited = true;
+                            break;
+                        }
+                    }
+                }
+
+            }
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e.getMessage());
+            return false;
+        }
+        if (!edited)
+        {
+            return false;
+        }
         try {
             this.serializetoXML(xmlFile);
         } catch (IOException | TransformerException ex) {

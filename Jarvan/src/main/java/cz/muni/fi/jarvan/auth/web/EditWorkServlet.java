@@ -1,6 +1,10 @@
 package cz.muni.fi.jarvan.auth.web;
 
 
+import cz.muni.fi.jarvan.auth.CvException;
+import cz.muni.fi.jarvan.auth.Settings;
+import cz.muni.fi.jarvan.auth.XMLParser;
+import cz.muni.fi.jarvan.auth.XMLWriter;
 import org.slf4j.Logger;
 import cz.muni.fi.jarvan.web.HomeServlet;
 import java.io.IOException;
@@ -31,6 +35,51 @@ public class EditWorkServlet extends HttpServlet
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
             return ;
         }
+        String fileName = req.getPathInfo().substring(1);
+        req.setAttribute("cvName", fileName);
+        XMLParser parser = new XMLParser(Settings.getPathCV() + fileName + ".xml");
+        req.setAttribute("works", parser.getWorks());
+        req.getRequestDispatcher(EDITWORK_JSP).forward(req, resp);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getSession().getAttribute("isLogged") == null)
+        {
+            resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
+            return ;
+        }
+        req.setCharacterEncoding("utf-8");
+        String action = req.getPathInfo().substring(req.getPathInfo().length()-5);
+        
+        switch(action)
+        {
+            case "/edit":
+                String workEnd = req.getParameter("workEnd");
+                String workJob = req.getParameter("workJob");
+                
+                String work = req.getParameter("work");
+                String name = req.getPathInfo().substring(1, req.getPathInfo().length()-5);
+                XMLWriter writer = new XMLWriter(Settings.getPathCV() + name + ".xml");
+                if (!writer.editWork(work, workJob, workEnd))
+                {
+                    req.setAttribute("otherError", "Error while creating work, please contact our administrators");
+                    req.getRequestDispatcher(EDITWORK_JSP).forward(req, resp);
+                    return;
+                }
+                
+                
+                
+                
+                req.setAttribute("success", "Congratulation ! You have successfully edited your work :) ");
+                break;
+        }
+        
+        
+        String fileName = req.getPathInfo().substring(1, req.getPathInfo().length()-5);
+        req.setAttribute("cvName", fileName);
+        XMLParser parser = new XMLParser(Settings.getPathCV() + fileName + ".xml");
+        req.setAttribute("works", parser.getWorks());
         req.getRequestDispatcher(EDITWORK_JSP).forward(req, resp);
     }
 }
