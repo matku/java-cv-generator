@@ -7,8 +7,6 @@ import javax.xml.validation.*;
 import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -18,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cz.muni.fi.jarvan.auth.Settings;
-import javax.sound.midi.Soundbank;
 
 /**
  * Validation, transformation, compilation
@@ -32,7 +29,8 @@ public class CvManager {
 	private String xslTransform;
 	private final static Logger log = LoggerFactory.getLogger(CvManager.class);
 
-	public CvManager() {
+	public CvManager() 
+        {    
 		this.xmlSchema = Settings.getPathManager() + "cvValidator.xsd";
 		this.xslTransform = Settings.getPathManager() + "xml2tex.xsl";
 	}

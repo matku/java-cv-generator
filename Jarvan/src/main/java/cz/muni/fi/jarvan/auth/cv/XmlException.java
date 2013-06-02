@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.muni.fi.jarvan.auth.cv;
 
 /**
- *
+ * XmlException class extend from exception
  * @author matuss
  */
 public class XmlException extends Throwable
