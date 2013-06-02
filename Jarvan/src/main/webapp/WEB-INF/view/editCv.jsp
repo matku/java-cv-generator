@@ -49,18 +49,6 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Pohlavie:* </td>
-                    <td>
-                        <input type="radio" value="Muz" name="sex" /> &nbsp;Muz<br />
-                        <input type="radio" value="Zena" name="sex"/>&nbsp;&nbsp;Zena
-                    </td>
-                    <c:if test="${not empty sexError}">
-                    <div class="alert alert-error">
-                        <c:out value="${sexError}"/>
-                    </div>
-                    </c:if>   
-                </tr>
-                <tr>
                     <td>Meno:* </td>
                     <td><input type="text" name="firstName" value="<c:out value='${firstName}'/>" required="true" pattern="[A-Z]([a-z])*"/></td>
                 </tr>
@@ -75,14 +63,6 @@
                 <tr>
                     <td>Titul(y) za menom: </td>
                     <td><input type="text" name="titleAfter" value="<c:out value='${titleAfter}'/>" /></td>
-                </tr>
-                <tr>
-                    <td>Datum narodenia:* </td>
-                    <td>
-                        <input type="text" name="birthdayDay" value="<c:out value='${birthdayDay}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|([1-2][0-9])|(3[0-1])"/>
-                        . &nbsp;<input type="text" name="birthdayMonth" value="<c:out value='${birthdayMonth}'/>" style="width: 30px;" required="true" pattern="[1-9]|(0[1-9])|(1[0-2])"/>
-                        . &nbsp;<input type="text" name="birthdayYear" value="<c:out value='${birthdayYear}'/>" style="width: 50px;" required="true" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/>
-                    </td>
                 </tr>
                 <tr class="success">
                     <td>Kontaktna adresa: </td>

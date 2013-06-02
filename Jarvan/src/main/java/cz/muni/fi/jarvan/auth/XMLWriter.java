@@ -322,6 +322,17 @@ public class XMLWriter {
                     Element school = doc.createElement("school");
                     school.setAttribute("type", "high");
                     
+                    Element schoolStart = doc.createElement("start");
+                    schoolStart.setTextContent(ed.getFrom());
+                    school.appendChild(schoolStart);
+                    
+                    if (ed.getTo() != null)
+                    {
+                        Element schoolEnd = doc.createElement("end");
+                        schoolEnd.setTextContent(ed.getTo());
+                        school.appendChild(schoolEnd);
+                    }
+                    
                     Element schoolName = doc.createElement("name");
                     schoolName.setTextContent(ed.getName());
                     school.appendChild(schoolName);
@@ -337,17 +348,6 @@ public class XMLWriter {
                         school.appendChild(schoolSpecialization);
                     }
                     
-                    Element schoolStart = doc.createElement("start");
-                    schoolStart.setTextContent(ed.getFrom());
-                    school.appendChild(schoolStart);
-                    
-                    if (ed.getTo() != null)
-                    {
-                        Element schoolEnd = doc.createElement("end");
-                        schoolEnd.setTextContent(ed.getTo());
-                        school.appendChild(schoolEnd);
-                    }
-                    
                     education.appendChild(school);
                 }
             }
@@ -358,6 +358,17 @@ public class XMLWriter {
                 {
                     Element school = doc.createElement("school");
                     school.setAttribute("type", "univ");
+                    
+                    Element schoolStart = doc.createElement("start");
+                    schoolStart.setTextContent(ed.getFrom());
+                    school.appendChild(schoolStart);
+                    
+                    if (ed.getTo() != null)
+                    {
+                        Element schoolEnd = doc.createElement("end");
+                        schoolEnd.setTextContent(ed.getTo());
+                        school.appendChild(schoolEnd);
+                    }
                     
                     Element schoolName = doc.createElement("name");
                     schoolName.setTextContent(ed.getName());
@@ -370,17 +381,6 @@ public class XMLWriter {
                     Element schoolSpecialization = doc.createElement("specialization");
                     schoolSpecialization.setTextContent(ed.getFieldOfStudy());
                     school.appendChild(schoolSpecialization);
-                    
-                    Element schoolStart = doc.createElement("start");
-                    schoolStart.setTextContent(ed.getFrom());
-                    school.appendChild(schoolStart);
-                    
-                    if (ed.getTo() != null)
-                    {
-                        Element schoolEnd = doc.createElement("end");
-                        schoolEnd.setTextContent(ed.getTo());
-                        school.appendChild(schoolEnd);
-                    }
                     
                     education.appendChild(school);
                 }
@@ -688,26 +688,6 @@ public class XMLWriter {
             Element lastName = (Element) name.getElementsByTagName("last").item(0);
             lastName.setTextContent(cv.getLastName());
             
-            Element sex = (Element) personalInfo.getElementsByTagName("sex").item(0);
-            sex.setTextContent(cv.isMale() ? "male" : "female");
-            
-            Element birthday = (Element) personalInfo.getElementsByTagName("birthday").item(0);
-            Element day = (Element) birthday.getElementsByTagName("day").item(0);
-            Element month = (Element) birthday.getElementsByTagName("month").item(0);
-            Element year = (Element) birthday.getElementsByTagName("year").item(0);
-            
-            try
-            {
-                String[] birth = cv.getDateOfBirth().split("\\.", 3);
-                day.setTextContent(birth[0]);
-                month.setTextContent(birth[1]);
-                year.setTextContent(birth[2]);
-            } catch (IndexOutOfBoundsException e)
-            {
-                log.error("Wrong birth date format");
-                return false;
-            }
-            
             Element address = (Element) personalInfo.getElementsByTagName("address").item(0);
             
             Element street = (Element) address.getElementsByTagName("street").item(0);
@@ -782,29 +762,160 @@ public class XMLWriter {
             Element education = (Element) root.getElementsByTagName("education").item(0);
             education.setAttribute("highest", cv.getHighestEducation());
             
+            NodeList languages = root.getElementsByTagName("language");
+            int maxLang = languages.getLength();
+            System.err.println("maxL: " + maxLang);
+            for (int i = 0; i < maxLang; i++)
+            {
+                System.err.println("removed " + languages.item(0).getTextContent());
+                root.removeChild(languages.item(0));
+            }
             
+            for (Map.Entry<String, String> e : cv.getLanguages().entrySet())
+            {
+                Element language = doc.createElement("language");
+                language.setAttribute("level", e.getValue());
+                language.setTextContent(e.getKey());
+                root.appendChild(language);
+                System.err.println("added " + language.getTextContent());
+            }
             
-            /*
-             * <language level="dobry">anglictina</language>
-    <language level="C1">nemcina</language>
-    <language level="matersky">slovencina</language>
-    <skill>skill1</skill>
-    <skill>skill2</skill>
-    <skill>skill3</skill>
-             */
+            NodeList skills = root.getElementsByTagName("skill");
+            int maxSkill = skills.getLength();
+            System.err.println("maxS: " + maxSkill);
+            for (int i = 0; i < maxSkill; i++)
+            {
+                System.err.println("removed " + skills.item(0).getTextContent());
+                root.removeChild(skills.item(0));
+            }
+            
+            for (String sk : cv.getSkills())
+            {
+                Element skill = doc.createElement("skill");
+                skill.setTextContent(sk);
+                root.appendChild(skill);
+                System.err.println("added" + skill.getTextContent());
+            }
             
         } catch (DOMException e)
         {
-            log.error("Error: ", e.getMessage());
+            log.error("Error DOM: ", e.getMessage());
             return false;
         }
         
         try {
             this.serializetoXML(xmlFile);
         } catch (IOException | TransformerException ex) {
-            log.error("Error: ", ex.getMessage());
+            log.error("Error serialize: ", ex.getMessage());
             return false;
         }
+        return true;
+    }
+    
+    public boolean addWork(Work newWork)
+    {
+        try
+        {
+            NodeList jobs = doc.getElementsByTagName("jobs");
+            Element job;
+            if (jobs.getLength() == 0)
+            {
+                job = doc.createElement("jobs");
+                doc.getElementsByTagName("cv").item(0).appendChild(job);
+            }
+            else
+            {
+                job = (Element) jobs.item(0);
+            }
+            
+            Element work = doc.createElement("work");
+            
+            Element start = doc.createElement("start");
+            start.setTextContent(newWork.getFrom());
+            work.appendChild(start);
+            if (newWork.getTo() != null)
+            {
+                Element end = doc.createElement("end");
+                end.setTextContent(newWork.getTo());
+                work.appendChild(end);
+            }
+            Element employer = doc.createElement("employer");
+            employer.setTextContent(newWork.getEmployer());
+            work.appendChild(employer);
+            Element position = doc.createElement("position");
+            position.setTextContent(newWork.getPosition());
+            work.appendChild(position);
+            
+            job.appendChild(work);
+            
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e.getMessage());
+            return false;
+        }
+        try {
+            this.serializetoXML(xmlFile);
+        } catch (IOException | TransformerException ex) {
+            log.error("Error serialize: ", ex.getMessage());
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean addEducation(Education newEdu, String type)
+    {
+        try
+        {
+            Element education = (Element) doc.getElementsByTagName("education").item(0);
+            
+            Element school = doc.createElement("school");
+            if (type.equals("highSchool"))
+            {
+                school.setAttribute("type", "high");
+            }
+            else
+            {
+                school.setAttribute("type", "univ");
+            }
+            
+            Element start = doc.createElement("start");
+            start.setTextContent(newEdu.getFrom());
+            school.appendChild(start);
+            if (newEdu.getTo() != null)
+            {
+                Element end = doc.createElement("end");
+                end.setTextContent(newEdu.getTo());
+                school.appendChild(end);
+            }
+            Element name = doc.createElement("name");
+            name.setTextContent(newEdu.getName());
+            school.appendChild(name);
+            Element city = doc.createElement("city");
+            city.setTextContent(newEdu.getCity());
+            school.appendChild(city);
+            if (newEdu.getFieldOfStudy() != null)
+            {
+                Element specialization = doc.createElement("specialization");
+                specialization.setTextContent(newEdu.getFieldOfStudy());
+                school.appendChild(specialization);
+            }
+            
+            education.appendChild(school);
+            
+        } catch (DOMException e)
+        {
+            log.error("Error DOM: ", e.getMessage());
+            return false;
+        }
+        
+        try {
+            this.serializetoXML(xmlFile);
+        } catch (IOException | TransformerException ex) {
+            log.error("Error serialize: ", ex.getMessage());
+            return false;
+        }
+        
         return true;
     }
 }

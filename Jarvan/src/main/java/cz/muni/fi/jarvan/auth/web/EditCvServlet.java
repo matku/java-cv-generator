@@ -44,7 +44,7 @@ public class EditCvServlet extends HttpServlet
         XMLParser parser = new XMLParser(Settings.getPathCV() + req.getPathInfo().substring(1) + ".xml");
         Cv cv = parser.getCv();
         String fileName = req.getPathInfo().substring(1);
-        req.setAttribute("cvName", req.getPathInfo().substring(1));
+        req.setAttribute("cvName", fileName);
         List<String> names = new XMLParser(Settings.getPathLibrary()).getCvs(req.getSession().getAttribute("isLogged").toString());
         
         for (String name : names)
@@ -60,10 +60,6 @@ public class EditCvServlet extends HttpServlet
         req.setAttribute("surname", cv.getLastName());
         req.setAttribute("titleBefore", cv.getTitle());
         req.setAttribute("titleAfter", cv.getTitleAfter());
-        String[] birthday = cv.getDateOfBirth().split("\\.");
-        req.setAttribute("birthdayDay", birthday[0]);
-        req.setAttribute("birthdayMonth", birthday[1]);
-        req.setAttribute("birthdayYear", birthday[2]);
         req.setAttribute("address", cv.getStreet());
         req.setAttribute("psc", cv.getZip());
         req.setAttribute("town", cv.getCity());
@@ -109,21 +105,10 @@ public class EditCvServlet extends HttpServlet
         {
             case "/edit":
                 //personal info
-                String sex = req.getParameter("sex");
-                if (sex == null)
-                {
-                    log.error("Sex not selected.");
-                    req.setAttribute("sexError", "Sex is required");
-                    req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
-                    return;
-                }
                 String firstName = req.getParameter("firstName");
                 String lastName = req.getParameter("surname");
                 String titleBefore = req.getParameter("titleBefore");
                 String titleAfter = req.getParameter("titleAfter");
-                String birthdayDay = req.getParameter("birthdayDay");
-                String birthdayMonth = req.getParameter("birthdayMonth");
-                String birthdayYear = req.getParameter("birthdayYear");
                 //kontaktna adresa
                 String address = req.getParameter("address");
                 String psc = req.getParameter("psc");
@@ -152,10 +137,8 @@ public class EditCvServlet extends HttpServlet
                     Cv cv = new Cv();
                     cv.setFirstName(firstName);
                     cv.setLastName(lastName);
-                    cv.setMale(sex.equals("Muz") ? true : false);
                     cv.setTitle(titleBefore);
                     cv.setTitleAfter(titleAfter);
-                    cv.setDateOfBirth(birthdayDay + "." + birthdayMonth + "." + birthdayYear);
                     cv.setStreet(address);
                     cv.setZip(psc);
                     cv.setCity(town);
