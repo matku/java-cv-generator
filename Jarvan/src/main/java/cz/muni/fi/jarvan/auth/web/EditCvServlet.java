@@ -30,9 +30,9 @@ public class EditCvServlet extends HttpServlet
 {
     private static final String EDITCV_JSP = "/WEB-INF/view/editCv.jsp";
     public static final String URL_MAPPING = "/auth/cv/editCv";
-    
+
     private final static Logger log = LoggerFactory.getLogger(EditCvServlet.class);
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession().getAttribute("isLogged") == null)
@@ -40,13 +40,13 @@ public class EditCvServlet extends HttpServlet
             resp.sendRedirect(req.getContextPath() + HomeServlet.URL_MAPPING);
             return;
         }
-        
+
         XMLParser parser = new XMLParser(Settings.getPathCV() + req.getPathInfo().substring(1) + ".xml");
         Cv cv = parser.getCv();
         String fileName = req.getPathInfo().substring(1);
         req.setAttribute("cvName", fileName);
         List<String> names = new XMLParser(Settings.getPathLibrary()).getCvs(req.getSession().getAttribute("isLogged").toString());
-        
+
         for (String name : names)
         {
             if (fileName.equals(name + "_" + new XMLParser(Settings.getPathUser()).getEmail(req.getSession().getAttribute("isLogged").toString())))
@@ -54,7 +54,7 @@ public class EditCvServlet extends HttpServlet
                 cv.setName(name);
             }
         }
-        
+
         req.setAttribute("name", cv.getName());
         req.setAttribute("firstName", cv.getFirstName());
         req.setAttribute("surname", cv.getLastName());
@@ -65,7 +65,7 @@ public class EditCvServlet extends HttpServlet
         req.setAttribute("town", cv.getCity());
         req.setAttribute("homePhone", cv.getHomeNumber());
         req.setAttribute("mobilePhone", cv.getMobileNumber());
-        
+
         String langs = "";
         if (cv.getLanguages() != null && !cv.getLanguages().isEmpty())
         {
@@ -77,7 +77,7 @@ public class EditCvServlet extends HttpServlet
             }
         }
         req.setAttribute("languages", langs);
-        
+
         String skills = "";
         if (cv.getSkills() != null && !cv.getSkills().isEmpty())
         {
@@ -91,7 +91,7 @@ public class EditCvServlet extends HttpServlet
         req.setAttribute("skills", skills);
         req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession().getAttribute("isLogged") == null)
@@ -118,7 +118,7 @@ public class EditCvServlet extends HttpServlet
                 String mobilePhone = req.getParameter("mobilePhone");
                 //vzdelanie
                 String topEducation = req.getParameter("topEducation");
-                
+
                 //languages
                 String[] languages = null;
                 if (!req.getParameter("languages").equals(""))
@@ -131,7 +131,7 @@ public class EditCvServlet extends HttpServlet
                 {
                     skill = req.getParameter("other").split(",");
                 }
-                
+
                 try
                 {
                     Cv cv = new Cv();
@@ -146,13 +146,13 @@ public class EditCvServlet extends HttpServlet
                     cv.setHomeNumber(homePhone);
                     cv.setMobileNumber(mobilePhone);
                     cv.setHighestEducation(topEducation);
-                    
+
                     Map<String, String> langs = new TreeMap<>();
-                    
+
                     if (languages != null)
                     {
                         String[] language;
-                        for (int i = 0; i < languages.length; i++) 
+                        for (int i = 0; i < languages.length; i++)
                         {
                             if (languages[i].trim().equals(""))
                             {
@@ -181,11 +181,11 @@ public class EditCvServlet extends HttpServlet
                             langs.put(language[0].trim(), language[1].trim());
                         }
                     }
-                    
+
                     cv.setLanguages(langs);
-                    
+
                     List<String> skills = new ArrayList<>();
-                    
+
                     if (skill != null)
                     {
                         for (int i = 0; i < skill.length; i++)
@@ -200,11 +200,11 @@ public class EditCvServlet extends HttpServlet
                             skills.add(skill[i].trim());
                         }
                     }
-                    
+
                     cv.setSkills(skills);
-                    
+
                     String name = req.getPathInfo().substring(1, req.getPathInfo().length()-5);
-                    
+
                     XMLWriter writer = new XMLWriter(Settings.getPathCV() + name + ".xml");
                     if (!writer.editCv(cv))
                     {
@@ -213,7 +213,7 @@ public class EditCvServlet extends HttpServlet
                         req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
                         return;
                     }
-                    
+
                 } catch (CvException e)
                 {
                     log.error("could not create CV", e);
@@ -223,7 +223,7 @@ public class EditCvServlet extends HttpServlet
                 req.setAttribute("success", "Congratulation ! You have successfully edited your CV :) ");
                 break;
         }
-        
+
         req.getRequestDispatcher(EDITCV_JSP).forward(req, resp);
     }
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.035" errors="0" skipped="0" tests="39" name="cz.muni.fi.jarvan.auth.CvTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/opt/oracle-jdk-bin-1.7.0.21/jre/lib/amd64"/>
+    <property name="java.vm.version" value="23.21-b01"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/home/matuss/NetBeansProjects/Jarvan"/>
+    <property name="java.runtime.version" value="1.7.0_21-b11"/>
+    <property name="netbeans.deploy" value="true"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/opt/oracle-jdk-bin-1.7.0.21/jre/lib/endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Linux"/>
+    <property name="classworlds.conf" value="/home/matuss/netbeans-7.3/java/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/lib64/jvm/oracle-jdk-bin-1.7/jre/lib/amd64:/usr/lib64/jvm/oracle-jdk-bin-1.7/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="3.9.0-sabayon"/>
+    <property name="user.home" value="/home/matuss"/>
+    <property name="user.timezone" value="Europe/Prague"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="user.name" value="matuss"/>
+    <property name="java.class.path" value="/home/matuss/netbeans-7.3/java/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/opt/oracle-jdk-bin-1.7.0.21/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dnetbeans.deploy=true package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.7.0_21"/>
+    <property name="java.ext.dirs" value="/opt/oracle-jdk-bin-1.7.0.21/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/opt/oracle-jdk-bin-1.7.0.21/jre/lib/resources.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/rt.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/sunrsasign.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/jsse.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/jce.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/charsets.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/lib/jfr.jar:/opt/oracle-jdk-bin-1.7.0.21/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/home/matuss/netbeans-7.3/java/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExSetFirstName1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExSetFirstName2"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExSetFirstName3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetFirstName4"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExcSetLastName"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExcSetLastName1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExcSetLastName2"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExcSetLastName3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetLastName4"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth2"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth4"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth5"/>
+  <testcase time="0.007" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetDateOfBirth6"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetHomeNumber"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetHomeNumber1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetMobileNumber"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testExSetFirstName"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetMobileNumber1"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet1"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet2"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet4"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet5"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetCity"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetCity1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetCity2"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetCity3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetCity4"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip1"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip2"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip3"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip4"/>
+  <testcase time="0" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetZip5"/>
+  <testcase time="0.001" classname="cz.muni.fi.jarvan.auth.CvTest" name="testSetStreet6"/>
+</testsuite>
