@@ -67,11 +67,11 @@
                 </tr>
                 <tr>
                     <td>Pracoval Do: </td>
-                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
+                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100" required="true" /></td>
                 </tr>
                 <tr>
                     <td>Pracovna pozicia: </td>
-                    <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>"/></td>
+                    <td><input type="text" name="workJob" value="<c:out value='${param.workJob}'/>" required="true" /></td>
                 </tr>
                 
                 <!-- FINALLY END OF THIS SHIT :) -->

@@ -62,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>Do: </td>
-                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
+                    <td><input type="text" name="workEnd" value="<c:out value='${param.workEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100" required="true"/></td>
                 </tr>
                 <tr>
                     <td>Zamestnavatel:* </td>

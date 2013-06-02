@@ -67,11 +67,11 @@
                 </tr>
                 <tr>
                     <td>Studoval Do: </td>
-                    <td><input type="text" name="schoolEnd" value="<c:out value='${param.schoolEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100"/></td>
+                    <td><input type="text" name="schoolEnd" value="<c:out value='${param.schoolEnd}'/>" pattern="(19[0-9][0-9])|(20[0-9][0-9])|2100" required="true" /></td>
                 </tr>
                 <tr>
                     <td>specializacia / odbor: </td>
-                    <td><input type="text" name="schoolFieldOfStudy" value="<c:out value='${param.schoolFieldOfStudy}'/>"/></td>
+                    <td><input type="text" name="schoolFieldOfStudy" value="<c:out value='${param.schoolFieldOfStudy}'/>" required="true"/></td>
                 </tr>
                 
                 <!-- FINALLY END OF THIS SHIT :) -->
