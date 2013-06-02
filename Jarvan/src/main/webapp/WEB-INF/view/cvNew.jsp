@@ -238,7 +238,9 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Zadavajte v tvare(Jazyk: uroven)<br />oddelujte Enterom</td>
+                    <td>Zadavajte v tvare(Jazyk: uroven)<br />
+                        oddelujte Enterom <br />
+                        * Pre preklad do AJ pouzivajte:  basic, good, satisfactory, excellent)</td>
                     <td><textarea name="languages"></textarea></td>
                 </tr>
                 <c:if test="${not empty languageError}">
