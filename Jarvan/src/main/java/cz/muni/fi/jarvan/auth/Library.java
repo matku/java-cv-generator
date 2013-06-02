@@ -48,6 +48,13 @@ public class Library {
         }
     }
     
+    /**
+     * Method for adding concrete user his new CvName (into library.xml)
+     * @param username
+     * @param cvName
+     * @return True  - CV was added successfully
+     * @return False - error occurred, see log file
+     */
     public boolean addCV(String username, String cvName)
     {
         if(username == null)
@@ -76,8 +83,10 @@ public class Library {
         
         XMLWriter newCV = new XMLWriter(Settings.getPathLibrary());
         if(newCV.addCvToXml(username, cvName))
+        {
+            log.info("New CV " + cvName + "added to library.xml");
             return true;
-        
+        }
         return false;
     }
 }

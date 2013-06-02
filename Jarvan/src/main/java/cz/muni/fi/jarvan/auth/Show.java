@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Show {
     
-    private final static Logger log = LoggerFactory.getLogger(User.class);
+    private final static Logger log = LoggerFactory.getLogger(Show.class);
     
      /***
      * Method for selecting PDF FILENAME, LANGUAGE and DOWNLOAD LINK
@@ -92,8 +92,8 @@ public class Show {
                     // add to list FILENAME, LANG, FILEPATH
                     cvList.add("<tr><td>" + entry.getFileName().toString() + "</td>");
                     cvList.add("<td>" + tmpLang + "</td>");
-                    cvList.add("<td><a href=\"http://localhost:8084/JarvanUpdate/auth/cv/edit\">Upravit</td>");
-                    cvList.add("<td><a href=\"http://localhost:8084/JarvanUpdate/auth/cv/delete\">Zmazat</td>");
+                    cvList.add("<td><a href=\"../cv/edit\">Upravit</td>");
+                    cvList.add("<td><a href=\"../cv/delete\">Zmazat</td>");
                 }
                 
                 return cvList;

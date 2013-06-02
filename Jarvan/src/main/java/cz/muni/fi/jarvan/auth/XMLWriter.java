@@ -30,7 +30,7 @@ public class XMLWriter {
 
     private File xmlFile;
     private Document doc;
-    private final static Logger log = LoggerFactory.getLogger(User.class);
+    private final static Logger log = LoggerFactory.getLogger(XMLWriter.class);
     
     /**
      * Creates an XMLWriter object and sets File and Document, 
@@ -162,6 +162,14 @@ public class XMLWriter {
         return 0;
     }
     
+    /**
+     * Method for changing username, checks if username already exists. If not system will
+     * allow changing username otherwise it will print error message.
+     * @param oldUsername
+     * @param username
+     * @return True  - correct changes 
+     * @return False - error while changes
+     */
     public boolean changeUsername(String oldUsername, String username)
     {
         

@@ -25,8 +25,6 @@ public class User {
 
     public User()
     {
-        //if (parser == null) parser = new XMLParser(this.getPath());
-        //if (writer == null) writer = new XMLWriter(this.getPath());
         
         if (parser == null) parser = new XMLParser(Settings.getPathUser());
         if (writer == null) writer = new XMLWriter(Settings.getPathUser());

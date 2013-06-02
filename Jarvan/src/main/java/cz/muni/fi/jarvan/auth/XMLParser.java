@@ -25,7 +25,7 @@ import org.xml.sax.SAXException;
 public class XMLParser {
 
     private Document doc;
-    private final static Logger log = LoggerFactory.getLogger(User.class);
+    private final static Logger log = LoggerFactory.getLogger(XMLParser.class);
   
     /**
      * Sets xml path for DocumentBuilder for parsing

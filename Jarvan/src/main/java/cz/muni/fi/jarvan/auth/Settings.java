@@ -1,9 +1,7 @@
 
 package cz.muni.fi.jarvan.auth;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +10,8 @@ import org.slf4j.LoggerFactory;
  * @author martin
  */
 public class Settings {
-
-	private final static Logger log = LoggerFactory.getLogger(Settings.class);
+    
+    private final static Logger log = LoggerFactory.getLogger(Settings.class);
     public Settings(){}
 
     /**
@@ -109,26 +107,23 @@ public class Settings {
    }
 
 
-		/**
-	 * executes command in terminal
-	 * @param cmd command to be executed
-	 * @return success
-	 */
-	public static boolean executeCmd(String cmd) {
-		String output = null;
+    /**
+     * executes command in terminal
+     * @param cmd command to be executed
+     * @return success
+     */
+     public static boolean executeCmd(String cmd) {
+            String output = null;
 
-		try {
-			Process p = Runtime.getRuntime().exec(cmd);
+            try {
+                    Process p = Runtime.getRuntime().exec(cmd);
 
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                    return true;
+            } catch (IOException e) {
+                    log.error("Command error execution: ", e.getMessage());
+            }
 
-			return true;
-		} catch (IOException e) {
-			log.error("Command error execution: ", e.getMessage());
-		}
-
-		return false;
-	}
+            return false;
+    }
 
 }

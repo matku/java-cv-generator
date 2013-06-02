@@ -1,6 +1,5 @@
 package cz.muni.fi.jarvan.auth;
 
-
 public class Work
 {
     String employer;
@@ -37,13 +36,9 @@ public class Work
 
     public void setFrom(String from) throws CvException {
         if (Integer.parseInt(from) >= 1900 && Integer.parseInt(from) <= 2100)
-        {
             this.from = from;
-        }
         else
-        {
             throw new CvException("wrong year");
-        }
     }
 
     public String getTo() {
@@ -52,13 +47,9 @@ public class Work
 
     public void setTo(String to) throws CvException {
         if (Integer.parseInt(to) >= 1900 && Integer.parseInt(to) <= 2100)
-        {
             this.to = to;
-        }
         else
-        {
             throw new CvException("wrong year");
-        }
     }
     
     
