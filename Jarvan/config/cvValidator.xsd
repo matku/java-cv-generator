@@ -156,6 +156,7 @@
 									<xs:all>
 
 										<xs:element name="name" type="xs:string"/>
+										<xs:element name="city" type="xs:string"/>
 										<xs:element name="specialization" type="xs:string"/>
 										<xs:element name="start" type="year"/>
 										<xs:element name="end" minOccurs="0" type="year"/>
@@ -211,15 +212,15 @@
 						<xs:simpleContent>
 							<xs:extension base="xs:string">
 								<!--<xs:pattern value="[A-Z]([a-z])*|([a-z])*"/>-->
-								<xs:attribute name="level">
-									<xs:simpleType>
+								<xs:attribute name="level" type="xs:string">
+									<!--									<xs:simpleType>
 										<xs:restriction base="xs:string">
 											<xs:enumeration value="basic"/>
 											<xs:enumeration value="good"/>
 											<xs:enumeration value="satisfactory"/>
 											<xs:enumeration value="excellent"/>
 										</xs:restriction>
-									</xs:simpleType>
+									</xs:simpleType>-->
 								</xs:attribute>
 							</xs:extension>
 						</xs:simpleContent>

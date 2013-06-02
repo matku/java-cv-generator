@@ -22,7 +22,7 @@
 		<xsl:text>\begin{document}&#xa;</xsl:text>
 		<xsl:text>\renewcommand*{\cvheadingfont}{\huge\bfseries}&#xa;</xsl:text>
 		<xsl:text>\renewcommand*{\cvlistheadingfont}{\large\bfseries}&#xa;</xsl:text>
-		<xsl:text>\setlength{\cvlabelwidth}{41mm}&#xa;</xsl:text>
+		<xsl:text>\setlength{\cvlabelwidth}{43mm}&#xa;</xsl:text>
 
 		<xsl:for-each select="personalInfo">
 			<xsl:for-each select="name">
@@ -50,7 +50,7 @@
 			<xsl:value-of select="address/street"/>
 			<xsl:text>&#xa;			\item[]</xsl:text>
 			<xsl:value-of select="address/city"/>
-			<xsl:text> , </xsl:text>
+			<xsl:text>, </xsl:text>
 			<xsl:variable name="country" select="address/country"/>
 			<xsl:value-of select="$translation/expression[@exp=$country]/tr[@lang=$lang]"/>
 			<xsl:text>&#xa;			\item[] </xsl:text>
@@ -59,7 +59,7 @@
 			<xsl:value-of select="$translation/expression[@exp='birthday']/tr[@lang=$lang]"/>
 			<xsl:text>:] </xsl:text>
 			<xsl:value-of select="birthday/day"/>.<xsl:value-of select="birthday/month"/>.<xsl:value-of select="birthday/year"/>
-			<xsl:for-each select="contact[type]">
+			<xsl:for-each select="contact[@type]">
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
 				<xsl:variable name="typ" select="@type"/>
 				<xsl:value-of select="$translation/expression[@exp=$typ]/tr[@lang=$lang]"/>
@@ -74,7 +74,7 @@
 			<xsl:text>&#xa;		{</xsl:text>
 			<xsl:text>&#xa;			\tikz[]</xsl:text>
 			<xsl:text>&#xa;			{</xsl:text>
-			<xsl:text>&#xa;				\node[shape=rectangle, text width=4in, fill=red!26!green!39!blue!26, text=black, minimum width=4in]</xsl:text>
+			<xsl:text>&#xa;				\node[shape=rectangle, text width=6.8in, fill=red!26!green!39!blue!26, text=black, minimum width=6.8in]</xsl:text>
 			<xsl:text>&#xa;				{</xsl:text>
 			<xsl:value-of select="$translation/expression[@exp='education']/tr[@lang=$lang]"/>
 			<xsl:text>};</xsl:text>
@@ -92,6 +92,8 @@
 				<xsl:value-of select="end"/>
 				<xsl:text>] </xsl:text>
 				<xsl:value-of select="name"/>
+				<xsl:text>, </xsl:text>
+				<xsl:value-of select="city"/>
 				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
 				<xsl:variable name="type" select="@type"/>
 				<xsl:value-of select="$translation/expression[@exp=$type]/tr[@lang=$lang]"/>
@@ -110,7 +112,7 @@
 			<xsl:text>&#xa;		{</xsl:text>
 			<xsl:text>&#xa;			\tikz[]</xsl:text>
 			<xsl:text>&#xa;			{</xsl:text>
-			<xsl:text>&#xa;				\node[shape=rectangle, text width=4in, fill=red!26!green!39!blue!26, text=black, minimum width=4in]</xsl:text>
+			<xsl:text>&#xa;				\node[shape=rectangle, text width=6.8in, fill=red!26!green!39!blue!26, text=black, minimum width=6.8in]</xsl:text>
 			<xsl:text>&#xa;				{</xsl:text>
 			<xsl:value-of select="$translation/expression[@exp='work']/tr[@lang=$lang]"/>
 			<xsl:text>};</xsl:text>
@@ -138,7 +140,7 @@
 			<xsl:text>&#xa;		{</xsl:text>
 			<xsl:text>&#xa;			\tikz[]</xsl:text>
 			<xsl:text>&#xa;			{</xsl:text>
-			<xsl:text>&#xa;				\node[shape=rectangle, text width=4in, fill=red!26!green!39!blue!26, text=black, minimum width=4in]</xsl:text>
+			<xsl:text>&#xa;				\node[shape=rectangle, text width=6.8in, fill=red!26!green!39!blue!26, text=black, minimum width=6.8in]</xsl:text>
 			<xsl:text>&#xa;				{</xsl:text>
 			<xsl:value-of select="$translation/expression[@exp='languages']/tr[@lang=$lang]"/>
 			<xsl:text>};</xsl:text>
@@ -168,7 +170,7 @@
 			<xsl:text>&#xa;		{</xsl:text>
 			<xsl:text>&#xa;			\tikz[]</xsl:text>
 			<xsl:text>&#xa;			{</xsl:text>
-			<xsl:text>&#xa;				\node[shape=rectangle, text width=4in, fill=red!26!green!39!blue!26, text=black, minimum width=4in]</xsl:text>
+			<xsl:text>&#xa;				\node[shape=rectangle, text width=6.8in, fill=red!26!green!39!blue!26, text=black, minimum width=6.8in]</xsl:text>
 			<xsl:text>&#xa;				{</xsl:text>
 			<xsl:value-of select="$translation/expression[@exp='skills']/tr[@lang=$lang]"/>
 			<xsl:text>};</xsl:text>
@@ -176,7 +178,7 @@
 			<xsl:text>&#xa;		}</xsl:text>
 
 			<xsl:for-each select="skill">
-				<xsl:text>&#xa;			\item[ </xsl:text>
+				<xsl:text>&#xa;			\item[\hspace{3mm}</xsl:text>
 				<xsl:value-of select="."/>
 				<xsl:text>]</xsl:text>
 			</xsl:for-each>

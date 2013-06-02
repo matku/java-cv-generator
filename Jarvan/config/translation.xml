@@ -115,7 +115,24 @@
 		<tr lang="en">University</tr>
 		<tr lang="sk">Vysoká škola</tr>
 		<tr lang="cz">Vysoká škola</tr>
-	</expression><!--
+	</expression>
+	<expression exp="home">
+		<tr lang="en">Home number</tr>
+		<tr lang="sk">Telefón</tr>
+		<tr lang="cz">Telefon</tr>
+	</expression>
+	<expression exp="mobile">
+		<tr lang="en">Cell phone</tr>
+		<tr lang="sk">Mobil</tr>
+		<tr lang="cz">Mobil</tr>
+	</expression>
+	<expression exp="email">
+		<tr lang="en">E-mail</tr>
+		<tr lang="sk">E-mail</tr>
+		<tr lang="cz">E-mail</tr>
+	</expression>
+
+	<!--
 	<expression exp="">
 		<tr lang="en"></tr>
 		<tr lang="sk"></tr>
