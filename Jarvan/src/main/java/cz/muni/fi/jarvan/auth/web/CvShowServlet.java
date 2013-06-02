@@ -25,7 +25,7 @@ public class CvShowServlet extends HttpServlet
     private static final String CVSHOW_JSP = "/WEB-INF/view/cvShow.jsp";
     public static final String URL_MAPPING = "/auth/cv/show";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(CvShowServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

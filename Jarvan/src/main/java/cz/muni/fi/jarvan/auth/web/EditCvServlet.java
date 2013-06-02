@@ -31,7 +31,7 @@ public class EditCvServlet extends HttpServlet
     private static final String EDITCV_JSP = "/WEB-INF/view/editCv.jsp";
     public static final String URL_MAPPING = "/auth/cv/editCv";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(EditCvServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -25,7 +25,7 @@ public class EditEducationServlet extends HttpServlet
     private static final String EDITEDU_JSP = "/WEB-INF/view/editEducation.jsp";
     public static final String URL_MAPPING = "/auth/cv/editEducation";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(EditEducationServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,6 +41,7 @@ public class EditEducationServlet extends HttpServlet
         req.getRequestDispatcher(EDITEDU_JSP).forward(req, resp);
     }
     
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getSession().getAttribute("isLogged") == null)
         {

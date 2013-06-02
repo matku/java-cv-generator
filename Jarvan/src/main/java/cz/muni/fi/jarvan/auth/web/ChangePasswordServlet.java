@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Servlet for changing user password. Password are stored in hash md5
  * @author martin
  */
 @WebServlet(ChangePasswordServlet.URL_MAPPING + "/*")
@@ -53,14 +53,11 @@ public class ChangePasswordServlet extends HttpServlet
                 User tmpUser = new User();
                 tmpUser.setPassword(newPassword);
                 XMLWriter writer = new XMLWriter(Settings.getPathUser());
+                
                 if(writer.changePassword(req.getSession().getAttribute("isLogged").toString(), oldPassword, newPassword) == 1)
-                {
                     req.setAttribute("error", "Old password isn't correct");
-                }
                 else
-                {
                     req.setAttribute("success", "Congratulation ! Your password has been chaged ! ");
-                }
         }
         
         req.getRequestDispatcher(CHANGEPASSWORD_JSP).forward(req, resp);

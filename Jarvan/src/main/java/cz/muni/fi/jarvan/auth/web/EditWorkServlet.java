@@ -1,7 +1,5 @@
 package cz.muni.fi.jarvan.auth.web;
 
-
-import cz.muni.fi.jarvan.auth.CvException;
 import cz.muni.fi.jarvan.auth.Settings;
 import cz.muni.fi.jarvan.auth.XMLParser;
 import cz.muni.fi.jarvan.auth.XMLWriter;

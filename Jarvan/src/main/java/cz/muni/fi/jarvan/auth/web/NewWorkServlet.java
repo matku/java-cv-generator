@@ -1,6 +1,5 @@
 package cz.muni.fi.jarvan.auth.web;
 
-
 import cz.muni.fi.jarvan.auth.CvException;
 import cz.muni.fi.jarvan.auth.Settings;
 import cz.muni.fi.jarvan.auth.Work;
@@ -28,7 +27,7 @@ public class NewWorkServlet extends HttpServlet
     private static final String NEWWORK_JSP = "/WEB-INF/view/newWork.jsp";
     public static final String URL_MAPPING = "/auth/cv/newWork";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(NewWorkServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -89,7 +88,8 @@ public class NewWorkServlet extends HttpServlet
                         return;
                     }
                     
-                } catch (CvException e)
+                } 
+                catch (CvException e)
                 {
                     log.error("could not create CV", e);
                     resp.sendRedirect("/JarvanUpdate/404");

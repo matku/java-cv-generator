@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Change username, if username already exists, print error, else chage it.
  * @author martin
  */
 @WebServlet(ChangeUsernameServlet.URL_MAPPING + "/*")

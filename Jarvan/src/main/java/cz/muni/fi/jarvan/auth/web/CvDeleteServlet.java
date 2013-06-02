@@ -25,7 +25,7 @@ public class CvDeleteServlet extends HttpServlet
     private static final String CVDELETE_JSP = "/WEB-INF/view/cvDelete.jsp";
     public static final String URL_MAPPING = "/auth/cv/delete";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(CvDeleteServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

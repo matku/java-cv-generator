@@ -33,7 +33,7 @@ public class CvNewServlet extends HttpServlet
     private static final String CVNEW_JSP = "/WEB-INF/view/cvNew.jsp";
     public static final String URL_MAPPING = "/auth/cv/create";
     
-    private final static Logger log = LoggerFactory.getLogger(ChangePasswordServlet.class);
+    private final static Logger log = LoggerFactory.getLogger(CvNewServlet.class);
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
