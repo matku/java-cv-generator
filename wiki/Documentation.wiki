@@ -1,1 +1,17 @@
 = Documentation =
+
+||Class	|| Description ||
+||Cv	|| 
+||CvException ||	
+||Exception class extends from Exception ||
+||Education ||	 
+||Library ||	
+||Class for storing CV like database, will parse library.xml
+||Registration || Class for register users, checks if username and email already exists TO DO: store user data to XML ||
+||Settings ||	
+||Class for getPath metdhods ||
+||Show ||	 
+||User	||Class for user Methods: setters and getters for username, password, email ||
+||Work ||	  
+||XMLParser || Class for parsing data from XML Methods: getUsers, getEmails ||
+||XMLWriter ||
