@@ -9,8 +9,8 @@
     <div class="container-fluid">
       <div class="row-fluid">       
         <div class="span5 offset1">
-            <h1>Vitaj !</h1>
-            <p>Nieco o nasej super ultra mega aplikacii, jozo vymyslis text ty <h1>MADAFAKA !!!</h1> </p>
+            <h1>Jarvan</h1>
+            <p>Vytvorili sme tuto aplikaciu aby ulahcila tvorbu zivotopisov, setrila vas cas a poskytla ich jednoduche spravovanie. <h1></h1> </p>
         </div><!--/span-->
       </div><!--/row-->
 
