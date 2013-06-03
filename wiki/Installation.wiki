@@ -14,3 +14,4 @@
  * >= Java 6.0, Java Web
  * texlive
  * currvita or texlive-latex-extra 
+ * NetBeans (>= 7.3)
