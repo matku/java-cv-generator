@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://xml.netbeans.org/schema/contacts"
+	elementFormDefault="qualified">
+
+	<xs:element name="users">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="user">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="password">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="[a-f0-9]{31}|[a-f0-9]{32}"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="username" type="xs:string"/>
+							<xs:element name="email" type="xs:string">
+								<!--								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:pattern value="([a-z])*@([a-z])*.([a-z]{2}|[a-z]{3})"/>
+									</xs:restriction>
+								</xs:simpleType>-->
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+				<xs:attribute name="id" type="xs:string" use="required"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
