@@ -3,6 +3,7 @@
 [https://java-cv-generator.googlecode.com/svn/Jarvan/Jarvan.zip Jarvan.zip]
 
 Záverečné správy:
+
 [http://code.google.com/p/java-cv-generator/source/browse/Jarvan/Zaverecne_spravy/MartinProksZaverecnaSprava.xml?spec=svn154&r=154 Martin Proks]
 
 [http://code.google.com/p/java-cv-generator/source/browse/Jarvan/Zaverecne_spravy/MartinOtahalZaverecnaSprava.xml?spec=svn154&r=154 Martin Otáhal]
