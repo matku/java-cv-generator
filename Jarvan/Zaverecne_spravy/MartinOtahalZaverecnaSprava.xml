@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article>
+  <articleinfo>
+    <title>Webová aplikácia pre vytváranie životopisov</title>
+
+    <author>
+      <firstname>Martin</firstname>
+
+      <surname>Otáhal</surname>
+
+      <affiliation>
+        <orgname>fi.muni.cz</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>3.6.2013</pubdate>
+  </articleinfo>
+
+  <section>
+    <title>Návrh aplikácie</title>
+
+    <para>Na začiatku celého projektu som sa podieľal na návrhu aplikácie
+    a to hlavne návrhom jej implementácie s využitím Javy, Servletov a JSP súborov.</para>
+  </section>
+  
+  <section>
+	<title>Práca s XML súbormi</title>
+	
+	<para>K vytváraniu a editácii životopisov sme museli použiť nejaký systém
+	ukladania XML dokumentov a informácií o nich, nakoniec sme zvolili prácu s XML súbormi,
+	XML databáza sa nám na túto prácu nezdala vhodná. 
+	Každý životopis teda máme uložený ako XML súbor a máme ďalší súbor so zoznamom všetkých
+	životopisov a ich priradeniu k používateľom. Túto "knižnicu" som síce netvoril,
+	musel som ju však hojne využívať pri mojej práci.</para>
+	
+	<para>Bol som zodpovedný za väčšinu čítania a zapisovania XML súborov,
+	toto som robil v Jave pomocou DOM-u. Spolu s kolegom Proksom sme vytvorili triedy
+	XMLParser a XMLWriter na prácu s XML súbormi, tu som následne implementoval väčšinu metód.</para>
+	
+	<para>Ďalej som implementoval registráciu užívateľov, 
+	ako aj vytváranie a editáciu životopisu pomocou Javovských Servletov, 
+	v ktorých som následne používal metódy, ktoré som implementoval v Parseri a Writeri.
+	</para>
+	
+	
+  </section>
+  
+  <section>
+	<title>Grafická realizácia</title>
+	
+	<para>Na grafickom návrhu aplikácie som sa podieľal menej.
+	JSP súbory na zobrazovanie formulárov, ktoré som potreboval, aby mi užívateľ mohol poslať dáta,
+	vytvoril kolega Proks, ja som ich následne iba minimálne upravil 
+	(spomeniem "required" políčka a pridanie regulárnych výrazov na overenie vstupu priamo v HTML).</para>
+  </section>
+</article>

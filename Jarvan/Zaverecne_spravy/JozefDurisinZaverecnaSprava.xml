@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article>
+  <articleinfo>
+    <title>Webová aplikácia pre vytváranie životopisov</title>
+
+    <author>
+      <firstname>Jozef</firstname>
+
+      <surname>Ďurišin</surname>
+
+      <affiliation>
+        <orgname>fi.muni.cz</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>3.6.2013</pubdate>
+  </articleinfo>
+
+  <section>
+    <title>Návrh aplikácie</title>
+
+    <para>Mojou úlohou bolo vytvoriť webový kontext stránky a otestovať
+		aplikáciu pomocou unit testov.</para>
+  </section>
+  
+  <section>
+	<title>Detaily</title>
+	
+	<para>Po vytvorení servletov som vytvoril a popísal kontext hlavnej stránky, about a kontakt</para>
+	
+	<para>Taktiež som spravil zmenu užívateľského mena a hesla. Kedye každý užívateľ má mať možnosť zmeny
+	používateľského mena a hesla, tak som túto funkciu doimplementoval.</para>
+	
+	<para>Vytvoril som unit testy pre kontrolu metód vytvorených kolegami. 
+	Unit testy boli zamerané na kontrolu vstupných parametrov metód a korektnosť výstupov.</para>
+	
+	
+	
+</article>

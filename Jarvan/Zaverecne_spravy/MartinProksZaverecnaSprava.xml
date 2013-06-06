@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article>
+  <articleinfo>
+    <title>Webová aplikácia pre vytváranie životopisov</title>
+
+    <author>
+      <firstname>Martin</firstname>
+
+      <surname>Proks</surname>
+
+      <affiliation>
+        <orgname>fi.muni.cz</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>3.6.2013</pubdate>
+  </articleinfo>
+
+  <section>
+    <title>Návrh aplikácie</title>
+
+    <para>Na projekte som sa zúčastnil ako leader. Rozdelil som prácu, koordinoval priebeh vývoja projektu.</para>
+  </section>
+  
+  <section>
+	<title>Moja práca</title>
+	
+	<para>
+        Ako leader som založil na začitku projekt na google code (ďalej GC). Code name sme zvolili Jarvan. Spolu s teamom sme vytvorili UML diagram a stanovili robotu.
+        Ja a Martin Otáhal sme sa postarali o vytvorenie jadra systému. Jozef Durišin sa postaral o par funckii a testovanie. Matúľ Králik zase o exportovnie do pdf.         
+    </para>
+	
+	<para>
+        Mojou úlohou na projekte bolo ďalej vytvoriť grafické prostredie za pomoci Bootstrap-u. Spolu s Martinom Otáhal sme vytvorili potrebné Servlet-y a jsp súbory.
+        Vačšinu roboty som robil s Martinom Otáhalom, kedže sme spolu navrhovali jadro systému. Vytvorili sme prihlásenie, základné servlet-y. Ďalej som sa postaral o
+        funckiu getPath, ktorá vracala path do config zložky, kde sa nachádzali všetky potrebné configuračné súbory a pdf-ka. Podielal som sa tak isto na refactoringu.
+    </para>
+	
+	<para>
+        Naprogramoval som execute, ktorý spúšťal potrebné commandy na exportovanie pdf súborov. Ďalej som naprogramoval zobrazovanie životopisov a ako posledné som 
+        spájal každého časť roboty do jedného celku. 
+	</para>
+	
+	
+  </section>
+  
+</article>

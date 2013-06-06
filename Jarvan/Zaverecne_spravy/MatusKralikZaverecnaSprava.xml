@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article>
+	<articleinfo>
+		<title>Webová aplikácia pre vytváranie životopisov</title>
+
+		<author>
+			<firstname>Matúš</firstname>
+
+			<surname>Králik</surname>
+
+			<affiliation>
+				<orgname>fi.muni.cz</orgname>
+			</affiliation>
+		</author>
+
+		<pubdate>3.6.2013</pubdate>
+	</articleinfo>
+
+	<section>
+		<title>Návrh aplikácie</title>
+
+		<para>Počas vývoja projektu som sa venoval najmä tvorbe pdf.</para>
+	</section>
+
+	<section>
+		<title>Návrh a verifikácia xml súborov</title>
+
+		<para>V projekte som navrhol štruktúru väčšiny XML súborov použitých na
+			ukladanie dát a ich verifikáciu pomocou štandardného nástroja XML Schema.</para>
+
+	</section>
+
+	<section>
+		<title>Preklad a kompilácia do PDF</title>
+
+		<para>Prevod z XML do PDF som realizoval pomocou XSL transformácie do
+			zdrojového súboru formátu LaTeX. V tomto súbore som pre jeho zjednodušenie
+			(a zmenšenie) použil balík Currvita dostupný na http://ctan.org/ pod
+			otvorenou licenciou GNU General Public License. Balík je tiež dostupný
+			priamo v distribúciách TeXLive a MiKTeX.</para>
+
+		<para>Kompilácia LaTeX do pdf prebieha pomocou systémového volania nakoľko v
+			Jave nie je dostupná knižnica poskytujúca túto funkcionalitu.
+			Preto som vytvoril jednoduchý bash skript, ktorý spúšťa kompiláciu
+			a čistí dočasné súbory po kompilácii v prípade úspechu.</para>
+
+	</section>
+</article>
