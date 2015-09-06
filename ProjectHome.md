@@ -1,0 +1,1 @@
+Application generates CV based on user data stored in xml file.
